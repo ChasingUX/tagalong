@@ -3,13 +3,25 @@
 import { useState, useEffect } from "react";
 import { CHARACTERS } from "@/lib/characters";
 import { getCharacterImageUrl } from "@/lib/image";
-import type { Scene } from "@/lib/types";
+import type { Scene, ExperienceType } from "@/lib/types";
 import MobileShell from "@/components/MobileShell";
 import SceneImage from "@/components/SceneImage";
 import Link from "next/link";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 
 type Params = Promise<{ id: string }>;
+
+
+// Experience type display configuration
+const getExperiencePill = (experience: ExperienceType) => {
+  const config = {
+    conversation: { label: 'Chat', color: 'bg-gray-100 text-gray-600' },
+    quiz: { label: 'Quiz', color: 'bg-emerald-50 text-emerald-600' },
+    flashcard: { label: 'Cards', color: 'bg-violet-50 text-violet-600' }
+  };
+  
+  return config[experience || 'conversation'] || config.conversation;
+};
 
 export default function CharacterPage({ params }: { params: Params }) {
   const [id, setId] = useState<string>('');
@@ -55,7 +67,7 @@ export default function CharacterPage({ params }: { params: Params }) {
   }
 
   return (
-    <MobileShell title={character.name} subtitle={character.role} currentCharacterId={character.id} showComposeButton={true}>
+      <MobileShell title={character.name} subtitle={character.role} currentCharacterId={character.id} showComposeButton={true}>
       <div>
 
       <div className="relative mb-7 overflow-hidden rounded-2xl">
@@ -67,7 +79,7 @@ export default function CharacterPage({ params }: { params: Params }) {
       </div>
 
       {/* Scene Types */}
-      {(['Collab', 'Learn', 'Game', 'Roleplay'] as const).map((sceneType) => {
+      {(['Learn', 'Collab', 'Game', 'Roleplay'] as const).map((sceneType) => {
         const typeScenes = scenes.filter(s => s.type === sceneType);
         
         // Map scene types to display titles
@@ -117,7 +129,7 @@ export default function CharacterPage({ params }: { params: Params }) {
                       className="group flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors"
                     >
                       {/* Thumbnail */}
-                      <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                      <div className="w-14 aspect-[3/4] rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
                         <SceneImage 
                           characterId={character.id}
                           sceneId={s.id}
@@ -136,6 +148,12 @@ export default function CharacterPage({ params }: { params: Params }) {
                             {s.description}
                           </div>
                         )}
+                        {/* Experience Type Pill */}
+                        <div className="mt-1.5">
+                          <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium ${getExperiencePill(s.experience).color}`}>
+                            {getExperiencePill(s.experience).label}
+                          </span>
+                        </div>
                       </div>
                       
                       {/* Arrow */}

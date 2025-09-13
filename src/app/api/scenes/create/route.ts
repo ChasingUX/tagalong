@@ -70,6 +70,7 @@ export async function POST(request: NextRequest) {
       title: title.trim(),
       caption: title.trim(),
       type,
+      experience: "conversation",
       description: description.trim()
     };
 

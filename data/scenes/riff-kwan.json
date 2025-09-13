@@ -10,7 +10,8 @@
       "We'll create written content together",
       "You share ideas and preferences, I build on them with expertise",
       "We'll end with a complete comedy sketch you can perform or share"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "2",
@@ -23,7 +24,8 @@
       "We'll make something new from scratch",
       "You share ideas and preferences, I build on them with expertise",
       "We'll end with a polished comedy routine ready for performance"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "3",
@@ -36,7 +38,8 @@
       "We'll develop a comprehensive plan",
       "You share ideas and preferences, I build on them with expertise",
       "We'll end with a detailed plan you can implement"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "4",
@@ -49,7 +52,8 @@
       "I'll guide you through comedy writing techniques",
       "You'll practice with step-by-step guidance and examples",
       "You'll get immediate feedback and track your understanding"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "5",
@@ -62,7 +66,8 @@
       "I'll guide you through stand-up performance skills",
       "You'll practice with step-by-step guidance and examples",
       "You'll get immediate feedback and track your understanding"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "6",
@@ -75,7 +80,8 @@
       "I'll guide you through improv comedy training",
       "We'll use flashcards, quizzes, and interactive exercises",
       "You'll get immediate feedback and track your understanding"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "7",
@@ -88,7 +94,8 @@
       "We'll compete in rounds with points and winners",
       "You make choices or responses, I react and keep score",
       "Success earns points or reveals, with fun reactions either way"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "8",
@@ -101,7 +108,8 @@
       "Simple rules with clear objectives and win conditions",
       "You make choices or responses, I react and keep score",
       "Success earns points or reveals, with fun reactions either way"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "9",
@@ -114,7 +122,8 @@
       "You'll face creative challenges with time or resource limits",
       "You make choices or responses, I react and keep score",
       "Success earns points or reveals, with fun reactions either way"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "10",
@@ -127,7 +136,8 @@
       "You're in a realistic scenario with clear context and stakes",
       "Respond naturally as yourself, make choices, and engage authentically",
       "I'll adapt to your responses and the story branches based on your choices"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "11",
@@ -140,7 +150,8 @@
       "You're in a realistic scenario with clear context and stakes",
       "Respond naturally as yourself, make choices, and engage authentically",
       "I'll adapt to your responses and the story branches based on your choices"
-    ]
+    ],
+    "experience": "conversation"
   },
   {
     "id": "12",
@@ -153,6 +164,7 @@
       "You're competing or being judged in a formal setting",
       "Respond naturally as yourself, make choices, and engage authentically",
       "I'll adapt to your responses and the story branches based on your choices"
-    ]
+    ],
+    "experience": "conversation"
   }
 ]

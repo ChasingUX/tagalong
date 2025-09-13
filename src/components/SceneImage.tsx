@@ -39,7 +39,7 @@ export default function SceneImage({ characterId, sceneId, title, characterRole 
   }, [isLoading, characterId, sceneId]);
 
   return (
-    <div className="relative aspect-square overflow-hidden">
+    <div className="relative aspect-[3/4] overflow-hidden">
       {hasError ? (
         <div className="h-full w-full bg-gray-200 flex items-center justify-center">
           <img 
@@ -63,7 +63,7 @@ export default function SceneImage({ characterId, sceneId, title, characterRole 
           {/* Shimmer loading placeholder */}
           {isLoading && (
             <div className="absolute inset-0 h-full transition-opacity duration-500">
-              <ShimmerThumbnail rounded />
+              <div style={{width: "100%", height: "100%"}}><ShimmerThumbnail /></div>
             </div>
           )}
         </>

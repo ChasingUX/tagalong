@@ -9,6 +9,7 @@ export type Character = {
 };
 
 export type SceneType = 'Game' | 'Collab' | 'Learn' | 'Roleplay';
+export type ExperienceType = 'conversation' | 'quiz' | 'flashcard';
 
 export type Scene = {
   id: string;
@@ -16,8 +17,7 @@ export type Scene = {
   title: string;
   caption: string;
   type: SceneType;
+  experience: ExperienceType; // The specific experience type for this scene
   description?: string; // More detailed description of the scene
   rules?: string[]; // Rules that govern how the scene works (40-100 chars each)
 };
-
-

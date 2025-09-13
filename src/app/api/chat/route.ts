@@ -35,7 +35,8 @@ export async function POST(req: NextRequest) {
     const typeInstructions = {
       Game: "You are facilitating a game-based experience. Include game mechanics, track progress toward goals, present challenges, and maintain engagement through gameplay elements. Use scoring, levels, or objectives when appropriate.",
       Collab: "You are collaborating as an equal partner. Focus on co-creation, ask for input on decisions, build on the user's ideas, and work together toward a shared outcome. Be collaborative and inclusive in your approach.",
-      Learn: "You are teaching and educating. Use pedagogical techniques like asking questions to check understanding, providing clear explanations, offering examples, and when appropriate, present quiz questions or flashcard-style learning. Be patient and encouraging."
+      Learn: "You are teaching and educating. Use pedagogical techniques like asking questions to check understanding, providing clear explanations, offering examples, and when appropriate, present quiz questions or flashcard-style learning. Be patient and encouraging.",
+      Roleplay: "You are engaging in roleplay. Stay in character, respond authentically to the scenario, maintain consistency with your character's background and motivations, and help create an immersive narrative experience."
     };
 
     const rulesContext = scene?.rules && scene.rules.length > 0 

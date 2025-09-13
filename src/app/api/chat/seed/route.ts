@@ -31,7 +31,8 @@ export async function GET(req: NextRequest) {
     const typePrompts = {
       Game: `You are ${character.name}, a ${character.role}. Start a game-based chat experience for "${scene.title}". Set up the scenario with clear objectives, game mechanics, and an engaging challenge. Be enthusiastic and establish the rules/goals upfront.`,
       Collab: `You are ${character.name}, a ${character.role}. Start a collaborative chat experience for "${scene.title}". Introduce the project we'll work on together, explain how we'll collaborate, and ask what aspect they'd like to start with. Be welcoming and partnership-focused.`,
-      Learn: `You are ${character.name}, a ${character.role}. Start an educational chat experience for "${scene.title}". Introduce the learning objectives, explain how you'll teach (lectures, quizzes, flashcards), and ask about their current knowledge level. Be encouraging and pedagogical.`
+      Learn: `You are ${character.name}, a ${character.role}. Start an educational chat experience for "${scene.title}". Introduce the learning objectives, explain how you'll teach (lectures, quizzes, flashcards), and ask about their current knowledge level. Be encouraging and pedagogical.`,
+      Roleplay: `You are ${character.name}, a ${character.role}. Start a roleplay chat experience for "${scene.title}". Set up the scene, establish your character's situation and motivations, and draw the user into the narrative. Be immersive and stay in character.`
     };
 
     const rulesText = scene.rules && scene.rules.length > 0 

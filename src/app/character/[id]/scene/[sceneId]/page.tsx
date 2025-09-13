@@ -9,6 +9,8 @@ import SceneModal from "@/components/SceneModal";
 import { StreamingText } from "@/components/StreamingText";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
+import { getExperienceType } from "@/lib/experiences";
+import { type ExperienceType } from "@/lib/types";
 
 type Message = { role: "assistant" | "user"; content: string; streaming?: boolean; id?: string };
 
@@ -28,6 +30,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [hasBegun, setHasBegun] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [wasAtBottom, setWasAtBottom] = useState(true);
+  const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -111,6 +114,9 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
         const scene = scenes.find((s: any) => s.id === sceneId);
         setSceneTitle(scene?.title || "Chat");
         setCurrentScene(scene || null);
+        
+        // Set the experience type based on the scene
+        setExperienceType(getExperienceType(scene));
         
         // Only show modal if the scene hasn't been begun yet
         if (!hasBegun) {
@@ -298,6 +304,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   return (
     <MobileShell title={sceneTitle} subtitle={character.name} currentCharacterId={id} showInfoButton={true} onInfoClick={() => setShowModal(true)}>
       <div className="flex h-full flex-col relative">
+        {/* Experience Type: {experienceType} - Future: render different experiences here */}
 
         {/* Chat Messages */}
         <div 

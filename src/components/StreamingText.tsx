@@ -28,6 +28,8 @@ const StreamingParagraph: React.FC<{
 }> = ({ text, delay, isStreaming, onComplete, onHeightChange }) => {
   const [visibleChars, setVisibleChars] = useState<number>(0);
   const [lines, setLines] = useState<string[]>([]);
+  const [hasStartedStreaming, setHasStartedStreaming] = useState<boolean>(false);
+  const [internalComplete, setInternalComplete] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Split text into lines based on container width
@@ -74,42 +76,53 @@ const StreamingParagraph: React.FC<{
   useEffect(() => {
     if (!lines.length) {
       setVisibleChars(0);
+      setHasStartedStreaming(false);
+      setInternalComplete(false);
       return;
     }
 
-    if (!isStreaming) {
-      setVisibleChars(text.length);
-      return;
-    }
-
-    setVisibleChars(0);
-    let charIndex = 0;
-    let intervalId: NodeJS.Timeout;
-    
-    const startStreaming = () => {
-      intervalId = setInterval(() => {
-        charIndex++;
-        setVisibleChars(charIndex);
-        
-        if (charIndex >= text.length) {
-          clearInterval(intervalId);
-          onComplete?.();
-        }
-      }, delay);
-    };
-
-    startStreaming();
-
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
+    // If streaming is requested and we haven't completed internally
+    if (isStreaming && !internalComplete) {
+      if (!hasStartedStreaming) {
+        setHasStartedStreaming(true);
+        setVisibleChars(0);
       }
-    };
-  }, [lines, text, delay, isStreaming, onComplete]);
+
+      let charIndex = visibleChars;
+      let intervalId: NodeJS.Timeout;
+      
+      const startStreaming = () => {
+        intervalId = setInterval(() => {
+          charIndex++;
+          setVisibleChars(charIndex);
+          
+          if (charIndex >= text.length) {
+            clearInterval(intervalId);
+            setInternalComplete(true);
+            onComplete?.();
+          }
+        }, delay);
+      };
+
+      if (charIndex < text.length) {
+        startStreaming();
+      }
+
+      return () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
+    } else if (!isStreaming || internalComplete) {
+      // If not streaming or internally complete, show full text
+      setVisibleChars(text.length);
+    }
+  }, [lines, text, delay, isStreaming, onComplete, hasStartedStreaming, internalComplete, visibleChars]);
 
   // Calculate streaming state
   const getStreamingState = () => {
-    if (!isStreaming || !lines.length) {
+    const effectivelyStreaming = isStreaming && !internalComplete;
+    if (!effectivelyStreaming || !lines.length) {
       return { currentLineIndex: -1, charsInCurrentLine: 0 };
     }
 
@@ -132,14 +145,16 @@ const StreamingParagraph: React.FC<{
 
   // Notify parent when line changes
   useEffect(() => {
-    if (isStreaming && onHeightChange) {
+    const effectivelyStreaming = isStreaming && !internalComplete;
+    if (effectivelyStreaming && onHeightChange) {
       onHeightChange();
     }
-  }, [getCurrentLineIndex(), isStreaming, onHeightChange]);
+  }, [getCurrentLineIndex(), isStreaming, internalComplete, onHeightChange]);
 
   // Get target height for animation
   const getTargetHeight = () => {
-    if (!isStreaming || !containerRef.current) {
+    const effectivelyStreaming = isStreaming && !internalComplete;
+    if (!effectivelyStreaming || !containerRef.current) {
       return 'auto';
     }
     
@@ -153,7 +168,8 @@ const StreamingParagraph: React.FC<{
 
   // Create mask style for current streaming line
   const getLineMaskStyle = (lineIndex: number, lineText: string) => {
-    if (!isStreaming || lineIndex !== currentLineIndex || charsInCurrentLine >= lineText.length) {
+    const effectivelyStreaming = isStreaming && !internalComplete;
+    if (!effectivelyStreaming || lineIndex !== currentLineIndex || charsInCurrentLine >= lineText.length) {
       return {};
     }
 
@@ -196,8 +212,9 @@ const StreamingParagraph: React.FC<{
       }}
     >
       {lines.map((line, i) => {
-        const shouldShowLine = !isStreaming || i < currentLineIndex || (i === currentLineIndex);
-        const shouldApplyFormatting = !isStreaming || i < currentLineIndex;
+        const effectivelyStreaming = isStreaming && !internalComplete;
+        const shouldShowLine = !effectivelyStreaming || i < currentLineIndex || (i === currentLineIndex);
+        const shouldApplyFormatting = !effectivelyStreaming || i < currentLineIndex;
         
         if (!shouldShowLine) {
           return (
@@ -344,6 +361,7 @@ export const StreamingText: React.FC<Props> = ({
   const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
   const [currentBlockIndex, setCurrentBlockIndex] = useState<number>(0);
   const [completedBlocks, setCompletedBlocks] = useState<number>(0);
+  const [internallyComplete, setInternallyComplete] = useState<boolean>(false);
 
   // Parse content into blocks
   useEffect(() => {
@@ -351,6 +369,7 @@ export const StreamingText: React.FC<Props> = ({
     setContentBlocks(blocks);
     setCurrentBlockIndex(0);
     setCompletedBlocks(0);
+    setInternallyComplete(false);
   }, [fullText]);
 
   // Handle block completion
@@ -362,7 +381,8 @@ export const StreamingText: React.FC<Props> = ({
       // Start next block
       setCurrentBlockIndex(nextCompleted);
     } else {
-      // All blocks complete
+      // All blocks complete - set internal completion state
+      setInternallyComplete(true);
       onComplete?.();
     }
   };
@@ -372,16 +392,21 @@ export const StreamingText: React.FC<Props> = ({
       {contentBlocks.map((block, index) => {
         const isCurrentBlock = index === currentBlockIndex;
         const isCompletedBlock = index < completedBlocks;
-        const shouldStream = isStreaming && isCurrentBlock;
+        const effectivelyStreaming = isStreaming && !internallyComplete;
+        const shouldStream = effectivelyStreaming && isCurrentBlock;
         const shouldShow = isCompletedBlock || isCurrentBlock;
         const isLastBlock = index === contentBlocks.length - 1;
+        
+        // During streaming, consider if this is the last visible block
+        const isLastVisibleBlock = effectivelyStreaming ? isCurrentBlock : isLastBlock;
+        const shouldHaveMargin = !isLastVisibleBlock && contentBlocks.length > 1;
 
         if (!shouldShow) {
           return null;
         }
 
         return (
-          <div key={block.id} className={isLastBlock ? "" : "mb-3"}>
+          <div key={block.id} className={shouldHaveMargin ? "mb-3" : ""}>
             <StreamingContentBlock
               block={block}
               delay={delay}

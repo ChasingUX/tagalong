@@ -104,6 +104,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Plan a lesson together",
       caption: "Co-create an engaging lesson plan on any topic you choose",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Design interactive lessons with Professor Ada using creative teaching methods."
     },
     {
@@ -112,6 +113,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create study materials",
       caption: "Make flashcards, guides, and visual aids for learning",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Craft effective study materials and learning resources together with Ada."
     },
     {
@@ -120,6 +122,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Design a curriculum",
       caption: "Build a complete learning path for a subject of interest",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Structure comprehensive curricula with clear learning objectives and milestones."
     },
     
@@ -130,6 +133,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Master study techniques",
       caption: "Learn effective note-taking, memory, and test-taking strategies",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Discover proven study methods and learning strategies from an expert educator."
     },
     {
@@ -138,6 +142,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Explore any subject deeply",
       caption: "Get personalized tutoring on topics you want to understand",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Receive expert guidance and explanations tailored to your learning style."
     },
     {
@@ -146,6 +151,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Research skills workshop",
       caption: "Learn to find, evaluate, and cite reliable sources",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master academic research methods and critical information evaluation skills."
     },
     
@@ -156,6 +162,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Knowledge trivia challenge",
       caption: "Test your knowledge across various academic subjects",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge yourself with trivia spanning history, science, literature, and more."
     },
     {
@@ -164,6 +171,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Vocabulary building game",
       caption: "Expand your vocabulary with word games and etymology",
       type: "Game",
+      experience: "conversation" as const,
       description: "Learn new words through engaging games and discover their fascinating origins."
     },
     {
@@ -172,6 +180,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Logic puzzle workshop",
       caption: "Solve riddles, brain teasers, and critical thinking puzzles",
       type: "Game",
+      experience: "conversation" as const,
       description: "Sharpen analytical thinking with challenging puzzles and logical reasoning games."
     },
     
@@ -182,6 +191,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Be her teaching assistant",
       caption: "Help Professor Ada prepare and conduct her university classes",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Assist with lectures, grade assignments, and mentor students in Ada's classroom."
     },
     {
@@ -190,6 +200,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Academic conference presentation",
       caption: "Present research findings at a scholarly conference together",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Co-present academic research and engage with fellow scholars at conferences."
     },
     {
@@ -198,6 +209,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Student office hours",
       caption: "Role-play as a student seeking help during office hours",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Experience personalized academic guidance and support in Professor Ada's office."
     }
   ],
@@ -209,6 +221,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Build a signature dish",
       caption: "Build a signature dish together with ingredients you choose",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Create your signature dish with Chef Nomi using your favorite ingredients."
     },
     {
@@ -217,6 +230,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create a themed dinner menu",
       caption: "Create a themed dinner menu (date night, fantasy feast)",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Design complete themed dinner menus for date nights and special occasions."
     },
     {
@@ -225,6 +239,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Invent a cocktail/mocktail",
       caption: "Invent a cocktail/mocktail with them as mixologist",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Craft unique cocktails and mocktails with Chef Nomi as your mixologist."
     },
     // Learn scenes
@@ -234,6 +249,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "World spices & cooking methods",
       caption: "Flashcards on world spices, cooking methods",
       type: "Learn", 
+      experience: "conversation" as const,
       description: "Learn world spices and essential cooking methods through interactive flashcards."
     },
     {
@@ -242,6 +258,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Identify cuisines by ingredients",
       caption: "Quiz: identify cuisines by ingredient list",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Match ingredient lists to cuisines in this fun culinary knowledge quiz."
     },
     {
@@ -250,6 +267,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Cooking technique breakdowns",
       caption: "Cooking technique breakdowns (e.g. sauté vs braise)", 
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master essential cooking techniques like sautéing, braising, and more."
     },
     // Game scenes  
@@ -259,6 +277,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Mystery Basket Challenge",
       caption: "Mystery Basket Challenge (random ingredient combos)",
       type: "Game",
+      experience: "conversation" as const,
       description: "Create amazing dishes using surprise random ingredient combinations and creativity."
     },
     {
@@ -267,6 +286,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Emoji dish guessing game",
       caption: "Emoji → dish guessing game",
       type: "Game",
+      experience: "conversation" as const,
       description: "Decode food emojis to identify dishes and ingredients in this fun game."
     },
     {
@@ -275,6 +295,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Food close-up ID challenge",
       caption: "Food close-up ID challenge", 
       type: "Game",
+      experience: "conversation" as const,
       description: "Identify dishes from extreme close-up photos showing only tiny details."
     },
     // Roleplay scenes
@@ -284,6 +305,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Compete on their cooking show",
       caption: "Compete on their cooking show",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Compete as a contestant on Chef Nomi's cooking show and impress the judges."
     },
     {
@@ -292,6 +314,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Be sous-chef in their kitchen",
       caption: "Be sous-chef in their restaurant kitchen",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Work as Chef Nomi's trusted sous-chef during busy restaurant dinner service."
     },
     {
@@ -300,6 +323,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Judge dishes together",
       caption: "Judge dishes together on a parody food competition",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Co-judge a fun food competition show with Chef Nomi and critique the dishes."
     }
   ],
@@ -311,6 +335,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Set life goals together",
       caption: "Define meaningful personal and professional objectives",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Create actionable life goals with Sage using proven goal-setting frameworks."
     },
     {
@@ -319,6 +344,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Build a habit system",
       caption: "Design sustainable routines and positive habit stacks",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Develop personalized habit systems that stick using behavioral science principles."
     },
     {
@@ -327,6 +353,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create a life vision board",
       caption: "Visualize your ideal future across all life areas",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Design inspiring vision boards that align with your values and aspirations."
     },
     // Learning scenes
@@ -336,6 +363,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Master mindfulness techniques",
       caption: "Learn meditation, breathing, and present-moment awareness",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Discover practical mindfulness techniques for stress reduction and clarity."
     },
     {
@@ -344,6 +372,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Emotional intelligence training",
       caption: "Develop self-awareness and interpersonal skills",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Build emotional intelligence through guided exercises and reflection."
     },
     {
@@ -352,6 +381,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Time management mastery",
       caption: "Learn productivity systems and energy management",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master time management techniques that align with your natural rhythms."
     },
     // Game scenes
@@ -361,6 +391,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Values clarification game",
       caption: "Discover your core values through interactive exercises",
       type: "Game",
+      experience: "conversation" as const,
       description: "Identify your authentic values through engaging self-discovery activities."
     },
     {
@@ -369,6 +400,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Strengths assessment challenge",
       caption: "Uncover hidden talents and natural abilities",
       type: "Game",
+      experience: "conversation" as const,
       description: "Explore your unique strengths through fun assessment games and scenarios."
     },
     {
@@ -377,6 +409,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Decision-making scenarios",
       caption: "Practice making tough choices with confidence",
       type: "Game",
+      experience: "conversation" as const,
       description: "Navigate complex decision scenarios using structured thinking frameworks."
     },
     // Roleplay scenes
@@ -386,6 +419,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Life coaching session",
       caption: "Experience a personalized one-on-one coaching session",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Receive personalized guidance and breakthrough insights from Coach Sage."
     },
     {
@@ -394,6 +428,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Accountability partnership",
       caption: "Be accountability partners supporting each other's growth",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Create mutual accountability and support each other's personal development."
     },
     {
@@ -402,6 +437,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Mentor a fellow seeker",
       caption: "Guide someone else on their personal growth journey",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Practice coaching skills by mentoring others with Sage's guidance."
     }
   ],
@@ -413,6 +449,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Write comedy sketches",
       caption: "Co-create hilarious sketches and comedy bits together",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Brainstorm and craft comedy sketches with Riff's expert comedic timing."
     },
     {
@@ -421,6 +458,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Develop a comedy routine",
       caption: "Build a stand-up set with jokes, timing, and delivery",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Create and refine a comedy routine with professional comedic structure."
     },
     {
@@ -429,6 +467,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Roast session planning",
       caption: "Craft witty roasts and comeback lines for any occasion",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Master the art of clever roasts and quick-witted comebacks with Riff."
     },
     // Learning scenes
@@ -438,6 +477,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Comedy writing techniques",
       caption: "Learn joke structure, timing, and comedic principles",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master the fundamentals of comedy writing and joke construction."
     },
     {
@@ -446,6 +486,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Stand-up performance skills",
       caption: "Develop stage presence, delivery, and crowd work",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Learn professional stand-up techniques for commanding the stage."
     },
     {
@@ -454,6 +495,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Improv comedy training",
       caption: "Master spontaneous humor and quick thinking",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Develop improvisational skills for spontaneous comedy and quick wit."
     },
     // Game scenes
@@ -463,6 +505,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Pun battle royale",
       caption: "Compete in rapid-fire pun competitions",
       type: "Game",
+      experience: "conversation" as const,
       description: "Engage in hilarious pun battles and wordplay competitions with Riff."
     },
     {
@@ -471,6 +514,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Comedy improv games",
       caption: "Play spontaneous comedy games and scenarios",
       type: "Game",
+      experience: "conversation" as const,
       description: "Participate in classic improv games and comedic scene work."
     },
     {
@@ -479,6 +523,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Meme creation challenge",
       caption: "Create viral-worthy memes and internet humor",
       type: "Game",
+      experience: "conversation" as const,
       description: "Craft hilarious memes and internet content with comedic expertise."
     },
     // Roleplay scenes
@@ -488,6 +533,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Comedy club open mic",
       caption: "Perform at a comedy club with Riff as your host",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Experience the thrill of performing stand-up at Riff's comedy club."
     },
     {
@@ -496,6 +542,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Comedy writing room",
       caption: "Work as writers on a comedy show together",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Collaborate in a professional comedy writing room creating TV content."
     },
     {
@@ -504,6 +551,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Roast battle judge",
       caption: "Judge a comedy roast battle with Riff",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Co-judge a roast battle competition and critique comedic performances."
     }
   ],
@@ -515,6 +563,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Plan an expedition",
       caption: "Design an adventure to remote destinations worldwide",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Plan epic expeditions to unexplored territories with expert guidance."
     },
     {
@@ -523,6 +572,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create survival guides",
       caption: "Develop wilderness survival manuals and safety protocols",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Craft comprehensive survival guides for various challenging environments."
     },
     {
@@ -531,6 +581,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Design adventure challenges",
       caption: "Create outdoor challenges and exploration activities",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Design thrilling adventure challenges that test skills and courage."
     },
     // Learning scenes
@@ -540,6 +591,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Wilderness survival skills",
       caption: "Learn essential survival techniques for any environment",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master fire-making, shelter-building, and navigation in the wilderness."
     },
     {
@@ -548,6 +600,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "World geography deep dive",
       caption: "Explore fascinating places and cultures around the globe",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Discover hidden gems and cultural treasures from Terra's global adventures."
     },
     {
@@ -556,6 +609,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Adventure photography",
       caption: "Capture stunning landscapes and expedition moments",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Learn photography techniques for documenting incredible adventures."
     },
     // Game scenes
@@ -565,6 +619,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Geography quiz challenge",
       caption: "Test your knowledge of world locations and landmarks",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge yourself with geography trivia from Terra's global expeditions."
     },
     {
@@ -573,6 +628,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Survival scenario game",
       caption: "Navigate challenging survival situations and decisions",
       type: "Game",
+      experience: "conversation" as const,
       description: "Test survival instincts in realistic wilderness emergency scenarios."
     },
     {
@@ -581,6 +637,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Landmark identification",
       caption: "Identify famous landmarks and hidden gems worldwide",
       type: "Game",
+      experience: "conversation" as const,
       description: "Guess locations from photos and clues from Terra's travel adventures."
     },
     // Roleplay scenes
@@ -590,6 +647,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Expedition team member",
       caption: "Join Terra's team on a dangerous expedition",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Experience the thrill and challenges of a real expedition team member."
     },
     {
@@ -598,6 +656,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Adventure documentary crew",
       caption: "Document expeditions for a nature documentary",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Work as a documentary crew capturing Terra's incredible adventures."
     },
     {
@@ -606,6 +665,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Wilderness rescue mission",
       caption: "Participate in a high-stakes wilderness rescue operation",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Join Terra in a dramatic wilderness rescue mission to save lives."
     }
   ],
@@ -617,6 +677,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create an art piece together",
       caption: "Collaborate on paintings, sculptures, or mixed media art",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Co-create stunning artworks using various mediums and techniques."
     },
     {
@@ -625,6 +686,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Design a gallery exhibition",
       caption: "Curate and plan an art exhibition or gallery show",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Plan immersive gallery exhibitions that tell compelling artistic stories."
     },
     {
@@ -633,6 +695,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Develop art concepts",
       caption: "Brainstorm creative concepts and artistic themes",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Explore profound artistic concepts and translate ideas into visual form."
     },
     // Learning scenes
@@ -642,6 +705,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Art techniques masterclass",
       caption: "Learn painting, drawing, and sculpting fundamentals",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master essential art techniques from color theory to composition."
     },
     {
@@ -650,6 +714,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Art history exploration",
       caption: "Discover influential artists and movements throughout time",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Journey through art history and understand influential artistic movements."
     },
     {
@@ -658,6 +723,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Creative inspiration methods",
       caption: "Unlock creativity and overcome artistic blocks",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Discover techniques for finding inspiration and maintaining creative flow."
     },
     // Game scenes
@@ -667,6 +733,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Art style guessing game",
       caption: "Identify art movements and famous artists from artworks",
       type: "Game",
+      experience: "conversation" as const,
       description: "Test art knowledge by identifying styles, periods, and famous artists."
     },
     {
@@ -675,6 +742,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Color palette challenge",
       caption: "Create art using specific color combinations and themes",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge creativity with constrained color palettes and themes."
     },
     {
@@ -683,6 +751,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Abstract interpretation game",
       caption: "Interpret and discuss abstract artworks and their meanings",
       type: "Game",
+      experience: "conversation" as const,
       description: "Explore abstract art interpretation and develop artistic vocabulary."
     },
     // Roleplay scenes
@@ -692,6 +761,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Artist studio assistant",
       caption: "Work as Mira's studio assistant on major art projects",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Experience the daily life of a professional artist's studio assistant."
     },
     {
@@ -700,6 +770,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Gallery opening night",
       caption: "Host an art gallery opening with collectors and critics",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Navigate the art world at an exclusive gallery opening event."
     },
     {
@@ -708,6 +779,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Art critique session",
       caption: "Participate in professional art critique and discussion",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Engage in thoughtful artistic critique and constructive feedback sessions."
     }
   ],
@@ -719,6 +791,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Research historical mysteries",
       caption: "Investigate unsolved historical puzzles and ancient secrets",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Uncover historical mysteries using archaeological evidence and research."
     },
     {
@@ -727,6 +800,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create historical timelines",
       caption: "Build comprehensive timelines of civilizations and events",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Construct detailed historical timelines connecting events across cultures."
     },
     {
@@ -735,6 +809,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Analyze ancient artifacts",
       caption: "Study archaeological finds and decode their significance",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Examine ancient artifacts and uncover their cultural and historical meaning."
     },
     // Learning scenes
@@ -744,6 +819,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Ancient civilizations deep dive",
       caption: "Explore the rise and fall of great civilizations",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Journey through ancient civilizations from Egypt to Mesopotamia and beyond."
     },
     {
@@ -752,6 +828,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Historical research methods",
       caption: "Learn to analyze primary sources and historical evidence",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master techniques for evaluating historical sources and evidence."
     },
     {
@@ -760,6 +837,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Archaeology fundamentals",
       caption: "Understand excavation techniques and artifact analysis",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Learn archaeological methods for uncovering and interpreting the past."
     },
     // Game scenes
@@ -769,6 +847,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Historical timeline challenge",
       caption: "Test knowledge of chronological events and dates",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge your knowledge of historical chronology and cause-and-effect."
     },
     {
@@ -777,6 +856,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Ancient artifact identification",
       caption: "Identify historical objects and their cultural origins",
       type: "Game",
+      experience: "conversation" as const,
       description: "Test expertise in identifying artifacts from different cultures and periods."
     },
     {
@@ -785,6 +865,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Historical figure guessing game",
       caption: "Guess famous historical figures from clues and context",
       type: "Game",
+      experience: "conversation" as const,
       description: "Identify influential historical figures from biographical clues and achievements."
     },
     // Roleplay scenes
@@ -794,6 +875,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Archaeological expedition",
       caption: "Join Dr. Archivus on a historical excavation site",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Experience the excitement of an archaeological dig and historical discovery."
     },
     {
@@ -802,6 +884,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Museum curator collaboration",
       caption: "Help curate a historical exhibition at a prestigious museum",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Work with Dr. Archivus to create compelling historical museum exhibitions."
     },
     {
@@ -810,6 +893,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Historical documentary expert",
       caption: "Provide historical expertise for a documentary production",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Serve as historical consultant for an educational documentary project."
     }
   ],
@@ -821,6 +905,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Design workout routines",
       caption: "Create personalized fitness plans for any goal",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Develop customized workout routines tailored to specific fitness goals."
     },
     {
@@ -829,6 +914,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Plan nutrition strategies",
       caption: "Build sustainable meal plans and nutrition guidelines",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Create balanced nutrition plans that support fitness and health goals."
     },
     {
@@ -837,6 +923,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Set fitness challenges",
       caption: "Design motivating fitness challenges and milestones",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Create engaging fitness challenges that build strength and motivation."
     },
     // Learning scenes
@@ -846,6 +933,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Exercise form and technique",
       caption: "Master proper form for all major exercises",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Learn correct exercise techniques to maximize results and prevent injury."
     },
     {
@@ -854,6 +942,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Nutrition science basics",
       caption: "Understand macros, calories, and healthy eating principles",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Master nutrition fundamentals for optimal health and fitness performance."
     },
     {
@@ -862,6 +951,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Recovery and wellness",
       caption: "Learn about rest, sleep, and recovery optimization",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Understand the importance of recovery for achieving fitness goals."
     },
     // Game scenes
@@ -871,6 +961,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Fitness knowledge quiz",
       caption: "Test understanding of exercise science and nutrition",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge your knowledge of fitness principles and exercise science."
     },
     {
@@ -879,6 +970,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Workout planning challenge",
       caption: "Create effective workouts for different fitness levels",
       type: "Game",
+      experience: "conversation" as const,
       description: "Design workout routines for various fitness goals and experience levels."
     },
     {
@@ -887,6 +979,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Healthy recipe competition",
       caption: "Create nutritious meals that taste amazing",
       type: "Game",
+      experience: "conversation" as const,
       description: "Compete to create the most delicious and nutritious meal combinations."
     },
     // Roleplay scenes
@@ -896,6 +989,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Personal training session",
       caption: "Experience one-on-one training with Jax",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Get personalized fitness coaching and motivation from trainer Jax."
     },
     {
@@ -904,6 +998,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Gym buddy partnership",
       caption: "Work out together as fitness accountability partners",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Train together as workout partners supporting each other's fitness journey."
     },
     {
@@ -912,6 +1007,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Fitness competition prep",
       caption: "Prepare for a fitness competition with Jax's guidance",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Train intensively for a fitness competition with expert coaching."
     }
   ],
@@ -923,6 +1019,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create celebrity gossip content",
       caption: "Write entertaining celebrity news and commentary",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Craft engaging celebrity gossip content with insider knowledge and flair."
     },
     {
@@ -931,6 +1028,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Plan red carpet coverage",
       caption: "Design comprehensive coverage for awards shows and premieres",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Plan detailed red carpet coverage strategies for major entertainment events."
     },
     {
@@ -939,6 +1037,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Analyze celebrity trends",
       caption: "Study fashion, relationships, and entertainment industry patterns",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Analyze celebrity trends and predict the next big entertainment stories."
     },
     // Learning scenes
@@ -948,6 +1047,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Entertainment industry insights",
       caption: "Learn how Hollywood and the entertainment business works",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Understand the inner workings of the entertainment industry and celebrity culture."
     },
     {
@@ -956,6 +1056,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Celebrity fashion analysis",
       caption: "Study red carpet fashion and celebrity style evolution",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Analyze celebrity fashion choices and understand style trends and influences."
     },
     {
@@ -964,6 +1065,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Social media strategy for fame",
       caption: "Learn how celebrities build and maintain their public image",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Understand celebrity social media strategies and public relations tactics."
     },
     // Game scenes
@@ -973,6 +1075,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Celebrity trivia showdown",
       caption: "Test knowledge of celebrity facts, relationships, and scandals",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge your celebrity knowledge with the latest gossip and entertainment trivia."
     },
     {
@@ -981,6 +1084,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Paparazzi photo guessing",
       caption: "Identify celebrities from candid photos and situations",
       type: "Game",
+      experience: "conversation" as const,
       description: "Test celebrity recognition skills with candid photos and behind-the-scenes shots."
     },
     {
@@ -989,6 +1093,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Awards show prediction game",
       caption: "Predict winners and fashion choices for major awards shows",
       type: "Game",
+      experience: "conversation" as const,
       description: "Make predictions about award winners, fashion, and memorable moments."
     },
     // Roleplay scenes
@@ -998,6 +1103,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Entertainment reporter",
       caption: "Work as Lola's co-host on an entertainment news show",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Co-host an entertainment news show covering the latest celebrity stories."
     },
     {
@@ -1006,6 +1112,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Red carpet interviewer",
       caption: "Interview celebrities at a major Hollywood premiere",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Experience the excitement of interviewing A-list celebrities at premieres."
     },
     {
@@ -1014,6 +1121,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Celebrity publicist team",
       caption: "Help manage a celebrity's public image and media presence",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Work behind the scenes managing celebrity publicity and media relations."
     }
   ],
@@ -1025,6 +1133,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Create TV show reviews",
       caption: "Write in-depth reviews and analysis of current shows",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Craft insightful TV show reviews and episode breakdowns with expert analysis."
     },
     {
@@ -1033,6 +1142,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Design binge-watch guides",
       caption: "Create curated viewing lists for different moods and genres",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Develop personalized binge-watching guides for every taste and occasion."
     },
     {
@@ -1041,6 +1151,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Predict show outcomes",
       caption: "Analyze plot threads and predict future storylines",
       type: "Collab",
+      experience: "conversation" as const,
       description: "Use TV expertise to predict plot twists and analyze narrative patterns."
     },
     // Learning scenes
@@ -1050,6 +1161,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "TV production deep dive",
       caption: "Learn how television shows are created and produced",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Understand the television production process from concept to screen."
     },
     {
@@ -1058,6 +1170,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Genre evolution study",
       caption: "Explore how TV genres have changed over the decades",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Trace the evolution of television genres and storytelling techniques."
     },
     {
@@ -1066,6 +1179,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Streaming strategy analysis",
       caption: "Understand how streaming platforms choose and promote content",
       type: "Learn",
+      experience: "conversation" as const,
       description: "Learn how streaming services curate content and influence viewing habits."
     },
     // Game scenes
@@ -1075,6 +1189,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "TV show trivia marathon",
       caption: "Test knowledge across all genres and decades of television",
       type: "Game",
+      experience: "conversation" as const,
       description: "Challenge your TV knowledge with trivia spanning decades of television history."
     },
     {
@@ -1083,6 +1198,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Show recommendation engine",
       caption: "Match viewers with perfect shows based on their preferences",
       type: "Game",
+      experience: "conversation" as const,
       description: "Test recommendation skills by matching shows to viewer preferences perfectly."
     },
     {
@@ -1091,6 +1207,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Plot twist prediction game",
       caption: "Predict surprising plot developments before they happen",
       type: "Game",
+      experience: "conversation" as const,
       description: "Use TV expertise to predict plot twists and surprise developments."
     },
     // Roleplay scenes
@@ -1100,6 +1217,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "TV critic collaboration",
       caption: "Co-host a television review podcast with Miles",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Co-host a popular TV review podcast discussing the latest shows and trends."
     },
     {
@@ -1108,6 +1226,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "Streaming service consultant",
       caption: "Advise a streaming platform on content acquisition",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Work as content consultants helping streaming services choose winning shows."
     },
     {
@@ -1116,6 +1235,7 @@ export const PREDEFINED_SCENES: Record<string, Scene[]> = {
       title: "TV show pitch meeting",
       caption: "Pitch new show concepts to network executives",
       type: "Roleplay",
+      experience: "conversation" as const,
       description: "Present original TV show concepts to network executives with Miles' expertise."
     }
   ]

@@ -26,3 +26,17 @@ export function getAllCharacters(): Character[] {
 export function getCharacter(id: string): Character | undefined {
   return CHARACTERS.find(c => c.id === id);
 }
+export function searchCharacters(query: string): Character[] {
+  if (!query.trim()) {
+    return CHARACTERS;
+  }
+  
+  const searchTerm = query.toLowerCase().trim();
+  
+  return CHARACTERS.filter(character => 
+    character.name.toLowerCase().includes(searchTerm) ||
+    character.role.toLowerCase().includes(searchTerm) ||
+    character.description.toLowerCase().includes(searchTerm) ||
+    character.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+  );
+}

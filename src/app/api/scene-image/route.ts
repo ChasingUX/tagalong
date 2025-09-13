@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
     const cachedImage = loadCachedSceneImage(characterId, sceneId);
     if (cachedImage) {
       console.log(`Using cached scene image for ${characterId}-${sceneId}`);
-      return new Response(cachedImage, {
+      return new Response(new Uint8Array(cachedImage), {
         status: 200,
         headers: { 
           "content-type": "image/png", 
