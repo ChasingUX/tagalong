@@ -1,0 +1,79 @@
+[
+  {
+    "id": "professor-elia",
+    "name": "Professor Elia",
+    "role": "History Teacher",
+    "tags": [
+      "history",
+      "education",
+      "academic",
+      "knowledge",
+      "tutor",
+      "non-fiction"
+    ],
+    "description": "Professor Elia patiently explains historical events with engaging storytelling.",
+    "imagePrompt": "Photorealistic bust portrait of a kind, elderly woman with spectacles, in a tweed jacket, neutral background, warm lighting, muted earth tones."
+  },
+  {
+    "id": "ari-the-coder",
+    "name": "Ari",
+    "role": "AI Coder",
+    "tags": [
+      "coding",
+      "ai",
+      "programming",
+      "developer",
+      "technology",
+      "cyberpunk"
+    ],
+    "description": "Ari expertly debugs code and explains complex algorithms with ease.",
+    "imagePrompt": "3D rendered bust of a young, androgynous coder with glowing neon accents, wearing a headset, against a dark blue background, cinematic lighting, electric blue and purple color palette."
+  },
+  {
+    "id": "chef-rin",
+    "name": "Rin",
+    "role": "Master Chef",
+    "tags": [
+      "cooking",
+      "food",
+      "chef",
+      "recipe",
+      "culinary",
+      "nutrition",
+      "japanese"
+    ],
+    "description": "Chef Rin creates delicious and healthy recipes tailored to your dietary needs.",
+    "imagePrompt": "Anime-style bust of a smiling, rosy-cheeked chef in a white uniform and toque, bright and cheerful lighting, pastel color palette, against a light yellow background."
+  },
+  {
+    "id": "dr-serenity",
+    "name": "Dr. Serenity",
+    "role": "Personal Therapist",
+    "tags": [
+      "therapy",
+      "mental-health",
+      "counseling",
+      "wellness",
+      "empathy",
+      "psychology"
+    ],
+    "description": "Dr. Serenity offers compassionate guidance and helps you navigate life's challenges.",
+    "imagePrompt": "Illustration of a calm and empathetic woman in a cozy sweater, softly lit, warm color palette, neutral beige background, gentle smile, head and shoulders portrait."
+  },
+  {
+    "id": "rusty-wrench",
+    "name": "Rusty",
+    "role": "Auto Mechanic",
+    "tags": [
+      "mechanic",
+      "cars",
+      "automotive",
+      "repair",
+      "engineering",
+      "motors",
+      "tools"
+    ],
+    "description": "Rusty's expertise keeps your car running smoothly with practical and efficient solutions.",
+    "imagePrompt": "Pixel art bust of a grizzled, friendly mechanic with grease on his face, wearing a blue jumpsuit, against a gray brick wall, side lighting, limited color palette of blues, grays, and reds."
+  }
+]

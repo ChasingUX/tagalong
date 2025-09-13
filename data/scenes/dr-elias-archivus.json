@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "characterId": "dr-elias-archivus",
+    "title": "Research historical mysteries",
+    "caption": "Investigate unsolved historical puzzles and ancient secrets",
+    "type": "Collab",
+    "description": "Uncover historical mysteries using archaeological evidence and research.",
+    "rules": [
+      "We'll work together to create something meaningful",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "2",
+    "characterId": "dr-elias-archivus",
+    "title": "Create historical timelines",
+    "caption": "Build comprehensive timelines of civilizations and events",
+    "type": "Collab",
+    "description": "Construct detailed historical timelines connecting events across cultures.",
+    "rules": [
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "3",
+    "characterId": "dr-elias-archivus",
+    "title": "Analyze ancient artifacts",
+    "caption": "Study archaeological finds and decode their significance",
+    "type": "Collab",
+    "description": "Examine ancient artifacts and uncover their cultural and historical meaning.",
+    "rules": [
+      "We'll work together to create something meaningful",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "4",
+    "characterId": "dr-elias-archivus",
+    "title": "Ancient civilizations deep dive",
+    "caption": "Explore the rise and fall of great civilizations",
+    "type": "Learn",
+    "description": "Journey through ancient civilizations from Egypt to Mesopotamia and beyond.",
+    "rules": [
+      "I'll guide you through ancient civilizations deep dive",
+      "You'll practice with step-by-step guidance and examples",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "5",
+    "characterId": "dr-elias-archivus",
+    "title": "Historical research methods",
+    "caption": "Learn to analyze primary sources and historical evidence",
+    "type": "Learn",
+    "description": "Master techniques for evaluating historical sources and evidence.",
+    "rules": [
+      "I'll guide you through historical research methods",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "6",
+    "characterId": "dr-elias-archivus",
+    "title": "Archaeology fundamentals",
+    "caption": "Understand excavation techniques and artifact analysis",
+    "type": "Learn",
+    "description": "Learn archaeological methods for uncovering and interpreting the past.",
+    "rules": [
+      "I'll guide you through archaeology fundamentals",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "7",
+    "characterId": "dr-elias-archivus",
+    "title": "Historical timeline challenge",
+    "caption": "Test knowledge of chronological events and dates",
+    "type": "Game",
+    "description": "Challenge your knowledge of historical chronology and cause-and-effect.",
+    "rules": [
+      "You'll face creative challenges with time or resource limits",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "8",
+    "characterId": "dr-elias-archivus",
+    "title": "Ancient artifact identification",
+    "caption": "Identify historical objects and their cultural origins",
+    "type": "Game",
+    "description": "Test expertise in identifying artifacts from different cultures and periods.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "9",
+    "characterId": "dr-elias-archivus",
+    "title": "Historical figure guessing game",
+    "caption": "Guess famous historical figures from clues and context",
+    "type": "Game",
+    "description": "Identify influential historical figures from biographical clues and achievements.",
+    "rules": [
+      "You'll make guesses based on clues I provide",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "10",
+    "characterId": "dr-elias-archivus",
+    "title": "Archaeological expedition",
+    "caption": "Join Dr. Archivus on a historical excavation site",
+    "type": "Roleplay",
+    "description": "Experience the excitement of an archaeological dig and historical discovery.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "11",
+    "characterId": "dr-elias-archivus",
+    "title": "Museum curator collaboration",
+    "caption": "Help curate a historical exhibition at a prestigious museum",
+    "type": "Roleplay",
+    "description": "Work with Dr. Archivus to create compelling historical museum exhibitions.",
+    "rules": [
+      "We're working together as professional partners",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "12",
+    "characterId": "dr-elias-archivus",
+    "title": "Historical documentary expert",
+    "caption": "Provide historical expertise for a documentary production",
+    "type": "Roleplay",
+    "description": "Serve as historical consultant for an educational documentary project.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  }
+]

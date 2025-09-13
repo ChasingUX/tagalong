@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "characterId": "terra-novak",
+    "title": "Plan an expedition",
+    "caption": "Design an adventure to remote destinations worldwide",
+    "type": "Collab",
+    "description": "Plan epic expeditions to unexplored territories with expert guidance.",
+    "rules": [
+      "We'll develop a comprehensive plan",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a detailed plan you can implement"
+    ]
+  },
+  {
+    "id": "2",
+    "characterId": "terra-novak",
+    "title": "Create survival guides",
+    "caption": "Develop wilderness survival manuals and safety protocols",
+    "type": "Collab",
+    "description": "Craft comprehensive survival guides for various challenging environments.",
+    "rules": [
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "3",
+    "characterId": "terra-novak",
+    "title": "Design adventure challenges",
+    "caption": "Create outdoor challenges and exploration activities",
+    "type": "Collab",
+    "description": "Design thrilling adventure challenges that test skills and courage.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a finished design you can use or modify"
+    ]
+  },
+  {
+    "id": "4",
+    "characterId": "terra-novak",
+    "title": "Wilderness survival skills",
+    "caption": "Learn essential survival techniques for any environment",
+    "type": "Learn",
+    "description": "Master fire-making, shelter-building, and navigation in the wilderness.",
+    "rules": [
+      "I'll guide you through wilderness survival skills",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "5",
+    "characterId": "terra-novak",
+    "title": "World geography deep dive",
+    "caption": "Explore fascinating places and cultures around the globe",
+    "type": "Learn",
+    "description": "Discover hidden gems and cultural treasures from Terra's global adventures.",
+    "rules": [
+      "I'll guide you through world geography deep dive",
+      "We'll use flashcards, quizzes, and interactive exercises",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "6",
+    "characterId": "terra-novak",
+    "title": "Adventure photography",
+    "caption": "Capture stunning landscapes and expedition moments",
+    "type": "Learn",
+    "description": "Learn photography techniques for documenting incredible adventures.",
+    "rules": [
+      "I'll guide you through adventure photography",
+      "You'll practice with step-by-step guidance and examples",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "7",
+    "characterId": "terra-novak",
+    "title": "Geography quiz challenge",
+    "caption": "Test your knowledge of world locations and landmarks",
+    "type": "Game",
+    "description": "Challenge yourself with geography trivia from Terra's global expeditions.",
+    "rules": [
+      "I'll ask questions and you choose or guess the answers",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "8",
+    "characterId": "terra-novak",
+    "title": "Survival scenario game",
+    "caption": "Navigate challenging survival situations and decisions",
+    "type": "Game",
+    "description": "Test survival instincts in realistic wilderness emergency scenarios.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "9",
+    "characterId": "terra-novak",
+    "title": "Landmark identification",
+    "caption": "Identify famous landmarks and hidden gems worldwide",
+    "type": "Game",
+    "description": "Guess locations from photos and clues from Terra's travel adventures.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "10",
+    "characterId": "terra-novak",
+    "title": "Expedition team member",
+    "caption": "Join Terra's team on a dangerous expedition",
+    "type": "Roleplay",
+    "description": "Experience the thrill and challenges of a real expedition team member.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "11",
+    "characterId": "terra-novak",
+    "title": "Adventure documentary crew",
+    "caption": "Document expeditions for a nature documentary",
+    "type": "Roleplay",
+    "description": "Work as a documentary crew capturing Terra's incredible adventures.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "12",
+    "characterId": "terra-novak",
+    "title": "Wilderness rescue mission",
+    "caption": "Participate in a high-stakes wilderness rescue operation",
+    "type": "Roleplay",
+    "description": "Join Terra in a dramatic wilderness rescue mission to save lives.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  }
+]

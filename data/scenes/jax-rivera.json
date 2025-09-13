@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "characterId": "jax-rivera",
+    "title": "Design workout routines",
+    "caption": "Create personalized fitness plans for any goal",
+    "type": "Collab",
+    "description": "Develop customized workout routines tailored to specific fitness goals.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a polished comedy routine ready for performance"
+    ]
+  },
+  {
+    "id": "2",
+    "characterId": "jax-rivera",
+    "title": "Plan nutrition strategies",
+    "caption": "Build sustainable meal plans and nutrition guidelines",
+    "type": "Collab",
+    "description": "Create balanced nutrition plans that support fitness and health goals.",
+    "rules": [
+      "We'll develop a comprehensive plan",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a detailed plan you can implement"
+    ]
+  },
+  {
+    "id": "3",
+    "characterId": "jax-rivera",
+    "title": "Set fitness challenges",
+    "caption": "Design motivating fitness challenges and milestones",
+    "type": "Collab",
+    "description": "Create engaging fitness challenges that build strength and motivation.",
+    "rules": [
+      "We'll construct something step by step",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "4",
+    "characterId": "jax-rivera",
+    "title": "Exercise form and technique",
+    "caption": "Master proper form for all major exercises",
+    "type": "Learn",
+    "description": "Learn correct exercise techniques to maximize results and prevent injury.",
+    "rules": [
+      "I'll guide you through exercise form and technique",
+      "You'll practice with step-by-step guidance and examples",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "5",
+    "characterId": "jax-rivera",
+    "title": "Nutrition science basics",
+    "caption": "Understand macros, calories, and healthy eating principles",
+    "type": "Learn",
+    "description": "Master nutrition fundamentals for optimal health and fitness performance.",
+    "rules": [
+      "I'll guide you through nutrition science basics",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "6",
+    "characterId": "jax-rivera",
+    "title": "Recovery and wellness",
+    "caption": "Learn about rest, sleep, and recovery optimization",
+    "type": "Learn",
+    "description": "Understand the importance of recovery for achieving fitness goals.",
+    "rules": [
+      "I'll guide you through recovery and wellness",
+      "We'll use flashcards, quizzes, and interactive exercises",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "7",
+    "characterId": "jax-rivera",
+    "title": "Fitness knowledge quiz",
+    "caption": "Test understanding of exercise science and nutrition",
+    "type": "Game",
+    "description": "Challenge your knowledge of fitness principles and exercise science.",
+    "rules": [
+      "I'll ask questions and you choose or guess the answers",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "8",
+    "characterId": "jax-rivera",
+    "title": "Workout planning challenge",
+    "caption": "Create effective workouts for different fitness levels",
+    "type": "Game",
+    "description": "Design workout routines for various fitness goals and experience levels.",
+    "rules": [
+      "You'll face creative challenges with time or resource limits",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "9",
+    "characterId": "jax-rivera",
+    "title": "Healthy recipe competition",
+    "caption": "Create nutritious meals that taste amazing",
+    "type": "Game",
+    "description": "Compete to create the most delicious and nutritious meal combinations.",
+    "rules": [
+      "We'll compete in rounds with points and winners",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "10",
+    "characterId": "jax-rivera",
+    "title": "Personal training session",
+    "caption": "Experience one-on-one training with Jax",
+    "type": "Roleplay",
+    "description": "Get personalized fitness coaching and motivation from trainer Jax.",
+    "rules": [
+      "You're in a training scenario where I'm your instructor",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "11",
+    "characterId": "jax-rivera",
+    "title": "Gym buddy partnership",
+    "caption": "Work out together as fitness accountability partners",
+    "type": "Roleplay",
+    "description": "Train together as workout partners supporting each other's fitness journey.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "12",
+    "characterId": "jax-rivera",
+    "title": "Fitness competition prep",
+    "caption": "Prepare for a fitness competition with Jax's guidance",
+    "type": "Roleplay",
+    "description": "Train intensively for a fitness competition with expert coaching.",
+    "rules": [
+      "You're competing or being judged in a formal setting",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  }
+]

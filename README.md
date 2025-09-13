@@ -1,3 +1,25 @@
+## AI Characters App
+
+Run locally:
+
+```bash
+npm i
+cp .env.example .env # fill GOOGLE_API_KEY and models
+npm run dev
+```
+
+Generate characters JSON (~100):
+
+```bash
+COUNT=100 npm run gen:characters
+```
+
+Environment:
+- `GOOGLE_API_KEY`: Google Generative AI key
+- `GEMINI_TEXT_MODEL`: e.g., `gemini-1.5-flash`
+- `GEMINI_IMAGE_MODEL`: e.g., `gemini-1.5-flash`
+- `DISABLE_IMAGE_GEN`: set `1` to use placeholder images
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

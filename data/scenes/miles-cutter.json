@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "characterId": "miles-cutter",
+    "title": "Create TV show reviews",
+    "caption": "Write in-depth reviews and analysis of current shows",
+    "type": "Collab",
+    "description": "Craft insightful TV show reviews and episode breakdowns with expert analysis.",
+    "rules": [
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "2",
+    "characterId": "miles-cutter",
+    "title": "Design binge-watch guides",
+    "caption": "Create curated viewing lists for different moods and genres",
+    "type": "Collab",
+    "description": "Develop personalized binge-watching guides for every taste and occasion.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a finished design you can use or modify"
+    ]
+  },
+  {
+    "id": "3",
+    "characterId": "miles-cutter",
+    "title": "Predict show outcomes",
+    "caption": "Analyze plot threads and predict future storylines",
+    "type": "Collab",
+    "description": "Use TV expertise to predict plot twists and analyze narrative patterns.",
+    "rules": [
+      "We'll work together to create something meaningful",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "4",
+    "characterId": "miles-cutter",
+    "title": "TV production deep dive",
+    "caption": "Learn how television shows are created and produced",
+    "type": "Learn",
+    "description": "Understand the television production process from concept to screen.",
+    "rules": [
+      "I'll guide you through tv production deep dive",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "5",
+    "characterId": "miles-cutter",
+    "title": "Genre evolution study",
+    "caption": "Explore how TV genres have changed over the decades",
+    "type": "Learn",
+    "description": "Trace the evolution of television genres and storytelling techniques.",
+    "rules": [
+      "I'll guide you through genre evolution study",
+      "You'll practice with step-by-step guidance and examples",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "6",
+    "characterId": "miles-cutter",
+    "title": "Streaming strategy analysis",
+    "caption": "Understand how streaming platforms choose and promote content",
+    "type": "Learn",
+    "description": "Learn how streaming services curate content and influence viewing habits.",
+    "rules": [
+      "I'll guide you through streaming strategy analysis",
+      "We'll use flashcards, quizzes, and interactive exercises",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "7",
+    "characterId": "miles-cutter",
+    "title": "TV show trivia marathon",
+    "caption": "Test knowledge across all genres and decades of television",
+    "type": "Game",
+    "description": "Challenge your TV knowledge with trivia spanning decades of television history.",
+    "rules": [
+      "You'll face creative challenges with time or resource limits",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "8",
+    "characterId": "miles-cutter",
+    "title": "Show recommendation engine",
+    "caption": "Match viewers with perfect shows based on their preferences",
+    "type": "Game",
+    "description": "Test recommendation skills by matching shows to viewer preferences perfectly.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "9",
+    "characterId": "miles-cutter",
+    "title": "Plot twist prediction game",
+    "caption": "Predict surprising plot developments before they happen",
+    "type": "Game",
+    "description": "Use TV expertise to predict plot twists and surprise developments.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "10",
+    "characterId": "miles-cutter",
+    "title": "TV critic collaboration",
+    "caption": "Co-host a television review podcast with Miles",
+    "type": "Roleplay",
+    "description": "Co-host a popular TV review podcast discussing the latest shows and trends.",
+    "rules": [
+      "We're working together as professional partners",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "11",
+    "characterId": "miles-cutter",
+    "title": "Streaming service consultant",
+    "caption": "Advise a streaming platform on content acquisition",
+    "type": "Roleplay",
+    "description": "Work as content consultants helping streaming services choose winning shows.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "12",
+    "characterId": "miles-cutter",
+    "title": "TV show pitch meeting",
+    "caption": "Pitch new show concepts to network executives",
+    "type": "Roleplay",
+    "description": "Present original TV show concepts to network executives with Miles' expertise.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  }
+]

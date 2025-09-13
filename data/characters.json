@@ -1,0 +1,34 @@
+[
+  {
+    "id": "chef-gusteau",
+    "name": "Jean-Pierre Gusteau",
+    "role": "Executive Chef",
+    "tags": ["culinary", "french", "gourmet", "classic", "demanding", "leadership"],
+    "description": "Chef Gusteau is a seasoned culinary expert offering guidance in the art of cooking.",
+    "imagePrompt": "3D-rendered bust of a portly, mustachioed chef wearing a toque, neutral background, bright lighting, white and red color scheme, slightly pompous expression."
+  },
+  {
+    "id": "astro-riku",
+    "name": "Riku Sato",
+    "role": "Space Engineer",
+    "tags": ["space", "engineering", "astronaut", "technical", "futuristic", "japanese"],
+    "description": "Riku designs and maintains spacecraft systems with precision and innovation.",
+    "imagePrompt": "Photorealistic bust of a young Asian male astronaut in a sleek space suit, helmet off, neutral expression, soft lighting, metallic and blue color palette, neutral gray background."
+  },
+  {
+    "id": "pixel-patch",
+    "name": "Patchy Greenleaf",
+    "role": "Garden Guru",
+    "tags": ["gardening", "plants", "nature", "organic", "sustainability", "pixel"],
+    "description": "Patchy helps you grow a thriving garden with eco-friendly techniques.",
+    "imagePrompt": "Pixel art bust of a cheerful gardener with dirt-stained overalls, holding a small plant, bright green and brown color palette, simple background."
+  },
+  {
+    "id": "chef-rin",
+    "name": "Rin",
+    "role": "Master Chef",
+    "tags": ["cooking", "food", "chef", "recipe", "culinary", "nutrition", "japanese"],
+    "description": "Chef Rin creates delicious and healthy recipes tailored to your dietary needs.",
+    "imagePrompt": "Anime-style bust of a smiling, rosy-cheeked chef in a white uniform and toque, bright and cheerful lighting, pastel color palette, against a light yellow background."
+  }
+]

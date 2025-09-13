@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "characterId": "chef-nomi-delgado",
+    "title": "Build a signature dish",
+    "caption": "Build a signature dish together with ingredients you choose",
+    "type": "Collab",
+    "description": "Create your signature dish with Chef Nomi using your favorite ingredients.",
+    "rules": [
+      "We'll construct something step by step",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "2",
+    "characterId": "chef-nomi-delgado",
+    "title": "Create a themed dinner menu",
+    "caption": "Create a themed dinner menu (date night, fantasy feast)",
+    "type": "Collab",
+    "description": "Design complete themed dinner menus for date nights and special occasions.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a complete menu plan you can use for your event"
+    ]
+  },
+  {
+    "id": "3",
+    "characterId": "chef-nomi-delgado",
+    "title": "Invent a cocktail/mocktail",
+    "caption": "Invent a cocktail/mocktail with them as mixologist",
+    "type": "Collab",
+    "description": "Craft unique cocktails and mocktails with Chef Nomi as your mixologist.",
+    "rules": [
+      "We'll work together to create something meaningful",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "4",
+    "characterId": "chef-nomi-delgado",
+    "title": "World spices & cooking methods",
+    "caption": "Flashcards on world spices, cooking methods",
+    "type": "Learn",
+    "description": "Learn world spices and essential cooking methods through interactive flashcards.",
+    "rules": [
+      "I'll guide you through world spices & cooking methods",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "5",
+    "characterId": "chef-nomi-delgado",
+    "title": "Identify cuisines by ingredients",
+    "caption": "Quiz: identify cuisines by ingredient list",
+    "type": "Learn",
+    "description": "Match ingredient lists to cuisines in this fun culinary knowledge quiz.",
+    "rules": [
+      "I'll guide you through identify cuisines by ingredients",
+      "You'll practice with step-by-step guidance and examples",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "6",
+    "characterId": "chef-nomi-delgado",
+    "title": "Cooking technique breakdowns",
+    "caption": "Cooking technique breakdowns (e.g. sauté vs braise)",
+    "type": "Learn",
+    "description": "Master essential cooking techniques like sautéing, braising, and more.",
+    "rules": [
+      "I'll guide you through cooking technique breakdowns",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "7",
+    "characterId": "chef-nomi-delgado",
+    "title": "Mystery Basket Challenge",
+    "caption": "Mystery Basket Challenge (random ingredient combos)",
+    "type": "Game",
+    "description": "Create amazing dishes using surprise random ingredient combinations and creativity.",
+    "rules": [
+      "You'll face creative challenges with time or resource limits",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "8",
+    "characterId": "chef-nomi-delgado",
+    "title": "Emoji dish guessing game",
+    "caption": "Emoji → dish guessing game",
+    "type": "Game",
+    "description": "Decode food emojis to identify dishes and ingredients in this fun game.",
+    "rules": [
+      "You'll make guesses based on clues I provide",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "9",
+    "characterId": "chef-nomi-delgado",
+    "title": "Food close-up ID challenge",
+    "caption": "Food close-up ID challenge",
+    "type": "Game",
+    "description": "Identify dishes from extreme close-up photos showing only tiny details.",
+    "rules": [
+      "You'll face creative challenges with time or resource limits",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "10",
+    "characterId": "chef-nomi-delgado",
+    "title": "Compete on their cooking show",
+    "caption": "Compete on their cooking show",
+    "type": "Roleplay",
+    "description": "Compete as a contestant on Chef Nomi's cooking show and impress the judges.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "11",
+    "characterId": "chef-nomi-delgado",
+    "title": "Be sous-chef in their kitchen",
+    "caption": "Be sous-chef in their restaurant kitchen",
+    "type": "Roleplay",
+    "description": "Work as Chef Nomi's trusted sous-chef during busy restaurant dinner service.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "12",
+    "characterId": "chef-nomi-delgado",
+    "title": "Judge dishes together",
+    "caption": "Judge dishes together on a parody food competition",
+    "type": "Roleplay",
+    "description": "Co-judge a fun food competition show with Chef Nomi and critique the dishes.",
+    "rules": [
+      "You're competing or being judged in a formal setting",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  }
+]

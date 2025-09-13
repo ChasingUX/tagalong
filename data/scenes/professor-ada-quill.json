@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "characterId": "professor-ada-quill",
+    "title": "Plan a lesson together",
+    "caption": "Co-create an engaging lesson plan on any topic you choose",
+    "type": "Collab",
+    "description": "Design interactive lessons with Professor Ada using creative teaching methods.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a detailed plan you can implement"
+    ]
+  },
+  {
+    "id": "2",
+    "characterId": "professor-ada-quill",
+    "title": "Create study materials",
+    "caption": "Make flashcards, guides, and visual aids for learning",
+    "type": "Collab",
+    "description": "Craft effective study materials and learning resources together with Ada.",
+    "rules": [
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ]
+  },
+  {
+    "id": "3",
+    "characterId": "professor-ada-quill",
+    "title": "Design a curriculum",
+    "caption": "Build a complete learning path for a subject of interest",
+    "type": "Collab",
+    "description": "Structure comprehensive curricula with clear learning objectives and milestones.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a finished design you can use or modify"
+    ]
+  },
+  {
+    "id": "4",
+    "characterId": "professor-ada-quill",
+    "title": "Master study techniques",
+    "caption": "Learn effective note-taking, memory, and test-taking strategies",
+    "type": "Learn",
+    "description": "Discover proven study methods and learning strategies from an expert educator.",
+    "rules": [
+      "I'll guide you through master study techniques",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "5",
+    "characterId": "professor-ada-quill",
+    "title": "Explore any subject deeply",
+    "caption": "Get personalized tutoring on topics you want to understand",
+    "type": "Learn",
+    "description": "Receive expert guidance and explanations tailored to your learning style.",
+    "rules": [
+      "I'll guide you through explore any subject deeply",
+      "We'll go through concepts with questions and explanations",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "6",
+    "characterId": "professor-ada-quill",
+    "title": "Research skills workshop",
+    "caption": "Learn to find, evaluate, and cite reliable sources",
+    "type": "Learn",
+    "description": "Master academic research methods and critical information evaluation skills.",
+    "rules": [
+      "I'll guide you through research skills workshop",
+      "You'll practice with step-by-step guidance and examples",
+      "You'll get immediate feedback and track your understanding"
+    ]
+  },
+  {
+    "id": "7",
+    "characterId": "professor-ada-quill",
+    "title": "Knowledge trivia challenge",
+    "caption": "Test your knowledge across various academic subjects",
+    "type": "Game",
+    "description": "Challenge yourself with trivia spanning history, science, literature, and more.",
+    "rules": [
+      "You'll face creative challenges with time or resource limits",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "8",
+    "characterId": "professor-ada-quill",
+    "title": "Vocabulary building game",
+    "caption": "Expand your vocabulary with word games and etymology",
+    "type": "Game",
+    "description": "Learn new words through engaging games and discover their fascinating origins.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "9",
+    "characterId": "professor-ada-quill",
+    "title": "Logic puzzle workshop",
+    "caption": "Solve riddles, brain teasers, and critical thinking puzzles",
+    "type": "Game",
+    "description": "Sharpen analytical thinking with challenging puzzles and logical reasoning games.",
+    "rules": [
+      "Simple rules with clear objectives and win conditions",
+      "You make choices or responses, I react and keep score",
+      "Success earns points or reveals, with fun reactions either way"
+    ]
+  },
+  {
+    "id": "10",
+    "characterId": "professor-ada-quill",
+    "title": "Be her teaching assistant",
+    "caption": "Help Professor Ada prepare and conduct her university classes",
+    "type": "Roleplay",
+    "description": "Assist with lectures, grade assignments, and mentor students in Ada's classroom.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "11",
+    "characterId": "professor-ada-quill",
+    "title": "Academic conference presentation",
+    "caption": "Present research findings at a scholarly conference together",
+    "type": "Roleplay",
+    "description": "Co-present academic research and engage with fellow scholars at conferences.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  },
+  {
+    "id": "12",
+    "characterId": "professor-ada-quill",
+    "title": "Student office hours",
+    "caption": "Role-play as a student seeking help during office hours",
+    "type": "Roleplay",
+    "description": "Experience personalized academic guidance and support in Professor Ada's office.",
+    "rules": [
+      "You're in a realistic scenario with clear context and stakes",
+      "Respond naturally as yourself, make choices, and engage authentically",
+      "I'll adapt to your responses and the story branches based on your choices"
+    ]
+  }
+]
