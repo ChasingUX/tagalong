@@ -45,15 +45,15 @@
     "id": "4",
     "characterId": "chef-nomi-delgado",
     "title": "World spices & cooking methods",
-    "caption": "Flashcards on world spices, cooking methods",
+    "caption": "Interactive quiz on world spices & cooking methods",
     "type": "Learn",
-    "description": "Learn world spices and essential cooking methods through interactive flashcards.",
+    "description": "Test your knowledge of world spices and essential cooking methods through an interactive quiz.",
     "rules": [
-      "I'll guide you through world spices & cooking methods",
-      "We'll go through concepts with questions and explanations",
-      "You'll get immediate feedback and track your understanding"
+      "Answer multiple-choice questions about spices and cooking techniques",
+      "Get immediate feedback with explanations from Chef Nomi",
+      "Track your progress and learn from detailed explanations"
     ],
-    "experience": "conversation"
+    "experience": "quiz"
   },
   {
     "id": "5",

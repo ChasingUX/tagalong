@@ -7,6 +7,7 @@ import { useSpring, animated, useTransition } from '@react-spring/web';
 import MobileShell from "@/components/MobileShell";
 import SceneModal from "@/components/SceneModal";
 import { StreamingText } from "@/components/StreamingText";
+import { QuizExperience } from "@/components/QuizExperience";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
 import { getExperienceType } from "@/lib/experiences";
@@ -304,9 +305,19 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   return (
     <MobileShell title={sceneTitle} subtitle={character.name} currentCharacterId={id} showInfoButton={true} onInfoClick={() => setShowModal(true)}>
       <div className="flex h-full flex-col relative">
-        {/* Experience Type: {experienceType} - Future: render different experiences here */}
-
-        {/* Chat Messages */}
+        {/* Render different experience types */}
+        {experienceType === 'quiz' && currentScene ? (
+          <QuizExperience character={character} scene={currentScene} />
+        ) : experienceType === 'quiz' && !currentScene ? (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading quiz...</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Chat Messages */}
         <div 
           ref={scrollerRef} 
           className="flex-1 space-y-3 overflow-y-auto px-1 pt-2 pb-8 relative scrollbar-hide"
@@ -463,6 +474,8 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             </div>
           </div>
         </form>
+          </>
+        )}
       </div>
 
       {/* Scene Modal */}
