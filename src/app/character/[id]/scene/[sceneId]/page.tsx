@@ -32,6 +32,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [wasAtBottom, setWasAtBottom] = useState(true);
   const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
+  const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void } | null>(null);
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -74,6 +75,17 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
 
   const beginScene = async () => {
     setShowModal(false);
+    
+    // Handle different experience types
+    if (experienceType === 'quiz') {
+      // For quiz, trigger the quiz's begin function
+      if (quizRef?.beginQuiz) {
+        quizRef.beginQuiz();
+      }
+      return;
+    }
+    
+    // For conversation experience
     setHasBegun(true);
     
     // Fetch initial message for the scene with streaming
@@ -309,7 +321,11 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
         {!currentScene ? (
           <div className="flex-1"></div>
         ) : experienceType === 'quiz' ? (
-          <QuizExperience character={character} scene={currentScene} />
+          <QuizExperience 
+            character={character} 
+            scene={currentScene} 
+            onRefReady={setQuizRef}
+          />
         ) : (
           <>
             {/* Chat Messages */}
