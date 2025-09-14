@@ -12,7 +12,7 @@ import CharacterPIP from "@/components/CharacterPIP";
 import Composer from "@/components/Composer";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
-import { getExperienceType } from "@/lib/experiences";
+import { getExperienceType, EXPERIENCES } from "@/lib/experiences";
 import { type ExperienceType } from "@/lib/types";
 
 type Message = { role: "assistant" | "user"; content: string; streaming?: boolean; id?: string };
@@ -35,6 +35,10 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [wasAtBottom, setWasAtBottom] = useState(true);
   const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
   const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void; hasBegun: boolean; loading: boolean } | null>(null);
+  const [isPipExpanded, setIsPipExpanded] = useState(() => {
+    // Initialize based on experience configuration
+    return false; // Will be set properly when experienceType is determined
+  });
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -131,7 +135,11 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
         setCurrentScene(scene || null);
         
         // Set the experience type based on the scene
-        setExperienceType(getExperienceType(scene));
+        const sceneExperienceType = getExperienceType(scene);
+        setExperienceType(sceneExperienceType);
+        
+        // Set initial PIP expanded state based on experience configuration
+        setIsPipExpanded(EXPERIENCES[sceneExperienceType]?.pipInitialExpanded || false);
         
         // Only show modal if the scene hasn't been begun yet
         if (!hasBegun) {
@@ -308,6 +316,14 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
     send();
   };
 
+  const togglePip = () => {
+    console.log(`🎯 togglePip called - current isPipExpanded:`, isPipExpanded);
+    setIsPipExpanded(prev => {
+      console.log(`🎯 togglePip - changing from ${prev} to ${!prev}`);
+      return !prev;
+    });
+  };
+
   if (!character) {
     return (
       <div className="p-6 text-center text-sm text-white/60">
@@ -320,7 +336,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
     <MobileShell title={sceneTitle} subtitle={character.name} currentCharacterId={id} showInfoButton={true} onInfoClick={() => setShowModal(true)}>
       <div className="flex h-full flex-col relative">
         {/* Character PIP - floats above all experience types */}
-        {character && <CharacterPIP character={character} experienceType={experienceType} isVisible={experienceType === 'quiz' ? (quizRef?.hasBegun && !quizRef?.loading) : (hasBegun && !loading)} />}
+        {character && <CharacterPIP character={character} experienceType={experienceType} isVisible={experienceType === 'quiz' ? (quizRef?.hasBegun && !quizRef?.loading) : (hasBegun && !loading)} initialExpanded={false} isExpanded={isPipExpanded} onToggleExpanded={togglePip} />}
         {/* Render different experience types */}
         {!currentScene ? (
           <div className="flex-1"></div>
@@ -329,6 +345,8 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             character={character} 
             scene={currentScene} 
             onRefReady={setQuizRef}
+            isPipExpanded={isPipExpanded}
+            onTogglePip={togglePip}
           />
         ) : (
           <>
@@ -446,6 +464,8 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
           onSubmit={onSubmit}
           placeholder={`Talk to ${character?.name.split(' ')[0] || 'character'}`}
           disabled={loading}
+          isPipExpanded={isPipExpanded}
+          onTogglePip={togglePip}
         />
           </>
         )}

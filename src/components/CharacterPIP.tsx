@@ -14,102 +14,141 @@ interface CharacterPIPProps {
   };
   experienceType?: 'conversation' | 'quiz' | 'flashcard';
   isVisible?: boolean;
+  initialExpanded?: boolean;
+  isExpanded?: boolean;
+  onToggleExpanded?: () => void;
 }
 
 const CharacterPIP: React.FC<CharacterPIPProps> = ({
   character, 
   experienceType = 'conversation',
-  isVisible = false
+  isVisible = false,
+  initialExpanded = false,
+  isExpanded: controlledExpanded,
+  onToggleExpanded
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [cssPosition, setCssPosition] = useState({ x: 251, y: 433, width: 100, height: 150, opacity: 1, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' });
+  // Use controlled expansion state if provided, otherwise use internal state
+  const [internalExpanded, setInternalExpanded] = useState(initialExpanded);
+  const isExpanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded;
+  const prevExpandedRef = useRef<boolean>(false); // Initialize with false, will be updated in useEffect
+  const [cssPosition, setCssPosition] = useState(() => {
+    // If starting expanded, use expanded dimensions and position
+    if (initialExpanded) {
+      return { x: 0, y: 0, width: 351, height: 527, opacity: 1, boxShadow: '0 0 0 rgba(0, 0, 0, 0)' };
+    }
+    // Otherwise use collapsed dimensions at bottom-right
+    return { x: 251, y: 433, width: 100, height: 150, opacity: 1, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' };
+  });
   const [isDragging, setIsDragging] = useState(false);
   const [preExpandPosition, setPreExpandPosition] = useState({ x: 251, y: 433 });
 
   // Show/hide animation
   useEffect(() => {
-    console.log(`${ts()} 👁️ Visibility effect triggered:`, { isVisible, isExpanded });
-    
     // COMPLETELY skip if expanded to prevent interference
     if (isExpanded) {
-      console.log(`${ts()} 👁️ Skipping visibility effect - component is expanded`);
       return;
     }
     
     // Skip if we already have a position set (don't override collapse position)
-    // Check if position is different from default initial position (bottom-right)
-    if (isVisible && (cssPosition.x !== 251 || cssPosition.y !== 433)) {
-      console.log(`${ts()} 👁️ Skipping visibility effect - position already set:`, cssPosition);
+    // Check if position is different from default initial position (bottom-right or expanded)
+    const isAtDefaultCollapsed = cssPosition.x === 251 && cssPosition.y === 433;
+    const isAtDefaultExpanded = cssPosition.x === 0 && cssPosition.y === 0 && cssPosition.width === 351;
+    
+    if (isVisible && !isAtDefaultCollapsed && !isAtDefaultExpanded) {
       return;
     }
     
     if (isVisible) {
-      // Set initial position
-      const container = containerRef.current?.parentElement;
-      const containerWidth = container?.clientWidth || 351;
-      
-      console.log(`${ts()} 📍 Setting initial position - containerWidth:`, containerWidth);
-      console.log(`${ts()} 📍 Target position:`, { x: containerWidth - 100, y: 'bottom-right', width: 100, height: 150 });
-      
-      // Set initial position using CSS (bottom-right)
-      const containerHeight = container?.clientHeight || 653;
-      const composerHeight = 70;
-      const availableHeight = containerHeight - composerHeight;
-      
-      const initialX = containerWidth - 100; // Right edge
-      const initialY = availableHeight - 150; // Bottom edge (with composer clearance)
-      
-      setCssPosition(prev => ({
-        ...prev,
-        x: initialX,
-        y: initialY,
-        opacity: 1,
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-      }));
-      
-      // Also update pre-expand position
-      setPreExpandPosition({ x: initialX, y: initialY });
-      
-      console.log(`${ts()} 📍 Initial position animation started`);
+      if (initialExpanded) {
+        // If starting expanded, set to expanded position
+        const expandedPos = getExpandedPosition();
+        
+        setCssPosition(prev => ({
+          ...prev,
+          ...expandedPos,
+          opacity: 1,
+          boxShadow: '0 0 0 rgba(0, 0, 0, 0)'
+        }));
+        
+        // Set pre-expand position to bottom-right for when user collapses
+        const container = containerRef.current?.parentElement;
+        const containerHeight = container?.clientHeight || 653;
+        const containerWidth = container?.clientWidth || 351;
+        const composerHeight = 70;
+        const availableHeight = containerHeight - composerHeight;
+        const fallbackX = containerWidth - 100;
+        const fallbackY = availableHeight - 150;
+        setPreExpandPosition({ x: fallbackX, y: fallbackY });
+      } else {
+        // Set initial position (bottom-right collapsed)
+        const container = containerRef.current?.parentElement;
+        const containerWidth = container?.clientWidth || 351;
+        
+        // Set initial position using CSS (bottom-right)
+        const containerHeight = container?.clientHeight || 653;
+        const composerHeight = 70;
+        const availableHeight = containerHeight - composerHeight;
+        
+        const initialX = containerWidth - 100; // Right edge
+        const initialY = availableHeight - 150; // Bottom edge (with composer clearance)
+        
+        setCssPosition(prev => ({
+          ...prev,
+          x: initialX,
+          y: initialY,
+          opacity: 1,
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+        }));
+        
+        // Also update pre-expand position
+        setPreExpandPosition({ x: initialX, y: initialY });
+      }
     } else {
-      console.log(`${ts()} 👁️ Hiding PIP`);
       setCssPosition(prev => ({
         ...prev,
         opacity: 0
       }));
     }
-  }, [isVisible, isExpanded]);
+  }, [isVisible, isExpanded, initialExpanded]);
+
+  // Initialize prevExpandedRef with current isExpanded state
+  useEffect(() => {
+    prevExpandedRef.current = isExpanded;
+  }, []); // Only run once on mount
 
   // Force video to play when component becomes visible
   useEffect(() => {
     if (isVisible && videoRef.current) {
-      console.log(`${ts()} 📹 Attempting to play video for ${character.id}`);
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch(e => {
-          console.log(`${ts()} 📹 Video autoplay blocked:`, e.message);
+        playPromise.catch(() => {
+          // Video autoplay blocked, ignore silently
         });
       }
     }
   }, [isVisible, character.id]);
 
-  // Get expanded position (full width at top)
+  // Get expanded position (full width at top, but leave space for composer)
   const getExpandedPosition = useCallback(() => {
-    console.log(`${ts()} 📐 getExpandedPosition called`);
-    
     const container = containerRef.current?.parentElement;
-    console.log(`${ts()} 📐 Container:`, container);
     
     if (!container) {
-      console.log(`${ts()} 📐 No container, using fallback`);
-      return { x: 0, y: 0, width: 351, height: 527 };
+      return { x: 0, y: 0, width: 351, height: 400 }; // Reduced height
     }
     
     const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
     const expandedWidth = containerWidth;
-    const expandedHeight = Math.round(expandedWidth * 1.5);
+    
+    // Reserve space for composer (48px height + 24px padding = ~80px total)
+    const composerSpace = 80;
+    const maxExpandedHeight = containerHeight - composerSpace;
+    
+    // Use 1.5 ratio but cap it to not cover composer
+    const idealHeight = Math.round(expandedWidth * 1.5);
+    const expandedHeight = Math.min(idealHeight, maxExpandedHeight);
     
     const result = {
       x: 0,
@@ -118,36 +157,36 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
       height: expandedHeight
     };
     
-    console.log(`${ts()} 📐 Calculated expanded position:`, result);
     return result;
   }, []);
 
   // This function is now handled inline in the drag gesture
 
-  // Handle click to expand/collapse
-  const handleClick = useCallback(() => {
-    console.log(`${ts()} 🖱️ CLICK - isExpanded:`, isExpanded);
-    console.log(`${ts()} 🖱️ Current CSS position:`, cssPosition);
+  // Handle expansion/collapse logic (now controlled externally)
+  useEffect(() => {
+    const wasExpanded = prevExpandedRef.current;
+    prevExpandedRef.current = isExpanded;
     
-    if (!isExpanded) {
-      console.log(`${ts()} 🔄 EXPANDING...`);
+    console.log(`${ts()} 🎛️ PIP control state change:`, { 
+      isExpanded, 
+      wasExpanded, 
+      controlledExpanded, 
+      experienceType,
+      isVisible 
+    });
+    
+    if (isExpanded && !wasExpanded) {
+      // Expanding: store current position before expanding
+      console.log(`${ts()} 🔄 EXPANDING via external control...`);
       
-      // Store current position before expanding
       const currentPos = { x: cssPosition.x, y: cssPosition.y };
       console.log(`${ts()} 💾 Storing pre-expand position:`, currentPos);
-      console.log(`${ts()} 💾 Current cssPosition before expand:`, cssPosition);
       setPreExpandPosition(currentPos);
       
       // Expand to full width at top
       const expandedPos = getExpandedPosition();
       console.log(`${ts()} 🔄 Target expanded position:`, expandedPos);
       
-      // Set expanded BEFORE starting animation to prevent visibility effect interference
-      console.log(`${ts()} 🔄 Setting isExpanded to true`);
-      setIsExpanded(true);
-      
-      // Use pure CSS for expansion - no React Spring
-      console.log(`${ts()} 🔄 Setting CSS position and size for expansion`);
       setCssPosition({
         x: expandedPos.x,
         y: expandedPos.y,
@@ -156,26 +195,9 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
         opacity: 1,
         boxShadow: '0 0 0 rgba(0, 0, 0, 0)' // Remove shadow when expanded
       });
-      
-      console.log(`${ts()} 🔄 Expansion completed`);
-      
-      console.log(`${ts()} 🔄 Expansion animation started`);
-      
-      // Log what the position is 100ms after expansion
-      setTimeout(() => {
-        console.log(`${ts()} 🔄 Position 100ms after expansion:`, {
-          css: cssPosition
-        });
-      }, 100);
-    } else {
-      console.log(`${ts()} 🔄 COLLAPSING...`);
-      console.log(`${ts()} 🔄 Current cssPosition:`, cssPosition);
-      console.log(`${ts()} 🔄 Current preExpandPosition:`, preExpandPosition);
-      console.log(`${ts()} 🔄 Setting isExpanded to false`);
-      setIsExpanded(false);
-      
-      // Restore to the position before expansion
-      console.log(`${ts()} 🔄 Restoring to pre-expand position:`, preExpandPosition);
+    } else if (!isExpanded && wasExpanded) {
+      // Collapsing: restore to previous position
+      console.log(`${ts()} 🔄 COLLAPSING via external control...`);
       
       setCssPosition({
         x: preExpandPosition.x,
@@ -188,14 +210,13 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
       
       console.log(`${ts()} 🔄 Collapse position set to:`, { x: preExpandPosition.x, y: preExpandPosition.y });
     }
-  }, [isExpanded, getExpandedPosition, cssPosition, preExpandPosition]);
+  }, [isExpanded, getExpandedPosition, cssPosition.x, cssPosition.y, controlledExpanded, experienceType]);
 
-  // Drag gesture with CSS positioning
+  // Drag gesture with CSS positioning (dragging only, no tap detection)
   const bind = useDrag(
-    ({ active, offset: [ox, oy], tap, first, last }) => {
-      // Handle tap separately
-      if (tap) {
-        handleClick();
+    ({ active, offset: [ox, oy], first, last }) => {
+      // Only allow dragging when collapsed
+      if (isExpanded) {
         return;
       }
       
@@ -203,14 +224,14 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
         setIsDragging(true);
       }
       
-      if (active && !isExpanded) {
+      if (active) {
         // Use pure CSS for immediate, responsive dragging
         setCssPosition(prev => ({
           ...prev,
           x: ox,
           y: oy
         }));
-      } else if (!active && !isExpanded && last) {
+      } else if (!active && last) {
         setIsDragging(false);
         
         // Snap to corner using pure CSS
@@ -244,7 +265,7 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
     },
     {
       from: () => [cssPosition.x, cssPosition.y] as [number, number],
-      filterTaps: true,
+      filterTaps: false, // No tap filtering needed since we removed tap handling
       threshold: 5,
       bounds: () => {
         const container = containerRef.current?.parentElement;
@@ -300,19 +321,12 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
         playsInline
         className="w-full h-full object-cover pointer-events-none"
         style={{ borderRadius: '12px' }}
-        onLoadedData={() => {
-          console.log(`${ts()} 📹 Video loaded for ${character.id}`);
-        }}
         onCanPlay={() => {
-          console.log(`${ts()} 📹 Video can play for ${character.id}`);
           if (videoRef.current) {
-            videoRef.current.play().catch(e => {
-              console.log(`${ts()} 📹 Video play failed:`, e);
+            videoRef.current.play().catch(() => {
+              // Video play failed, ignore silently
             });
           }
-        }}
-        onError={(e) => {
-          console.log(`${ts()} 📹 Video error for ${character.id}:`, e);
         }}
       >
         <source src={getVideoSrc()} type="video/mp4" />

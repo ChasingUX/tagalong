@@ -10,6 +10,9 @@ interface ComposerProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  // PIP control props
+  isPipExpanded?: boolean;
+  onTogglePip?: () => void;
 }
 
 export const Composer: React.FC<ComposerProps> = ({
@@ -18,7 +21,9 @@ export const Composer: React.FC<ComposerProps> = ({
   onSubmit,
   placeholder = "Type a message...",
   disabled = false,
-  className = ""
+  className = "",
+  isPipExpanded = false,
+  onTogglePip
 }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,21 +53,46 @@ export const Composer: React.FC<ComposerProps> = ({
             />
           </div>
           
-          {/* Wave button */}
-          <button 
-            type={disabled ? "button" : "submit"} 
-            className="flex-shrink-0 rounded-lg transition-all duration-150 hover:bg-gray-100 hover:shadow-inner" 
-            style={{ width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            disabled={disabled}
-          >
-            <Image
-              src="/wave.svg"
-              alt="Send"
-              width={22}
-              height={22}
-              className="text-gray-600"
-            />
-          </button>
+          {/* PIP Toggle / Send button */}
+          {onTogglePip ? (
+            /* PIP Toggle Button */
+            <button 
+              type="button"
+              onClick={() => {
+                console.log(`🎵 Composer PIP button clicked - isPipExpanded:`, isPipExpanded);
+                if (onTogglePip) {
+                  onTogglePip();
+                }
+              }}
+              className="flex-shrink-0 rounded-lg transition-all duration-150 hover:bg-gray-100 hover:shadow-inner" 
+              style={{ width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              disabled={false}
+            >
+              <Image
+                src={isPipExpanded ? "/close.svg" : "/wave.svg"}
+                alt={isPipExpanded ? "Collapse PIP" : "Expand PIP"}
+                width={22}
+                height={22}
+                className="text-gray-600"
+              />
+            </button>
+          ) : (
+            /* Regular Send Button */
+            <button 
+              type={disabled ? "button" : "submit"} 
+              className="flex-shrink-0 rounded-lg transition-all duration-150 hover:bg-gray-100 hover:shadow-inner" 
+              style={{ width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              disabled={disabled}
+            >
+              <Image
+                src="/wave.svg"
+                alt="Send"
+                width={22}
+                height={22}
+                className="text-gray-600"
+              />
+            </button>
+          )}
         </div>
       </form>
     </div>

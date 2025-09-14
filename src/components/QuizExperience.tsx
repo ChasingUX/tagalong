@@ -10,6 +10,8 @@ interface QuizExperienceProps {
   character: Character;
   scene: Scene;
   onRefReady?: (ref: { beginQuiz: () => void; hasBegun: boolean; loading: boolean }) => void;
+  isPipExpanded?: boolean;
+  onTogglePip?: () => void;
 }
 
 interface AnimatedAnswerButtonProps {
@@ -118,7 +120,7 @@ interface QuizState {
   isComplete: boolean;
 }
 
-export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene, onRefReady }) => {
+export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene, onRefReady, isPipExpanded, onTogglePip }) => {
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasBegun, setHasBegun] = useState(false);
@@ -433,6 +435,8 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
       <Composer
         placeholder={`Talk to ${character?.name.split(' ')[0] || 'character'}`}
         disabled={true}
+        isPipExpanded={isPipExpanded}
+        onTogglePip={onTogglePip}
       />
     </div>
   );

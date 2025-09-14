@@ -5,6 +5,7 @@ export interface ExperienceConfig {
   type: ExperienceType;
   label: string;
   description: string;
+  pipInitialExpanded?: boolean;
 }
 
 // Available experiences
@@ -12,17 +13,20 @@ export const EXPERIENCES: Record<ExperienceType, ExperienceConfig> = {
   conversation: {
     type: 'conversation',
     label: 'Conversation',
-    description: 'Interactive discussion with the character'
+    description: 'Interactive discussion with the character',
+    pipInitialExpanded: true // For focused voice conversation
   },
   quiz: {
     type: 'quiz',
     label: 'Quiz',
-    description: 'Test your knowledge with AI-generated questions'
+    description: 'Test your knowledge with AI-generated questions',
+    pipInitialExpanded: false // Starts collapsed
   },
   flashcard: {
     type: 'flashcard',
     label: 'Flashcards',
-    description: 'Study with AI-generated flashcards'
+    description: 'Study with AI-generated flashcards',
+    pipInitialExpanded: false // Starts collapsed
   }
 };
 

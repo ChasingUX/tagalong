@@ -38,7 +38,7 @@ export default function Sidebar({ isOpen, onClose, mounted, currentCharacterId }
             <animated.div
               key="sidebar-backdrop"
               style={style}
-              className="absolute inset-0 bg-black/20 z-10"
+              className="absolute inset-0 bg-black/20 z-[60]"
               onClick={onClose}
             />
             
@@ -46,7 +46,7 @@ export default function Sidebar({ isOpen, onClose, mounted, currentCharacterId }
             <animated.div
               key="sidebar-panel"
               style={sidebarSpring}
-              className="absolute left-0 top-0 bottom-0 w-[70%] bg-white border-r border-gray-200 z-20 flex flex-col"
+              className="absolute left-0 top-0 bottom-0 w-[70%] bg-white border-r border-gray-200 z-[70] flex flex-col"
             >
               {/* Conversations List */}
               <div className="flex-1 overflow-y-auto p-4 pt-20">
