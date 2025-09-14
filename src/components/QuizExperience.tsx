@@ -4,11 +4,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSpring, animated, config } from '@react-spring/web';
 import Image from 'next/image';
 import { Character, Scene } from '@/lib/types';
+import Composer from './Composer';
 
 interface QuizExperienceProps {
   character: Character;
   scene: Scene;
-  onRefReady?: (ref: { beginQuiz: () => void }) => void;
+  onRefReady?: (ref: { beginQuiz: () => void; hasBegun: boolean; loading: boolean }) => void;
 }
 
 interface AnimatedAnswerButtonProps {
@@ -177,12 +178,12 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
     }
   }, [character.id, scene.id, scene.title, scene.description]);
 
-  // Expose beginQuiz function to parent component
+  // Expose beginQuiz function and state to parent component
   useEffect(() => {
     if (onRefReady) {
-      onRefReady({ beginQuiz });
+      onRefReady({ beginQuiz, hasBegun, loading });
     }
-  }, [onRefReady, beginQuiz]);
+  }, [onRefReady, beginQuiz, hasBegun, loading]);
 
   const handleAnswerSelect = (questionIndex: number, answerIndex: number) => {
     // Don't allow changing answer if already answered
@@ -427,6 +428,12 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
           })}
         </div>
       </div>
+
+      {/* Message Input Composer - positioned at bottom, unaffected by quiz steps */}
+      <Composer
+        placeholder={`Talk to ${character?.name.split(' ')[0] || 'character'}`}
+        disabled={true}
+      />
     </div>
   );
 };

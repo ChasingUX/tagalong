@@ -8,6 +8,8 @@ import MobileShell from "@/components/MobileShell";
 import SceneModal from "@/components/SceneModal";
 import { StreamingText } from "@/components/StreamingText";
 import { QuizExperience } from "@/components/QuizExperience";
+import CharacterPIP from "@/components/CharacterPIP";
+import Composer from "@/components/Composer";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
 import { getExperienceType } from "@/lib/experiences";
@@ -32,7 +34,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [wasAtBottom, setWasAtBottom] = useState(true);
   const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
-  const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void } | null>(null);
+  const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void; hasBegun: boolean; loading: boolean } | null>(null);
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -317,6 +319,8 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   return (
     <MobileShell title={sceneTitle} subtitle={character.name} currentCharacterId={id} showInfoButton={true} onInfoClick={() => setShowModal(true)}>
       <div className="flex h-full flex-col relative">
+        {/* Character PIP - floats above all experience types */}
+        {character && <CharacterPIP character={character} experienceType={experienceType} isVisible={experienceType === 'quiz' ? (quizRef?.hasBegun && !quizRef?.loading) : (hasBegun && !loading)} />}
         {/* Render different experience types */}
         {!currentScene ? (
           <div className="flex-1"></div>
@@ -331,7 +335,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             {/* Chat Messages */}
         <div 
           ref={scrollerRef} 
-          className="flex-1 space-y-3 overflow-y-auto px-1 pt-2 pb-8 relative scrollbar-hide"
+          className="flex-1 flex flex-col overflow-y-auto px-1 pt-2 pb-8 relative scrollbar-hide"
           style={{ 
             overscrollBehavior: 'contain',
             scrollbarWidth: 'none', /* Firefox */
@@ -360,7 +364,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
               </p>
             </div>
           ) : (
-            <>
+            <div className="space-y-3">
                {messages.map((m, i) => {
                  // Only render messages that have content (or user messages which should always show)
                  if (m.role === "assistant" && !m.content) {
@@ -393,7 +397,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
                    <AnimatedLoadingStar />
                  </div>
                )}
-            </>
+            </div>
           )}
 
         </div>
@@ -436,55 +440,13 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
         )}
 
         {/* Message Input */}
-        <form onSubmit={onSubmit} className="px-1 pb-2">
-          <div className="flex items-center gap-2 bg-white border border-gray-200" style={{ height: '44px', padding: '12px 6px', borderRadius: '12px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.06)' }}>
-            {/* Plus icon on the left */}
-            <button type="button" className="flex-shrink-0 rounded-lg transition-all duration-150 hover:bg-gray-100 hover:shadow-inner" style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Image
-                src="/plus.svg"
-                alt="Add"
-                width={20}
-                height={20}
-                className="text-gray-600"
-              />
-            </button>
-            
-            {/* Input field */}
-            <div className="relative flex-1">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder={`Talk to ${character?.name.split(' ')[0] || 'character'}`}
-                className="w-full bg-transparent text-[14px] text-gray-900 placeholder:text-gray-500 focus:outline-none"
-              />
-            </div>
-            
-            {/* Mic and Wave buttons combined */}
-            <div className="flex items-center gap-1">
-              {/* Mic icon button */}
-              <button type="button" className="flex-shrink-0 rounded-lg transition-all duration-150 hover:bg-gray-100 hover:shadow-inner" style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Image
-                  src="/mic.svg"
-                  alt="Microphone"
-                  width={20}
-                  height={20}
-                  className="text-gray-600"
-                />
-              </button>
-              
-              {/* Wave icon button */}
-              <button type="submit" className="flex-shrink-0 rounded-lg transition-all duration-150 hover:bg-gray-100 hover:shadow-inner" style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Image
-                  src="/wave.svg"
-                  alt="Send"
-                  width={20}
-                  height={20}
-                  className="text-gray-600"
-                />
-              </button>
-            </div>
-          </div>
-        </form>
+        <Composer
+          value={input}
+          onChange={setInput}
+          onSubmit={onSubmit}
+          placeholder={`Talk to ${character?.name.split(' ')[0] || 'character'}`}
+          disabled={loading}
+        />
           </>
         )}
       </div>
