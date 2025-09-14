@@ -69,7 +69,7 @@ export const Composer: React.FC<ComposerProps> = ({
               disabled={false}
             >
               <Image
-                src={isPipExpanded ? "/close.svg" : "/wave.svg"}
+                src={isPipExpanded ? "/collapse.svg" : "/wave.svg"}
                 alt={isPipExpanded ? "Collapse PIP" : "Expand PIP"}
                 width={22}
                 height={22}
