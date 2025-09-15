@@ -45,15 +45,15 @@
     "id": "4",
     "characterId": "professor-ada-quill",
     "title": "Master study techniques",
-    "caption": "Learn effective note-taking, memory, and test-taking strategies",
+    "caption": "Interactive quiz on effective study methods and learning strategies",
     "type": "Learn",
-    "description": "Discover proven study methods and learning strategies from an expert educator.",
+    "description": "Test your knowledge of proven study techniques and learning strategies.",
     "rules": [
-      "I'll guide you through master study techniques",
-      "We'll go through concepts with questions and explanations",
-      "You'll get immediate feedback and track your understanding"
+      "Answer multiple-choice questions about study methods and strategies",
+      "Get immediate feedback with explanations from Professor Ada",
+      "Track your progress and learn from detailed explanations"
     ],
-    "experience": "conversation"
+    "experience": "quiz"
   },
   {
     "id": "5",

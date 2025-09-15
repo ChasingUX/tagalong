@@ -45,15 +45,15 @@
     "id": "4",
     "characterId": "riff-kwan",
     "title": "Comedy writing techniques",
-    "caption": "Learn joke structure, timing, and comedic principles",
+    "caption": "Interactive quiz on joke structure, timing, and comedic principles",
     "type": "Learn",
-    "description": "Master the fundamentals of comedy writing and joke construction.",
+    "description": "Test your knowledge of comedy writing fundamentals and joke construction.",
     "rules": [
-      "I'll guide you through comedy writing techniques",
-      "You'll practice with step-by-step guidance and examples",
-      "You'll get immediate feedback and track your understanding"
+      "Answer multiple-choice questions about comedy writing techniques",
+      "Get immediate feedback with explanations from Riff",
+      "Track your progress and learn from detailed explanations"
     ],
-    "experience": "conversation"
+    "experience": "quiz"
   },
   {
     "id": "5",

@@ -42,6 +42,20 @@
     "experience": "conversation"
   },
   {
+    "id": "5",
+    "characterId": "mira-solange",
+    "title": "Art history exploration",
+    "caption": "Interactive quiz on influential artists and movements throughout time",
+    "type": "Learn",
+    "description": "Test your knowledge of art history and influential artistic movements.",
+    "rules": [
+      "Answer multiple-choice questions about artists and art movements",
+      "Get immediate feedback with explanations from Mira",
+      "Track your progress and learn from detailed explanations"
+    ],
+    "experience": "quiz"
+  },
+  {
     "id": "4",
     "characterId": "mira-solange",
     "title": "Art techniques masterclass",
@@ -51,20 +65,6 @@
     "rules": [
       "I'll guide you through art techniques masterclass",
       "We'll go through concepts with questions and explanations",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "5",
-    "characterId": "mira-solange",
-    "title": "Art history exploration",
-    "caption": "Discover influential artists and movements throughout time",
-    "type": "Learn",
-    "description": "Journey through art history and understand influential artistic movements.",
-    "rules": [
-      "I'll guide you through art history exploration",
-      "We'll use flashcards, quizzes, and interactive exercises",
       "You'll get immediate feedback and track your understanding"
     ],
     "experience": "conversation"

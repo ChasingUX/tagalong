@@ -191,6 +191,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   }, []);
 
 
+
   const handleTranscriptChange = useCallback((transcript: string) => {
     console.log('🎤 VoiceChat: Transcript changed:', transcript, 'length:', transcript.length);
     setCurrentTranscript(transcript);

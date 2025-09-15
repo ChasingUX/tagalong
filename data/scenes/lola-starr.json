@@ -45,15 +45,15 @@
     "id": "4",
     "characterId": "lola-starr",
     "title": "Entertainment industry insights",
-    "caption": "Learn how Hollywood and the entertainment business works",
+    "caption": "Interactive quiz on how Hollywood and the entertainment business works",
     "type": "Learn",
-    "description": "Understand the inner workings of the entertainment industry and celebrity culture.",
+    "description": "Test your knowledge of the entertainment industry and celebrity culture.",
     "rules": [
-      "I'll guide you through entertainment industry insights",
-      "We'll go through concepts with questions and explanations",
-      "You'll get immediate feedback and track your understanding"
+      "Answer multiple-choice questions about Hollywood and entertainment",
+      "Get immediate feedback with explanations from Lola",
+      "Track your progress and learn from detailed explanations"
     ],
-    "experience": "conversation"
+    "experience": "quiz"
   },
   {
     "id": "5",

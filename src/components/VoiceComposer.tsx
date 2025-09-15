@@ -190,6 +190,8 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
   // Debug disabled prop changes and auto-start when enabled
   useEffect(() => {
     console.log('🎤 VoiceComposer: disabled prop changed to:', disabled);
+    console.log('🎤 VoiceComposer: Current micEnabled state:', micEnabled);
+    console.log('🎤 VoiceComposer: Current listening state:', listening);
     
     if (disabled && listening) {
       // Stop listening when component becomes disabled
@@ -240,6 +242,7 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
     }
   }, [micEnabled, listening, stopListening, startListening]);
 
+
   // Auto-start listening when requested
   useEffect(() => {
     console.log('🔄 VoiceComposer: Auto-start effect triggered');
@@ -257,6 +260,15 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
       if (!micEnabled) console.log('  - mic is disabled');
     }
   }, [autoStartListening, listening, micEnabled, startListening]);
+
+  // Stop speech recognition when component unmounts (navigation away)
+  useEffect(() => {
+    return () => {
+      if (listening) {
+        SpeechRecognition.stopListening();
+      }
+    };
+  }, [listening]);
 
   // Show error states
   if (!browserSupportsSpeechRecognition) {

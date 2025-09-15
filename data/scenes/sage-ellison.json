@@ -42,6 +42,20 @@
     "experience": "conversation"
   },
   {
+    "id": "5",
+    "characterId": "sage-ellison",
+    "title": "Emotional intelligence training",
+    "caption": "Interactive quiz on self-awareness and interpersonal skills",
+    "type": "Learn",
+    "description": "Test your knowledge of emotional intelligence and interpersonal skills.",
+    "rules": [
+      "Answer multiple-choice questions about emotional intelligence",
+      "Get immediate feedback with explanations from Sage",
+      "Track your progress and learn from detailed explanations"
+    ],
+    "experience": "quiz"
+  },
+  {
     "id": "4",
     "characterId": "sage-ellison",
     "title": "Master mindfulness techniques",
@@ -50,20 +64,6 @@
     "description": "Discover practical mindfulness techniques for stress reduction and clarity.",
     "rules": [
       "I'll guide you through master mindfulness techniques",
-      "We'll use flashcards, quizzes, and interactive exercises",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "5",
-    "characterId": "sage-ellison",
-    "title": "Emotional intelligence training",
-    "caption": "Develop self-awareness and interpersonal skills",
-    "type": "Learn",
-    "description": "Build emotional intelligence through guided exercises and reflection.",
-    "rules": [
-      "I'll guide you through emotional intelligence training",
       "We'll use flashcards, quizzes, and interactive exercises",
       "You'll get immediate feedback and track your understanding"
     ],

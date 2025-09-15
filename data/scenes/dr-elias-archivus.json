@@ -42,6 +42,20 @@
     "experience": "conversation"
   },
   {
+    "id": "5",
+    "characterId": "dr-elias-archivus",
+    "title": "Historical research methods",
+    "caption": "Interactive quiz on analyzing primary sources and historical evidence",
+    "type": "Learn",
+    "description": "Test your knowledge of techniques for evaluating historical sources and evidence.",
+    "rules": [
+      "Answer multiple-choice questions about historical research methods",
+      "Get immediate feedback with explanations from Dr. Archivus",
+      "Track your progress and learn from detailed explanations"
+    ],
+    "experience": "quiz"
+  },
+  {
     "id": "4",
     "characterId": "dr-elias-archivus",
     "title": "Ancient civilizations deep dive",
@@ -51,20 +65,6 @@
     "rules": [
       "I'll guide you through ancient civilizations deep dive",
       "You'll practice with step-by-step guidance and examples",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "5",
-    "characterId": "dr-elias-archivus",
-    "title": "Historical research methods",
-    "caption": "Learn to analyze primary sources and historical evidence",
-    "type": "Learn",
-    "description": "Master techniques for evaluating historical sources and evidence.",
-    "rules": [
-      "I'll guide you through historical research methods",
-      "We'll go through concepts with questions and explanations",
       "You'll get immediate feedback and track your understanding"
     ],
     "experience": "conversation"

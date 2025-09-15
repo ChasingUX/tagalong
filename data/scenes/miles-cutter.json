@@ -45,15 +45,15 @@
     "id": "4",
     "characterId": "miles-cutter",
     "title": "TV production deep dive",
-    "caption": "Learn how television shows are created and produced",
+    "caption": "Interactive quiz on how television shows are created and produced",
     "type": "Learn",
-    "description": "Understand the television production process from concept to screen.",
+    "description": "Test your knowledge of the television production process from concept to screen.",
     "rules": [
-      "I'll guide you through tv production deep dive",
-      "We'll go through concepts with questions and explanations",
-      "You'll get immediate feedback and track your understanding"
+      "Answer multiple-choice questions about TV production and processes",
+      "Get immediate feedback with explanations from Miles",
+      "Track your progress and learn from detailed explanations"
     ],
-    "experience": "conversation"
+    "experience": "quiz"
   },
   {
     "id": "5",
