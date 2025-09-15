@@ -295,7 +295,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
           </div>
 
           {/* Voice Chat Content */}
-          <div className="flex-1 px-5 pb-6 flex flex-col min-h-0">
+          <div className="flex-1 px-5 pb-4 flex flex-col min-h-0">
             <VoiceChat
               ref={voiceChatRef}
               context={context}

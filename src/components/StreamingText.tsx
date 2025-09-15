@@ -43,7 +43,7 @@ const StreamingParagraph: React.FC<{
     tempDiv.style.position = 'absolute';
     tempDiv.style.visibility = 'hidden';
     tempDiv.style.whiteSpace = 'nowrap';
-    tempDiv.style.fontSize = '14px';
+    tempDiv.style.fontSize = '16px';
     tempDiv.style.fontFamily = 'var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"';
     document.body.appendChild(tempDiv);
 
@@ -205,7 +205,7 @@ const StreamingParagraph: React.FC<{
   return (
     <div 
       ref={containerRef} 
-      className="leading-snug text-sm transition-all duration-300 ease-out"
+      className="text-base transition-all duration-300 ease-out"
       style={{ 
         overflow: 'hidden',
         height: getTargetHeight()

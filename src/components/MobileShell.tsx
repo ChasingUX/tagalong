@@ -136,7 +136,7 @@ export default function MobileShell({ children, className, title = "Tagalong", s
             />
 
             {/* Scrollable content */}
-            <div className="relative flex-1 overflow-y-auto px-5 pb-6">
+            <div className="relative flex-1 overflow-y-auto px-5 pb-4">
               {children}
             </div>
 

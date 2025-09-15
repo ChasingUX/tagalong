@@ -5,6 +5,7 @@ import { useSpring, animated, useTransition } from '@react-spring/web';
 import Image from 'next/image';
 import VoiceComposer from './VoiceComposer';
 import CharacterVideo from './CharacterVideo';
+import { StreamingText } from './StreamingText';
 import { Character, Scene } from '@/lib/types';
 
 export type Message = { 
@@ -67,6 +68,9 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   const [ttsError, setTtsError] = useState<string | null>(null);
   const [shouldStartListening, setShouldStartListening] = useState(false);
   const [playedMessages, setPlayedMessages] = useState<Set<string>>(new Set());
+  const [activeMessage, setActiveMessage] = useState<string | null>(null);
+  const [streamingMessage, setStreamingMessage] = useState<string | null>(null);
+  const [hasPlayedFirstMessage, setHasPlayedFirstMessage] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Animated loading star component
@@ -79,14 +83,30 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
     });
 
     return (
-      <animated.div style={pulseAnimation}>
-        <Image
-          src="/star.svg"
-          alt="Loading"
-          width={16}
-          height={16}
-        />
-      </animated.div>
+      <div className="flex items-center justify-center gap-2">
+        <animated.div style={pulseAnimation}>
+          <Image
+            src="/star.svg"
+            alt="Loading"
+            width={16}
+            height={16}
+          />
+        </animated.div>
+        <span 
+          className="text-sm"
+          style={{
+            background: 'linear-gradient(90deg, #9ca3af 0%, #4b5563 50%, #9ca3af 100%)',
+            backgroundSize: '200% 100%',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: 'transparent',
+            animation: 'shimmer 1.8s linear infinite'
+          }}
+        >
+          Connecting
+        </span>
+      </div>
     );
   };
 
@@ -107,6 +127,8 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       }
 
       setCurrentlyPlaying(messageId);
+      setActiveMessage(messageId); // Set this message as the active one to display
+      setStreamingMessage(messageId); // Start streaming when audio begins
       const audio = new Audio(audioUrl);
       audioRef.current = audio;
       
@@ -120,6 +142,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       audio.onended = () => {
         console.log('🔊 VoiceChat: Audio playback completed for message:', messageId);
         setCurrentlyPlaying(null);
+        setStreamingMessage(null); // Stop streaming when audio ends
         audioRef.current = null;
         // Reset the listening trigger
         console.log('🔊 VoiceChat: Setting shouldStartListening to false (audio ended)');
@@ -129,6 +152,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       audio.onerror = (error) => {
         console.error('🔊 VoiceChat: Error playing audio for message:', messageId, error);
         setCurrentlyPlaying(null);
+        setStreamingMessage(null); // Stop streaming on error
         audioRef.current = null;
         // Reset the listening trigger on error
         console.log('🔊 VoiceChat: Setting shouldStartListening to false (audio error)');
@@ -137,6 +161,11 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
 
       await audio.play();
       console.log('🔊 VoiceChat: Audio playback started successfully for message:', messageId);
+      
+      // Mark that we've played the first message
+      if (!hasPlayedFirstMessage) {
+        setHasPlayedFirstMessage(true);
+      }
     } catch (error) {
       console.error('🔊 VoiceChat: Failed to start audio playback:', error);
       setCurrentlyPlaying(null);
@@ -147,10 +176,12 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   }, [isMuted]);
 
   const stopAudio = useCallback(() => {
+    console.log('🔇 VoiceChat: Stopping audio playback');
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current = null;
       setCurrentlyPlaying(null);
+      setStreamingMessage(null); // Stop streaming when audio is stopped
     }
   }, []);
 
@@ -262,20 +293,14 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       console.log('🤖 VoiceChat: LLM response received');
       console.log('📝 VoiceChat: LLM response text:', data.message);
       
-      // Add streaming assistant message
-      const streamingMsg: Message = { 
+      // Add assistant message with content immediately
+      const assistantMessage: Message = { 
         role: "assistant", 
-        content: "", 
+        content: data.message, 
         streaming: true, 
         id: messageId 
       };
-      onMessagesChange([...newMessages, streamingMsg]);
-      
-      // Set the full content immediately and let StreamingText handle the animation
-      onMessagesChange([
-        ...newMessages,
-        { role: "assistant", content: data.message, streaming: true, id: messageId }
-      ]);
+      onMessagesChange([...newMessages, assistantMessage]);
 
       // Generate TTS for the response in parallel
       console.log('🎵 VoiceChat: Sending LLM response to Play.ai TTS');
@@ -312,26 +337,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       // Wait for TTS to complete
       const ttsData = await ttsPromise;
       
-      if (ttsData?.audioUrl) {
-        // Update message with audio URL
-        const messageWithAudio: Message = {
-          role: "assistant",
-          content: data.message,
-          streaming: true,
-          id: messageId,
-          audioUrl: ttsData.audioUrl
-        };
-        
-        onMessagesChange([...newMessages, messageWithAudio]);
-        
-        // Auto-play the audio if enabled
-        if (autoPlay) {
-          console.log('🔊 VoiceChat: Starting audio playback');
-          await playAudio(ttsData.audioUrl, messageId);
-        } else {
-          console.log('🔇 VoiceChat: Auto-play disabled, audio ready for manual play');
-        }
-      }
+      // Audio will be auto-played by the useEffect when the message is updated with audioUrl
       
       // After a delay, mark as complete (streaming animation will finish)
       setTimeout(() => {
@@ -414,7 +420,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       )}
 
       {/* Chat Messages - Simplified without scroll behavior */}
-      <div className={`flex-1 flex flex-col pt-2 relative ${composerMode === 'sheet' ? 'min-h-0' : ''}`}>
+      <div className={`flex-1 flex flex-col pt-1 relative ${composerMode === 'sheet' ? 'min-h-0' : ''}`} style={{ minHeight: '200px' }}>
         {messages.length === 0 && !loading && composerMode !== 'sheet' ? (
           /* Empty state text */
           <div className="flex flex-col items-center justify-center h-full gap-3">
@@ -445,80 +451,63 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
           </div>
         ) : messages.length === 0 && loading ? (
           /* Loading state when no messages yet */
-          <div className="space-y-3">
-            <div className="ml-0 flex items-center">
-              <AnimatedLoadingStar />
-            </div>
+          <div className="flex-1 flex items-center justify-center">
+            <AnimatedLoadingStar />
           </div>
         ) : (
-          <div className="space-y-3 overflow-y-auto flex-1">
-             {messages.map((m, i) => {
-               // Only render messages that have content (or user messages which should always show)
-               if (m.role === "assistant" && !m.content) {
+          <div className="space-y-3 overflow-y-auto flex-1 relative">
+             {(() => {
+               // Find the active message to display
+               const messageToShow = messages.find(m => m.id === activeMessage);
+               
+               // Show loading indicator only for the first message until audio is ready
+               const showLoadingIndicator = !hasPlayedFirstMessage && (loading || (messages.length > 0 && messages[messages.length - 1]?.role === 'assistant' && !messages[messages.length - 1]?.audioUrl));
+               
+               if (showLoadingIndicator) {
+                 return (
+                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                     <AnimatedLoadingStar />
+                   </div>
+                 );
+               }
+               
+               // If no active message, don't show anything
+               if (!messageToShow || !messageToShow.content) {
                  return null;
                }
                
                return (
                  <div
-                   key={m.id || i}
-                   className={m.role === "assistant" ? "ml-0 max-w-[80%] rounded-2xl bg-gray-100 p-3 text-sm text-gray-900 relative" : "ml-auto rounded-2xl bg-blue-500 text-white p-3 text-sm"}
-                   style={m.role === "user" ? { width: "fit-content", maxWidth: "80%" } : {}}
+                   key={messageToShow.id}
+                   className="ml-0 text-base text-gray-900 relative"
                  >
-                   {m.role === "user" ? (
-                     m.content
-                   ) : (
-                     <>
-                       {/* Voice-first: Show content without streaming animation */}
-                       {m.content}
+                   {/* Voice-first: Show content with streaming animation when audio plays */}
+                   <StreamingText 
+                     fullText={messageToShow.content} 
+                     isStreaming={streamingMessage === messageToShow.id}
+                     delay={18}
+                   />
                        
-                       {/* Audio controls for assistant messages */}
-                       <div className="absolute top-2 right-2 flex gap-1">
-                         {/* TTS Error indicator */}
-                         {m.ttsError && (
-                           <div 
-                             className="w-5 h-5 rounded-full bg-yellow-100 flex items-center justify-center"
-                             title={`TTS Error: ${m.ttsError}`}
-                           >
-                             <Image
-                               src="/error.svg"
-                               alt="TTS Error"
-                               width={10}
-                               height={10}
-                               className="text-yellow-600"
-                             />
-                           </div>
-                         )}
-                         
-                         {/* Audio play button */}
-                         {m.audioUrl && (
-                           <button
-                             onClick={() => playAudio(m.audioUrl!, m.id!, true)} // Force play on user click
-                             disabled={currentlyPlaying === m.id}
-                             className="w-6 h-6 rounded-full hover:bg-gray-200 flex items-center justify-center transition-colors"
-                             title={currentlyPlaying === m.id ? "Playing..." : "Play audio"}
-                           >
-                             <Image
-                               src="/wave.svg"
-                               alt="Play audio"
-                               width={12}
-                               height={12}
-                               className={currentlyPlaying === m.id ? "animate-pulse text-blue-600" : ""}
-                             />
-                           </button>
-                         )}
+                   {/* TTS Error indicator - only show if there's an error */}
+                   {messageToShow.ttsError && (
+                     <div className="absolute top-2 right-2">
+                       <div 
+                         className="w-5 h-5 rounded-full bg-yellow-100 flex items-center justify-center"
+                         title={`TTS Error: ${messageToShow.ttsError}`}
+                       >
+                         <Image
+                           src="/error.svg"
+                           alt="TTS Error"
+                           width={10}
+                           height={10}
+                           className="text-yellow-600"
+                         />
                        </div>
-                     </>
+                     </div>
                    )}
                  </div>
                );
-             })}
-            
-             {/* Loading Indicator - Pulsing Star - show when loading and last message is empty and streaming */}
-             {loading && messages.length > 0 && messages[messages.length - 1]?.streaming && !messages[messages.length - 1]?.content && (
-               <div className="ml-0 flex items-center">
-                 <AnimatedLoadingStar />
-               </div>
-             )}
+             })()}
           </div>
         )}
       </div>
