@@ -13,6 +13,8 @@ interface ComposerProps {
   // PIP control props
   isPipExpanded?: boolean;
   onTogglePip?: () => void;
+  // Mode for different behaviors
+  mode?: 'normal' | 'sheet';
 }
 
 export const Composer: React.FC<ComposerProps> = ({
@@ -23,7 +25,8 @@ export const Composer: React.FC<ComposerProps> = ({
   disabled = false,
   className = "",
   isPipExpanded = false,
-  onTogglePip
+  onTogglePip,
+  mode = 'normal'
 }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ export const Composer: React.FC<ComposerProps> = ({
           </div>
           
           {/* PIP Toggle / Send button */}
-          {onTogglePip ? (
+          {onTogglePip && mode === 'normal' ? (
             /* PIP Toggle Button */
             <button 
               type="button"

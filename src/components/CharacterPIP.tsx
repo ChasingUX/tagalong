@@ -167,25 +167,15 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
     const wasExpanded = prevExpandedRef.current;
     prevExpandedRef.current = isExpanded;
     
-    console.log(`${ts()} 🎛️ PIP control state change:`, { 
-      isExpanded, 
-      wasExpanded, 
-      controlledExpanded, 
-      experienceType,
-      isVisible 
-    });
     
     if (isExpanded && !wasExpanded) {
       // Expanding: store current position before expanding
-      console.log(`${ts()} 🔄 EXPANDING via external control...`);
       
       const currentPos = { x: cssPosition.x, y: cssPosition.y };
-      console.log(`${ts()} 💾 Storing pre-expand position:`, currentPos);
       setPreExpandPosition(currentPos);
       
       // Expand to full width at top
       const expandedPos = getExpandedPosition();
-      console.log(`${ts()} 🔄 Target expanded position:`, expandedPos);
       
       setCssPosition({
         x: expandedPos.x,
@@ -197,7 +187,6 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
       });
     } else if (!isExpanded && wasExpanded) {
       // Collapsing: restore to previous position
-      console.log(`${ts()} 🔄 COLLAPSING via external control...`);
       
       setCssPosition({
         x: preExpandPosition.x,
@@ -208,7 +197,6 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
         boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' // Restore shadow when collapsed
       });
       
-      console.log(`${ts()} 🔄 Collapse position set to:`, { x: preExpandPosition.x, y: preExpandPosition.y });
     }
   }, [isExpanded, getExpandedPosition, cssPosition.x, cssPosition.y, controlledExpanded, experienceType]);
 
@@ -283,14 +271,12 @@ const CharacterPIP: React.FC<CharacterPIPProps> = ({
   );
 
   if (!isVisible) {
-    console.log(`${ts()} 👻 Component not visible, returning null`);
     return null;
   }
 
   const getVideoSrc = () => `/idle/${character.id}_idle.mp4`;
 
   // Temporarily disable render logging to reduce noise
-  // console.log(`${ts()} 🎨 Rendering PIP with current values:`, {
   //   css: cssPosition,
   //   dragSpring: { x: dragSpring.x.get().toFixed(1), y: dragSpring.y.get().toFixed(1) },
   //   isExpanded

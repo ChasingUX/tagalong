@@ -5,6 +5,8 @@ import { useSpring, animated, config } from '@react-spring/web';
 import Image from 'next/image';
 import { Character, Scene } from '@/lib/types';
 import Composer from './Composer';
+import ChatSheet from './ChatSheet';
+import { type ChatContext } from './ChatComponent';
 
 interface QuizExperienceProps {
   character: Character;
@@ -12,6 +14,7 @@ interface QuizExperienceProps {
   onRefReady?: (ref: { beginQuiz: () => void; hasBegun: boolean; loading: boolean }) => void;
   isPipExpanded?: boolean;
   onTogglePip?: () => void;
+  onBegin?: () => void;
 }
 
 interface AnimatedAnswerButtonProps {
@@ -120,14 +123,14 @@ interface QuizState {
   isComplete: boolean;
 }
 
-export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene, onRefReady, isPipExpanded, onTogglePip }) => {
+export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene, onRefReady, isPipExpanded, onTogglePip, onBegin }) => {
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasBegun, setHasBegun] = useState(false);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-
-
+  const [chatSheetOpen, setChatSheetOpen] = useState(false);
+  const [composerInput, setComposerInput] = useState("");
 
   const [quizState, setQuizState] = useState<QuizState>({
     score: 0,
@@ -136,8 +139,18 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
   });
 
   const beginQuiz = useCallback(async () => {
+    console.log('🎯 QuizExperience: beginQuiz called');
     setHasBegun(true);
+    console.log('🎯 QuizExperience: hasBegun set to true');
+    
+    // Notify parent that quiz has begun (for PIP visibility)
+    if (onBegin) {
+      console.log('🎯 QuizExperience: Calling onBegin to show PIP');
+      onBegin();
+    }
+    
     setLoading(true);
+    console.log('🎯 QuizExperience: loading set to true');
     
     try {
       const response = await fetch('/api/quiz/generate', {
@@ -157,8 +170,10 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
       
       const { questions } = await response.json();
       const generatedQuestions = questions;
+      console.log('🎯 QuizExperience: Questions generated:', generatedQuestions.length);
       
       setQuestions(generatedQuestions);
+      console.log('🎯 QuizExperience: Questions state updated');
       
       // Initialize question states
       setQuizState({
@@ -178,14 +193,39 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
     } finally {
       setLoading(false);
     }
-  }, [character.id, scene.id, scene.title, scene.description]);
+  }, [character.id, scene.id, scene.title, scene.description, onBegin]);
 
   // Expose beginQuiz function and state to parent component
   useEffect(() => {
     if (onRefReady) {
       onRefReady({ beginQuiz, hasBegun, loading });
     }
-  }, [onRefReady, beginQuiz, hasBegun, loading]);
+  }, [onRefReady, hasBegun, loading]);
+
+  // Chat context for the current quiz question
+  const chatContext: ChatContext = {
+    character,
+    scene,
+    quizQuestion: questions[activeQuestionIndex] ? {
+      id: questions[activeQuestionIndex].id,
+      question: questions[activeQuestionIndex].question,
+      options: questions[activeQuestionIndex].options
+    } : undefined
+  };
+
+  // Handle composer submit - open chat sheet
+  const handleComposerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (composerInput.trim()) {
+      setChatSheetOpen(true);
+    }
+  };
+
+  // Handle chat sheet close
+  const handleChatSheetClose = () => {
+    setChatSheetOpen(false);
+    setComposerInput(""); // Clear the input when closing
+  };
 
   const handleAnswerSelect = (questionIndex: number, answerIndex: number) => {
     // Don't allow changing answer if already answered
@@ -433,10 +473,23 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
 
       {/* Message Input Composer - positioned at bottom, unaffected by quiz steps */}
       <Composer
-        placeholder={`Talk to ${character?.name.split(' ')[0] || 'character'}`}
-        disabled={true}
+        value={composerInput}
+        onChange={setComposerInput}
+        onSubmit={handleComposerSubmit}
+        placeholder={`Ask ${character?.name.split(' ')[0] || 'character'} a question`}
+        disabled={false}
+        mode="normal"
         isPipExpanded={isPipExpanded}
         onTogglePip={onTogglePip}
+      />
+
+      {/* Chat Sheet */}
+      <ChatSheet
+        isOpen={chatSheetOpen}
+        onClose={handleChatSheetClose}
+        context={chatContext}
+        initialMessage={composerInput}
+        onBegin={beginQuiz}
       />
     </div>
   );

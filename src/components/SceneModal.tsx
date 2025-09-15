@@ -116,7 +116,7 @@ export default function SceneModal({ isOpen, onClose, onBegin, scene, character,
             {/* Action Button */}
             <button
               onClick={hasStarted ? onClose : onBegin}
-              className="w-full flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-sm font-semibold text-white rounded-xl transition-colors cursor-pointer"
+              className="w-full flex items-center justify-center px-6 py-3 bg-black hover:bg-gray-800 text-sm font-semibold text-white rounded-xl transition-colors cursor-pointer"
             >
               {hasStarted ? 'Continue' : 'Begin'}
             </button>

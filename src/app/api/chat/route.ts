@@ -9,10 +9,15 @@ const MODEL_NAME = process.env.GEMINI_TEXT_MODEL || "gemini-2.0-flash-exp"; // p
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { characterId, sceneId, messages } = body as {
+  const { characterId, sceneId, messages, quizContext } = body as {
     characterId: string;
     sceneId: string;
     messages: Message[];
+    quizContext?: {
+      questionId: string;
+      question: string;
+      options: string[];
+    };
   };
 
   if (!characterId || !sceneId || !messages) {
@@ -49,9 +54,19 @@ Description: ${scene.description}${rulesContext}
 Type-specific approach: ${typeInstructions[scene.type] || ''}
 ` : '';
 
+    const quizContextText = quizContext ? `
+QUIZ CONTEXT:
+The user is currently working on a quiz question and has asked for help. Here's the current question:
+Question: ${quizContext.question}
+Options: ${quizContext.options.map((opt, i) => `${i + 1}. ${opt}`).join(', ')}
+
+Please help the user understand the topic or provide guidance without directly giving away the answer. Focus on teaching and explaining concepts.
+` : '';
+
     const systemPrompt = `You are ${character?.name || 'a helpful character'}, a ${character?.role || 'assistant'}.
 ${sceneContext}
 Character description: ${character?.description || 'A helpful assistant'}
+${quizContextText}
 
 FORMATTING REQUIREMENTS:
 - Break your response into 2-4 short paragraphs

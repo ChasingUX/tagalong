@@ -44,7 +44,7 @@ const StreamingParagraph: React.FC<{
     tempDiv.style.visibility = 'hidden';
     tempDiv.style.whiteSpace = 'nowrap';
     tempDiv.style.fontSize = '14px';
-    tempDiv.style.fontFamily = getComputedStyle(containerRef.current).fontFamily;
+    tempDiv.style.fontFamily = 'var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"';
     document.body.appendChild(tempDiv);
 
     const containerWidth = containerRef.current.offsetWidth - 4;
