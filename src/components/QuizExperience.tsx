@@ -404,14 +404,14 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
               <div key={question.id} data-question-index={questionIndex} className={containerClass}>
                 {/* Question Header */}
                 <div className="mb-4">
-                  <p className="text-xs text-gray-500 mb-2">{questionIndex + 1}/{questions.length}</p>
+                  <p className="text-xs text-gray-500 mb-2 mt-3">{questionIndex + 1}/{questions.length}</p>
                   <h2 className="text-lg font-medium leading-relaxed">
                     {question.question}
                   </h2>
                 </div>
 
                 {/* Answer Options */}
-                <div className="space-y-3 mb-4">
+                <div className="space-y-3 mb-2">
                   {question.options.map((option, answerIndex) => {
                     const isSelected = questionState?.selectedAnswer === answerIndex;
                     const isCorrect = answerIndex === question.correctAnswer;
@@ -437,7 +437,7 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
 
                 {/* Next Button */}
                 {questionState?.isAnswered && questionIndex < questions.length - 1 && (
-                  <div className="mt-4 flex justify-end">
+                  <div className="mt-1 flex justify-end">
                     <button
                       onClick={() => {
                         const nextIndex = questionIndex + 1;
@@ -459,7 +459,7 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
                           }, 50);
                         }, 200);
                       }}
-                      className="px-3 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
+                      className="px-3 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer text-sm"
                     >
                       Next
                     </button>
