@@ -72,7 +72,13 @@ export async function GET(req: NextRequest) {
     
     const scenes = await generateScenes(character);
     const scene = scenes.find((s) => s.id === sceneId);
-    const caption = scene?.caption ?? "general interaction";
+    const rawCaption = scene?.caption ?? "general interaction";
+    
+    // Clean up caption for image generation - remove common prefixes
+    const caption = rawCaption
+      .replace(/^Interactive quiz on\s+/i, '')
+      .replace(/^Quiz:\s+/i, '')
+      .replace(/^Game:\s+/i, '');
     
     console.log(`Generating new scene image for ${characterId}-${sceneId}: ${caption}`);
     

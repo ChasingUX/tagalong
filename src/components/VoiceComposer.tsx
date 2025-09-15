@@ -104,7 +104,7 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
     };
   }, [transcript, listening, silenceThreshold]);
 
-  const [micEnabled, setMicEnabled] = useState(true);
+  const [micEnabled, setMicEnabled] = useState(false);
 
   // Add effect to monitor transcript changes and handle interruptions
   useEffect(() => {
@@ -127,6 +127,7 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
       onTranscriptChange(transcript);
     }
   }, [transcript, onTranscriptChange]);
+
 
   const startListening = useCallback(() => {
     console.log('🎤 VoiceComposer: Attempting to start listening...');
@@ -185,6 +186,33 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
       setSilenceTimer(null);
     }
   }, [silenceTimer]);
+
+  // Debug disabled prop changes and auto-start when enabled
+  useEffect(() => {
+    console.log('🎤 VoiceComposer: disabled prop changed to:', disabled);
+    
+    if (disabled && listening) {
+      // Stop listening when component becomes disabled
+      console.log('🎤 VoiceComposer: Component disabled, stopping listening');
+      stopListening();
+    } else if (!disabled && !micEnabled) {
+      // Enable microphone and start listening when component becomes enabled (after AI finishes speaking)
+      console.log('🎤 VoiceComposer: Enabling microphone and auto-starting listening');
+      setMicEnabled(true);
+      // startListening will be called by the next useEffect when micEnabled becomes true
+    } else if (!disabled && !listening && micEnabled) {
+      console.log('🎤 VoiceComposer: Auto-starting listening (mic already enabled)');
+      startListening();
+    }
+  }, [disabled, listening, micEnabled, startListening, stopListening]);
+
+  // Auto-start listening when microphone becomes enabled
+  useEffect(() => {
+    if (!disabled && micEnabled && !listening) {
+      console.log('🎤 VoiceComposer: Microphone enabled, auto-starting listening');
+      startListening();
+    }
+  }, [disabled, micEnabled, listening, startListening]);
 
   const toggleListening = useCallback(() => {
     if (listening) {

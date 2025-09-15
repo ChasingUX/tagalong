@@ -24,6 +24,8 @@ export interface ChatContext {
     id: string;
     question: string;
     options: string[];
+    selectedAnswer?: number;
+    explanation?: string;
   };
 }
 
@@ -66,7 +68,6 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [ttsError, setTtsError] = useState<string | null>(null);
-  const [shouldStartListening, setShouldStartListening] = useState(false);
   const [playedMessages, setPlayedMessages] = useState<Set<string>>(new Set());
   const [activeMessage, setActiveMessage] = useState<string | null>(null);
   const [streamingMessage, setStreamingMessage] = useState<string | null>(null);
@@ -74,6 +75,8 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   const [currentTranscript, setCurrentTranscript] = useState<string>('');
   const [showTranscript, setShowTranscript] = useState(false);
   const [lastSpokenTranscript, setLastSpokenTranscript] = useState<string>('');
+  const [microphoneEnabled, setMicrophoneEnabled] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Animated loading star component
@@ -138,28 +141,21 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       // Set initial mute state based on current mute setting
       audio.muted = isMuted;
       
-      // Trigger microphone to start listening when audio starts
-      console.log('🔊 VoiceChat: Setting shouldStartListening to true');
-      setShouldStartListening(true);
 
       audio.onended = () => {
         console.log('🔊 VoiceChat: Audio playback completed for message:', messageId);
         setCurrentlyPlaying(null);
         setStreamingMessage(null); // Stop streaming when audio ends
+        setMicrophoneEnabled(true); // Enable microphone after audio finishes
         audioRef.current = null;
-        // Reset the listening trigger
-        console.log('🔊 VoiceChat: Setting shouldStartListening to false (audio ended)');
-        setShouldStartListening(false);
       };
 
       audio.onerror = (error) => {
         console.error('🔊 VoiceChat: Error playing audio for message:', messageId, error);
         setCurrentlyPlaying(null);
         setStreamingMessage(null); // Stop streaming on error
+        setMicrophoneEnabled(true); // Enable microphone after audio error
         audioRef.current = null;
-        // Reset the listening trigger on error
-        console.log('🔊 VoiceChat: Setting shouldStartListening to false (audio error)');
-        setShouldStartListening(false);
       };
 
       // Add event listener to hide transcript when audio actually starts playing
@@ -168,6 +164,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
         console.log('🔊 VoiceChat: Current transcript state before hiding:', currentTranscript, 'showTranscript:', showTranscript);
         setShowTranscript(false);
         setLastSpokenTranscript(''); // Clear the persisted transcript
+        setIsProcessing(false); // Stop processing animation when audio starts
       });
 
       await audio.play();
@@ -180,9 +177,6 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
     } catch (error) {
       console.error('🔊 VoiceChat: Failed to start audio playback:', error);
       setCurrentlyPlaying(null);
-      // Reset the listening trigger on error
-      console.log('🔊 VoiceChat: Setting shouldStartListening to false (playback error)');
-      setShouldStartListening(false);
     }
   }, [isMuted]);
 
@@ -196,14 +190,6 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
     }
   }, []);
 
-  const handleUserSpeaking = useCallback(() => {
-    if (currentlyPlaying && audioRef.current) {
-      console.log('🗣️ VoiceChat: User interruption detected - stopping AI audio');
-      stopAudio();
-      // Reset listening trigger since audio was interrupted
-      setShouldStartListening(false);
-    }
-  }, [currentlyPlaying, stopAudio]);
 
   const handleTranscriptChange = useCallback((transcript: string) => {
     console.log('🎤 VoiceChat: Transcript changed:', transcript, 'length:', transcript.length);
@@ -235,6 +221,17 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
     config: { tension: 280, friction: 30 }
   });
 
+  // Processing pulse animation
+  const processingAnimation = useSpring({
+    from: { opacity: 1 },
+    to: { opacity: isProcessing ? 0.5 : 1 },
+    loop: isProcessing ? { reverse: true } : false,
+    config: {
+      duration: 800,
+    },
+    immediate: !isProcessing, // snap back to 1 when stopped
+  });
+
   const toggleMute = useCallback(() => {
     const newMuted = !isMuted;
     setIsMuted(newMuted);
@@ -252,6 +249,11 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   useEffect(() => {
     console.log('🎤 VoiceChat: showTranscript state changed to:', showTranscript, 'currentTranscript:', currentTranscript);
   }, [showTranscript, currentTranscript]);
+
+  // Monitor microphone state for debugging
+  useEffect(() => {
+    console.log('🎤 VoiceChat: Microphone enabled state:', microphoneEnabled);
+  }, [microphoneEnabled]);
 
   // Auto-play new messages with audio
   useEffect(() => {
@@ -291,6 +293,12 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
     
     // Clear any previous TTS errors
     setTtsError(null);
+    
+    // Disable microphone while processing
+    setMicrophoneEnabled(false);
+    
+    // Start processing animation
+    setIsProcessing(true);
     
     // Start new streaming message
     const messageId = `msg-${Date.now()}`;
@@ -415,6 +423,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       onMessagesChange([...newMessages, errorMessage]);
     } finally {
       onLoadingChange(false);
+      setIsProcessing(false); // Stop processing animation on completion or error
     }
   };
 
@@ -509,9 +518,10 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
                }
                
                return (
-                 <div
+                 <animated.div
                    key={messageToShow.id}
                    className="ml-0 text-base text-gray-900 relative"
+                   style={processingAnimation}
                  >
                    {/* Voice-first: Show content with streaming animation when audio plays */}
                    <StreamingText 
@@ -531,7 +541,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
                        </div>
                      </div>
                    )}
-                 </div>
+                 </animated.div>
                );
              })()}
           </div>
@@ -555,12 +565,10 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
         <div className="pb-2">
           <VoiceComposer
             onMessage={handleVoiceMessage}
-            disabled={loading}
+            disabled={!microphoneEnabled}
             isMuted={isMuted}
             onToggleMute={toggleMute}
             silenceThreshold={silenceThreshold}
-            autoStartListening={shouldStartListening}
-            onUserSpeaking={handleUserSpeaking}
             onTranscriptChange={handleTranscriptChange}
           />
         </div>

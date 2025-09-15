@@ -57,7 +57,15 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
           
           try {
             // Create a greeting message about the quiz question
-            const greetingText = `So you want to discuss "${context.quizQuestion?.question}"? What's on your mind?`;
+            let greetingText: string;
+            
+            if (context.quizQuestion?.selectedAnswer !== undefined && context.quizQuestion?.explanation) {
+              // User has already answered - provide explanation/summary
+              greetingText = `Great choice! ${context.quizQuestion.explanation} What would you like to know more about?`;
+            } else {
+              // User hasn't answered yet - ask about the question
+              greetingText = `So you want to discuss "${context.quizQuestion?.question}"? What's on your mind?`;
+            }
             
             console.log('🎯 ChatSheet: Generating quiz greeting:', greetingText);
             
@@ -295,7 +303,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
           </div>
 
           {/* Voice Chat Content */}
-          <div className="flex-1 px-5 pb-4 flex flex-col min-h-0">
+          <div className="flex-1 px-5 pb-6 flex flex-col min-h-0">
             <VoiceChat
               ref={voiceChatRef}
               context={context}

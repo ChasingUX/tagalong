@@ -205,7 +205,9 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
     quizQuestion: questions[activeQuestionIndex] ? {
       id: questions[activeQuestionIndex].id,
       question: questions[activeQuestionIndex].question,
-      options: questions[activeQuestionIndex].options
+      options: questions[activeQuestionIndex].options,
+      selectedAnswer: quizState.questionStates[activeQuestionIndex]?.selectedAnswer ?? undefined,
+      explanation: questions[activeQuestionIndex].explanation
     } : undefined
   };
 

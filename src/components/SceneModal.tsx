@@ -84,7 +84,7 @@ export default function SceneModal({ isOpen, onClose, onBegin, scene, character,
           {/* Content */}
           <div className="px-6 pb-5">
             {/* Scene Title */}
-            <h2 className="text-xl font-semibold text-gray-900 mb-1">{scene.title}</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-1">{scene.title}</h2>
 
             {/* Scene Description */}
             {scene.description && (
