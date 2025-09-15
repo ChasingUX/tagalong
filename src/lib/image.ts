@@ -6,4 +6,8 @@ export function getCharacterImageUrl(character: Character): string {
   return `/characters/${character.id}.png`;
 }
 
+export function getCharacterIdleVideoUrl(character: Character): string {
+  return `/idle/${character.id}_idle.mp4`;
+}
+
 

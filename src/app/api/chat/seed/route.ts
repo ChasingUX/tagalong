@@ -29,20 +29,28 @@ export async function GET(req: NextRequest) {
     // Generate type-specific opening message
     const model = getTextModel();
     const typePrompts = {
-      Game: `You are ${character.name}, a ${character.role}. Start a game-based chat experience for "${scene.title}". Set up the scenario with clear objectives, game mechanics, and an engaging challenge. Be enthusiastic and establish the rules/goals upfront.`,
-      Collab: `You are ${character.name}, a ${character.role}. Start a collaborative chat experience for "${scene.title}". Introduce the project we'll work on together, explain how we'll collaborate, and ask what aspect they'd like to start with. Be welcoming and partnership-focused.`,
-      Learn: `You are ${character.name}, a ${character.role}. Start an educational chat experience for "${scene.title}". Introduce the learning objectives, explain how you'll teach (lectures, quizzes, flashcards), and ask about their current knowledge level. Be encouraging and pedagogical.`,
-      Roleplay: `You are ${character.name}, a ${character.role}. Start a roleplay chat experience for "${scene.title}". Set up the scene, establish your character's situation and motivations, and draw the user into the narrative. Be immersive and stay in character.`
+      Game: `You are ${character.name}, a ${character.role}. Create a SHORT, energetic opening for the game "${scene.title}". Just greet the user and kick things off - don't explain rules or mechanics yet.`,
+      Collab: `You are ${character.name}, a ${character.role}. Create a SHORT, welcoming opening for the collaboration "${scene.title}". Just greet the user and suggest getting started together.`,
+      Learn: `You are ${character.name}, a ${character.role}. Create a SHORT, encouraging opening for the learning experience "${scene.title}". Just greet the user and ask one simple question to get started.`,
+      Roleplay: `You are ${character.name}, a ${character.role}. Create a SHORT, immersive opening for the roleplay "${scene.title}". Just greet the user in character and set the immediate scene.`
     };
-
-    const rulesText = scene.rules && scene.rules.length > 0 
-      ? `\n\nScene rules to follow:\n${scene.rules.map((rule, i) => `${i + 1}. ${rule}`).join('\n')}`
-      : '';
     
-    const prompt = typePrompts[scene.type] + `\n\nScene description: ${scene.description}${rulesText}\n\nKeep the opening message concise but engaging (2-3 sentences max). Incorporate the scene rules naturally into how you set up the experience.`;
+    const prompt = typePrompts[scene.type] + `
+
+CRITICAL: This is for a VOICE-FIRST interface. Keep it EXTREMELY short:
+- Maximum 1-2 sentences
+- 15-25 words total
+- Sound natural when spoken aloud
+- Be punchy and engaging
+- Don't explain everything - just get things started
+- NEVER include voice directions like "(Warm voice)" or "(Enthusiastic tone)"
+- Just write the spoken words directly without any stage directions
+
+Scene: ${scene.title}
+Description: ${scene.description}`;
     
     const result = await model.generateContent(prompt);
-    const message = result.response.text() || `Hey! I'm here for this ${scene.type.toLowerCase()} experience. What would you like to explore first?`;
+    const message = result.response.text() || `Hey there! Ready to get started?`;
 
     return new Response(JSON.stringify({ message }), {
       status: 200,
@@ -51,7 +59,7 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error('Error generating seed message:', error);
     // Fallback message
-    const message = `Hey! I'm here for this scene. What would you like to explore first?`;
+    const message = `Hey there! Ready to get started?`;
     return new Response(JSON.stringify({ message }), {
       status: 200,
       headers: { "content-type": "application/json" },

@@ -68,11 +68,15 @@ ${sceneContext}
 Character description: ${character?.description || 'A helpful assistant'}
 ${quizContextText}
 
-FORMATTING REQUIREMENTS:
-- Break your response into 2-4 short paragraphs
-- Use double line breaks between paragraphs
-- Keep paragraphs to 2-4 sentences maximum
-- Avoid walls of text
+VOICE-FIRST FORMATTING REQUIREMENTS:
+- This is for a VOICE INTERFACE - keep responses SHORT and conversational
+- Maximum 30-50 words per response (2-3 sentences)
+- Sound natural when spoken aloud
+- Be punchy, engaging, and to the point
+- Ask ONE clear question or make ONE clear point per response
+- Avoid long explanations - keep it snappy and interactive
+- NEVER include voice directions like "(Warm voice)" or "(Enthusiastic tone)" in your response
+- Just write the spoken words directly without any stage directions or parenthetical notes
 
 Be proactive, concise, and engaging. Stay in character and maintain the scene's context and type throughout the conversation.`;
 

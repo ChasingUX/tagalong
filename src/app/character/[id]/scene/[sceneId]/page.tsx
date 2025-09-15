@@ -6,8 +6,7 @@ import Image from "next/image";
 import MobileShell from "@/components/MobileShell";
 import SceneModal from "@/components/SceneModal";
 import { QuizExperience } from "@/components/QuizExperience";
-import CharacterPIP from "@/components/CharacterPIP";
-import ChatComponent, { type ChatContext, type Message } from "@/components/ChatComponent";
+import VoiceChat, { type ChatContext, type Message } from "@/components/VoiceChat";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
 import { getExperienceType, EXPERIENCES } from "@/lib/experiences";
@@ -28,7 +27,6 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [hasBegun, setHasBegun] = useState(false);
   const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
   const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void; hasBegun: boolean; loading: boolean } | null>(null);
-  const [isPipExpanded, setIsPipExpanded] = useState(false);
   
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
@@ -59,14 +57,18 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
     const messageId = `seed-${Date.now()}`;
     
     try {
+      console.log('🌱 Scene: Starting conversation seed');
       const res = await fetch(`/api/chat/seed?characterId=${character.id}&sceneId=${currentScene.id}`);
       const data = await res.json();
       
       if (data.message) {
+        console.log('🌱 Scene: Seed message received from LLM');
+        console.log('📝 Scene: Seed message text:', data.message);
+        
         // Add streaming assistant message
         const streamingMsg: Message = { 
           role: "assistant", 
-          content: "", 
+          content: data.message, 
           streaming: true, 
           id: messageId 
         };
@@ -75,33 +77,51 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
         // Stop loading immediately when we start showing the message
         setLoading(false);
         
-        // Set the full content immediately and let StreamingText handle the animation
-        setTimeout(() => {
-          setMessages([
-            { role: "assistant", content: data.message, streaming: true, id: messageId }
-          ]);
+        // Generate TTS for the seed message
+        console.log('🎵 Scene: Sending seed message to Play.ai TTS');
+        try {
+          const ttsRes = await fetch('/api/tts', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              text: data.message,
+              characterId: character.id
+            })
+          });
           
-          // After a delay, mark as complete (streaming animation will finish)
-          setTimeout(() => {
-            setMessages([
-              { role: "assistant", content: data.message, streaming: false, id: messageId }
-            ]);
-          }, data.message.length * 15 + 200); // 15ms per character + 200ms buffer
-        }, 500); // Small delay to show loading animation first
+          if (ttsRes.ok) {
+            const ttsData = await ttsRes.json();
+            console.log('🎵 Scene: TTS audio received for seed message');
+            
+            // Update message with audio URL
+            const messageWithAudio: Message = {
+              role: "assistant",
+              content: data.message,
+              streaming: true,
+              id: messageId,
+              audioUrl: ttsData.audioUrl
+            };
+            
+            console.log('🔊 Scene: Setting message with audio - VoiceChat will handle playback and mic activation');
+            setMessages([messageWithAudio]);
+          }
+        } catch (ttsError) {
+          console.error('🎵 Scene: TTS Error for seed message:', ttsError);
+        }
+        
+        // After a delay, mark as complete
+        setTimeout(() => {
+          setMessages(prev => prev.map(m => 
+            m.id === messageId ? { ...m, streaming: false } : m
+          ));
+        }, 1000); // Give time for audio to start
       }
     } catch (error) {
-      console.error('Failed to seed conversation:', error);
+      console.error('🌱 Scene: Failed to seed conversation:', error);
       setLoading(false);
     }
   };
 
-  const togglePip = () => {
-    console.log(`🎯 togglePip called - current isPipExpanded:`, isPipExpanded);
-    setIsPipExpanded(prev => {
-      console.log(`🎯 togglePip - changing from ${prev} to ${!prev}`);
-      return !prev;
-    });
-  };
 
   // Load scene data
   useEffect(() => {
@@ -134,11 +154,6 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
     loadScene();
   }, [character, sceneId, hasStarted]);
 
-  // Update PIP expansion when experience type changes
-  useEffect(() => {
-    const expConfig = EXPERIENCES[experienceType];
-    setIsPipExpanded(expConfig?.pipInitialExpanded || false);
-  }, [experienceType]);
 
   if (!character) {
     return (
@@ -158,22 +173,12 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   return (
     <MobileShell 
       title={sceneTitle} 
+      subtitle={character.name}
       currentCharacterId={character.id}
       showInfoButton={true}
       onInfoClick={() => setShowModal(true)}
     >
-      <div className="h-full flex flex-col relative">
-        {/* Character PIP */}
-        {character && hasBegun && (
-          <CharacterPIP 
-            character={character} 
-            isVisible={true}
-            initialExpanded={EXPERIENCES[experienceType]?.pipInitialExpanded || false}
-            isExpanded={isPipExpanded} 
-            onToggleExpanded={togglePip} 
-          />
-        )}
-        
+      <div className="h-full flex flex-col relative">        
         {/* Render different experience types */}
         {!currentScene ? (
           <div className="flex-1"></div>
@@ -182,12 +187,10 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             character={character} 
             scene={currentScene} 
             onRefReady={setQuizRef}
-            isPipExpanded={isPipExpanded}
-            onTogglePip={togglePip}
             onBegin={() => setHasBegun(true)}
           />
         ) : chatContext ? (
-          <ChatComponent
+          <VoiceChat
             context={chatContext}
             messages={messages}
             onMessagesChange={setMessages}
@@ -198,8 +201,6 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             composerMode="normal"
             hasBegun={hasBegun}
             onBegin={beginScene}
-            isPipExpanded={isPipExpanded}
-            onTogglePip={togglePip}
           />
         ) : (
           <div className="flex-1"></div>

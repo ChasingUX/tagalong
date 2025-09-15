@@ -4,16 +4,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSpring, animated, config } from '@react-spring/web';
 import Image from 'next/image';
 import { Character, Scene } from '@/lib/types';
-import Composer from './Composer';
+import VoiceComposer from './VoiceComposer';
 import ChatSheet from './ChatSheet';
-import { type ChatContext } from './ChatComponent';
+import { type ChatContext } from './VoiceChat';
 
 interface QuizExperienceProps {
   character: Character;
   scene: Scene;
   onRefReady?: (ref: { beginQuiz: () => void; hasBegun: boolean; loading: boolean }) => void;
-  isPipExpanded?: boolean;
-  onTogglePip?: () => void;
   onBegin?: () => void;
 }
 
@@ -123,7 +121,7 @@ interface QuizState {
   isComplete: boolean;
 }
 
-export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene, onRefReady, isPipExpanded, onTogglePip, onBegin }) => {
+export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene, onRefReady, onBegin }) => {
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasBegun, setHasBegun] = useState(false);
@@ -471,16 +469,20 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
         </div>
       </div>
 
-      {/* Message Input Composer - positioned at bottom, unaffected by quiz steps */}
-      <Composer
-        value={composerInput}
-        onChange={setComposerInput}
-        onSubmit={handleComposerSubmit}
-        placeholder={`Ask ${character?.name.split(' ')[0] || 'character'} a question`}
+      {/* Voice Composer - positioned at bottom, unaffected by quiz steps */}
+      <VoiceComposer
+        onMessage={(message) => {
+          if (message.trim()) {
+            setComposerInput(message);
+            setChatSheetOpen(true);
+          }
+        }}
         disabled={false}
-        mode="normal"
-        isPipExpanded={isPipExpanded}
-        onTogglePip={onTogglePip}
+        isMuted={false}
+        onToggleMute={() => {
+          // TODO: Implement mute functionality for quiz
+          console.log('Quiz mute toggle - not yet implemented');
+        }}
       />
 
       {/* Chat Sheet */}

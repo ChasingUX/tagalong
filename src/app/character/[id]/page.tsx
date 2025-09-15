@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { CHARACTERS } from "@/lib/characters";
-import { getCharacterImageUrl } from "@/lib/image";
+import { getCharacterImageUrl, getCharacterIdleVideoUrl } from "@/lib/image";
 import type { Scene, ExperienceType } from "@/lib/types";
 import MobileShell from "@/components/MobileShell";
 import SceneImage from "@/components/SceneImage";
@@ -71,11 +71,21 @@ export default function CharacterPage({ params }: { params: Params }) {
       <div>
 
       <div className="relative mb-7 overflow-hidden rounded-2xl">
-        <img
-          src={getCharacterImageUrl(character)}
-          alt={character.name}
+        <video
+          src={getCharacterIdleVideoUrl(character)}
+          autoPlay
+          loop
+          muted
+          playsInline
           className="h-84 w-full object-cover object-top"
-        />
+        >
+          {/* Fallback image if video fails to load */}
+          <img
+            src={getCharacterImageUrl(character)}
+            alt={character.name}
+            className="h-84 w-full object-cover object-top"
+          />
+        </video>
       </div>
 
       {/* Scene Types */}
