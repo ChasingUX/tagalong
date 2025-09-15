@@ -71,6 +71,9 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   const [activeMessage, setActiveMessage] = useState<string | null>(null);
   const [streamingMessage, setStreamingMessage] = useState<string | null>(null);
   const [hasPlayedFirstMessage, setHasPlayedFirstMessage] = useState(false);
+  const [currentTranscript, setCurrentTranscript] = useState<string>('');
+  const [showTranscript, setShowTranscript] = useState(false);
+  const [lastSpokenTranscript, setLastSpokenTranscript] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Animated loading star component
@@ -159,6 +162,14 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
         setShouldStartListening(false);
       };
 
+      // Add event listener to hide transcript when audio actually starts playing
+      audio.addEventListener('play', () => {
+        console.log('🔊 VoiceChat: Audio playback actually started - hiding transcript');
+        console.log('🔊 VoiceChat: Current transcript state before hiding:', currentTranscript, 'showTranscript:', showTranscript);
+        setShowTranscript(false);
+        setLastSpokenTranscript(''); // Clear the persisted transcript
+      });
+
       await audio.play();
       console.log('🔊 VoiceChat: Audio playback started successfully for message:', messageId);
       
@@ -194,6 +205,23 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
     }
   }, [currentlyPlaying, stopAudio]);
 
+  const handleTranscriptChange = useCallback((transcript: string) => {
+    console.log('🎤 VoiceChat: Transcript changed:', transcript, 'length:', transcript.length);
+    setCurrentTranscript(transcript);
+    
+    if (transcript.trim().length > 0) {
+      // User is actively speaking - show transcript and remember what they said
+      console.log('🎤 VoiceChat: User speaking - showing transcript');
+      setLastSpokenTranscript(transcript);
+      setShowTranscript(true);
+    } else if (lastSpokenTranscript.length > 0) {
+      // Transcript was cleared but user had spoken - keep showing the last spoken text
+      console.log('🎤 VoiceChat: Transcript cleared, but keeping last spoken text visible:', lastSpokenTranscript);
+      setCurrentTranscript(lastSpokenTranscript);
+      // Keep showTranscript as true - don't hide until AI speaks
+    }
+  }, [lastSpokenTranscript]);
+
   // Expose stopAudio function to parent components
   useImperativeHandle(ref, () => ({
     stopAudio
@@ -219,6 +247,11 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       console.log('🔇 Audio mute state changed:', newMuted, '(no active audio)');
     }
   }, [isMuted]);
+
+  // Monitor showTranscript state changes for debugging
+  useEffect(() => {
+    console.log('🎤 VoiceChat: showTranscript state changed to:', showTranscript, 'currentTranscript:', currentTranscript);
+  }, [showTranscript, currentTranscript]);
 
   // Auto-play new messages with audio
   useEffect(() => {
@@ -412,8 +445,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       {/* TTS Error indicator */}
       {ttsError && (
         <div className="mb-2 p-2 bg-yellow-50 border border-yellow-200 rounded-lg">
-          <div className="flex items-center gap-2 text-yellow-700 text-sm">
-            <Image src="/error.svg" alt="Warning" width={14} height={14} />
+          <div className="text-yellow-700 text-sm">
             <span>Voice synthesis: {ttsError}</span>
           </div>
         </div>
@@ -492,22 +524,28 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
                    {messageToShow.ttsError && (
                      <div className="absolute top-2 right-2">
                        <div 
-                         className="w-5 h-5 rounded-full bg-yellow-100 flex items-center justify-center"
+                         className="px-2 py-1 rounded bg-yellow-100 text-yellow-700 text-xs"
                          title={`TTS Error: ${messageToShow.ttsError}`}
                        >
-                         <Image
-                           src="/error.svg"
-                           alt="TTS Error"
-                           width={10}
-                           height={10}
-                           className="text-yellow-600"
-                         />
+                         TTS Error
                        </div>
                      </div>
                    )}
                  </div>
                );
              })()}
+          </div>
+        )}
+        {/* Real-time Transcript Display */}
+        {showTranscript && (
+          <div 
+            className="absolute bottom-4 left-0 right-0 px-4 py-2 text-sm text-gray-500 text-center overflow-x-auto whitespace-nowrap pointer-events-none"
+            style={{
+              opacity: showTranscript ? 1 : 0,
+              transition: 'opacity 0.3s ease-out'
+            }}
+          >
+            {currentTranscript}
           </div>
         )}
       </div>
@@ -523,6 +561,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
             silenceThreshold={silenceThreshold}
             autoStartListening={shouldStartListening}
             onUserSpeaking={handleUserSpeaking}
+            onTranscriptChange={handleTranscriptChange}
           />
         </div>
       )}

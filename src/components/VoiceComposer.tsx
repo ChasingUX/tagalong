@@ -17,6 +17,8 @@ interface VoiceComposerProps {
   autoStartListening?: boolean;
   // Interruption handling
   onUserSpeaking?: () => void;
+  // Real-time transcript
+  onTranscriptChange?: (transcript: string) => void;
 }
 
 export const VoiceComposer: React.FC<VoiceComposerProps> = ({
@@ -27,7 +29,8 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
   onToggleMute,
   silenceThreshold = 5000, // 5 seconds default
   autoStartListening = false,
-  onUserSpeaking
+  onUserSpeaking,
+  onTranscriptChange
 }) => {
   const [isListening, setIsListening] = useState(false);
   const [lastTranscript, setLastTranscript] = useState('');
@@ -117,6 +120,13 @@ export const VoiceComposer: React.FC<VoiceComposerProps> = ({
     }
     console.log('🎤 VoiceComposer: Listening status:', listening);
   }, [transcript, listening, onUserSpeaking]);
+
+  // Pass transcript changes to parent for real-time display
+  useEffect(() => {
+    if (onTranscriptChange) {
+      onTranscriptChange(transcript);
+    }
+  }, [transcript, onTranscriptChange]);
 
   const startListening = useCallback(() => {
     console.log('🎤 VoiceComposer: Attempting to start listening...');
