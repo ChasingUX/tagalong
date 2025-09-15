@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { useSpring, animated, useTransition } from '@react-spring/web';
 import Image from 'next/image';
 import VoiceComposer from './VoiceComposer';
@@ -26,6 +26,10 @@ export interface ChatContext {
   };
 }
 
+export interface VoiceChatRef {
+  stopAudio: () => void;
+}
+
 interface VoiceChatProps {
   context: ChatContext;
   messages: Message[];
@@ -43,7 +47,7 @@ interface VoiceChatProps {
   autoPlay?: boolean;
 }
 
-export const VoiceChat: React.FC<VoiceChatProps> = ({
+export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   context,
   messages,
   onMessagesChange,
@@ -57,7 +61,7 @@ export const VoiceChat: React.FC<VoiceChatProps> = ({
   onBegin,
   silenceThreshold = 2000,
   autoPlay = true
-}) => {
+}, ref) => {
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [ttsError, setTtsError] = useState<string | null>(null);
@@ -158,6 +162,11 @@ export const VoiceChat: React.FC<VoiceChatProps> = ({
       setShouldStartListening(false);
     }
   }, [currentlyPlaying, stopAudio]);
+
+  // Expose stopAudio function to parent components
+  useImperativeHandle(ref, () => ({
+    stopAudio
+  }), [stopAudio]);
 
   // Character video fade-in transition
   const videoTransition = useTransition(hasBegun, {
@@ -388,6 +397,7 @@ export const VoiceChat: React.FC<VoiceChatProps> = ({
           <CharacterVideo 
             character={context.character} 
             fullWidth={true}
+            height="aspect-square"
             className="flex-shrink-0"
           />
         </animated.div>
@@ -404,8 +414,8 @@ export const VoiceChat: React.FC<VoiceChatProps> = ({
       )}
 
       {/* Chat Messages - Simplified without scroll behavior */}
-      <div className="flex-1 flex flex-col pt-2 relative">
-        {messages.length === 0 && !loading ? (
+      <div className={`flex-1 flex flex-col pt-2 relative ${composerMode === 'sheet' ? 'min-h-0' : ''}`}>
+        {messages.length === 0 && !loading && composerMode !== 'sheet' ? (
           /* Empty state text */
           <div className="flex flex-col items-center justify-center h-full gap-3">
             <Image
@@ -529,6 +539,8 @@ export const VoiceChat: React.FC<VoiceChatProps> = ({
       )}
     </div>
   );
-};
+});
+
+VoiceChat.displayName = 'VoiceChat';
 
 export default VoiceChat;

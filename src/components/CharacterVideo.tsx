@@ -26,7 +26,7 @@ export const CharacterVideo: React.FC<CharacterVideoProps> = ({
   };
 
   const containerClasses = fullWidth 
-    ? `w-full aspect-square` 
+    ? `w-full ${height}` 
     : sizeClasses[size];
 
   return (

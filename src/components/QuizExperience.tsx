@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSpring, animated, config } from '@react-spring/web';
 import Image from 'next/image';
 import { Character, Scene } from '@/lib/types';
-import VoiceComposer from './VoiceComposer';
 import ChatSheet from './ChatSheet';
 import { type ChatContext } from './VoiceChat';
 
@@ -38,6 +37,7 @@ const AnimatedAnswerButton: React.FC<AnimatedAnswerButtonProps> = ({
 }) => {
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = React.useState(56);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   // Measure content height when explanation shows
   React.useEffect(() => {
@@ -60,19 +60,15 @@ const AnimatedAnswerButton: React.FC<AnimatedAnswerButtonProps> = ({
     height: contentHeight,
     backgroundColor: isAnswered 
       ? (isCorrect ? '#f7fef7' : (isSelected && !isCorrect ? '#fef7f7' : '#ffffff'))
-      : '#ffffff',
+      : (isHovered ? '#f9fafb' : '#ffffff'),
     borderColor: isAnswered
       ? (isCorrect ? '#afdbaf' : (isSelected && !isCorrect ? '#ffc6c6' : '#e5e7eb'))
-      : '#e5e7eb',
+      : (isHovered ? '#d1d5db' : '#e5e7eb'),
     config: config.default
   });
 
   let buttonClass = "w-full p-4 text-left cursor-pointer overflow-hidden ";
   buttonClass += "rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.06)] border ";
-  
-  if (!isAnswered) {
-    buttonClass += "hover:border-gray-300 hover:bg-gray-50";
-  }
 
   return (
     <animated.button
@@ -80,6 +76,8 @@ const AnimatedAnswerButton: React.FC<AnimatedAnswerButtonProps> = ({
       disabled={isAnswered}
       className={buttonClass}
       style={springProps}
+      onMouseEnter={() => !isAnswered && setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div ref={contentRef}>
         <div className="flex items-center text-gray-900">
@@ -433,57 +431,58 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
                 </div>
 
 
-                {/* Next Button */}
-                {questionState?.isAnswered && questionIndex < questions.length - 1 && (
-                  <div className="mt-1 flex justify-end">
-                    <button
-                      onClick={() => {
-                        const nextIndex = questionIndex + 1;
-                        
-                        // Start fade out
-                        setIsTransitioning(true);
-                        
-                        // After fade out completes, change question and fade in
-                        setTimeout(() => {
-                          setActiveQuestionIndex(nextIndex);
-                          
-                          // Scroll to top and fade in
-                          setTimeout(() => {
-                            const container = document.querySelector('.overflow-y-auto');
-                            if (container) {
-                              container.scrollTo({ top: 0, behavior: 'smooth' });
-                            }
-                            setIsTransitioning(false);
-                          }, 50);
-                        }, 200);
-                      }}
-                      className="px-3 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer text-sm"
-                    >
-                      Next
-                    </button>
-                  </div>
-                )}
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* Voice Composer - positioned at bottom, unaffected by quiz steps */}
-      <VoiceComposer
-        onMessage={(message) => {
-          if (message.trim()) {
-            setComposerInput(message);
-            setChatSheetOpen(true);
-          }
-        }}
-        disabled={false}
-        isMuted={false}
-        onToggleMute={() => {
-          // TODO: Implement mute functionality for quiz
-          console.log('Quiz mute toggle - not yet implemented');
-        }}
-      />
+      {/* Quiz Action Buttons - positioned at bottom */}
+      <div className="flex py-4" style={{ gap: '8px' }}>
+        <button
+          onClick={() => setChatSheetOpen(true)}
+          className="flex-1 h-11 bg-white border border-gray-200 text-gray-900 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center font-medium text-sm gap-2 cursor-pointer"
+        >
+          <Image
+            src="/wave.svg"
+            alt="Discuss"
+            width={20}
+            height={20}
+            className="text-gray-600"
+          />
+          Discuss
+        </button>
+        <button
+          onClick={() => {
+            const nextIndex = activeQuestionIndex + 1;
+            
+            // Start fade out
+            setIsTransitioning(true);
+            
+            // After fade out completes, change question and fade in
+            setTimeout(() => {
+              setActiveQuestionIndex(nextIndex);
+              
+              // Scroll to top and fade in
+              setTimeout(() => {
+                const container = document.querySelector('.overflow-y-auto');
+                if (container) {
+                  container.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                setIsTransitioning(false);
+              }, 50);
+            }, 200);
+          }}
+          disabled={!quizState.questionStates[activeQuestionIndex]?.isAnswered || activeQuestionIndex >= questions.length - 1}
+          className="flex-1 h-11 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
+          style={{
+            backgroundColor: !quizState.questionStates[activeQuestionIndex]?.isAnswered || activeQuestionIndex >= questions.length - 1 ? '#f1f1f1' : undefined,
+            color: !quizState.questionStates[activeQuestionIndex]?.isAnswered || activeQuestionIndex >= questions.length - 1 ? '#9a9a9a' : undefined
+          }}
+        >
+          Next
+        </button>
+      </div>
 
       {/* Chat Sheet */}
       <ChatSheet

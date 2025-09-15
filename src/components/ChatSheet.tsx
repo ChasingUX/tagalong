@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 import Image from 'next/image';
-import VoiceChat, { type Message, type ChatContext } from './VoiceChat';
+import VoiceChat, { type Message, type ChatContext, type VoiceChatRef } from './VoiceChat';
 
 interface ChatSheetProps {
   isOpen: boolean;
@@ -23,17 +23,95 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
   console.log('🔥 ChatSheet: Component rendered, isOpen:', isOpen);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const voiceChatRef = useRef<VoiceChatRef>(null);
+
+  // Handle close with audio cleanup
+  const handleClose = () => {
+    console.log('🔇 ChatSheet: Closing sheet and stopping audio');
+    
+    // Stop VoiceChat audio using ref
+    if (voiceChatRef.current) {
+      console.log('🔇 ChatSheet: Stopping VoiceChat audio via ref');
+      voiceChatRef.current.stopAudio();
+    }
+    
+    // Call the original onClose
+    onClose();
+  };
 
   const transition = useTransition(isOpen, {
-    from: { opacity: 0, transform: 'translateY(100%)' },
-    enter: { opacity: 1, transform: 'translateY(30%)' }, // 70% coverage means 30% from top
-    leave: { opacity: 0, transform: 'translateY(100%)' },
+    from: { opacity: 0, height: '0%' },
+    enter: { opacity: 1, height: '93%' },
+    leave: { opacity: 0, height: '0%' },
     config: { tension: 280, friction: 30 }
   });
 
   // Handle initial message when sheet opens
   useEffect(() => {
-    if (isOpen && initialMessage && initialMessage.trim()) {
+    if (isOpen) {
+      // For quiz context, generate automatic greeting
+      if (context.quizQuestion && !initialMessage) {
+        const generateQuizGreeting = async () => {
+          setLoading(true);
+          const messageId = `quiz-greeting-${Date.now()}`;
+          
+          try {
+            // Create a greeting message about the quiz question
+            const greetingText = `So you want to discuss "${context.quizQuestion?.question}"? What's on your mind?`;
+            
+            console.log('🎯 ChatSheet: Generating quiz greeting:', greetingText);
+            
+            // Add the AI greeting message
+            const aiMessage: Message = { 
+              role: "assistant", 
+              content: greetingText,
+              id: messageId
+            };
+            
+            setMessages([aiMessage]);
+
+            // Generate TTS for the greeting
+            console.log('🎵 ChatSheet: Sending quiz greeting to Play.ai TTS');
+            try {
+              const ttsRes = await fetch('/api/tts', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                  text: greetingText,
+                  characterId: context.character.id
+                })
+              });
+              
+              if (ttsRes.ok) {
+                const ttsData = await ttsRes.json();
+                
+                console.log('🎵 ChatSheet: TTS audio received for quiz greeting');
+                
+                // Update message with audio URL
+                const messageWithAudio: Message = {
+                  role: "assistant",
+                  content: greetingText,
+                  id: messageId,
+                  audioUrl: ttsData.audioUrl
+                };
+                
+                setMessages([messageWithAudio]);
+              }
+            } catch (ttsError) {
+              console.error('🎵 ChatSheet: TTS Error for quiz greeting:', ttsError);
+            }
+          } finally {
+            setLoading(false);
+          }
+        };
+        
+        // Small delay to let the sheet animate in first
+        setTimeout(generateQuizGreeting, 300);
+        return; // Exit early for quiz greeting
+      }
+      
+      // Handle regular initial message
+      if (initialMessage && initialMessage.trim()) {
       // Add the initial message and trigger AI response
       const userMessage: Message = { 
         role: "user", 
@@ -136,6 +214,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
       
       // Small delay to let the sheet animate in first
       setTimeout(sendInitialMessage, 300);
+      }
     }
   }, [isOpen, initialMessage, context]);
 
@@ -143,7 +222,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     };
 
@@ -179,13 +258,13 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
       {/* Sheet */}
       <animated.div 
         style={{ 
-          transform: style.transform,
+          height: style.height,
           borderTopLeftRadius: '24px', 
-          borderTopRightRadius: '24px' 
+          borderTopRightRadius: '24px'
         }}
-        className="fixed inset-x-0 top-0 z-50 bg-white shadow-2xl"
+        className="fixed inset-x-0 bottom-0 z-50 bg-white shadow-2xl"
       >
-        <div className="mx-auto max-w-md h-[70vh] flex flex-col">
+        <div className="mx-auto max-w-md flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-center p-4 relative">
             <div className="text-center">
@@ -201,7 +280,7 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
             
             {/* Close button */}
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="absolute right-4 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
               aria-label="Close chat"
             >
@@ -216,8 +295,9 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
           </div>
 
           {/* Voice Chat Content */}
-          <div className="flex-1 px-5 flex flex-col min-h-0">
+          <div className="flex-1 px-5 pb-6 flex flex-col min-h-0">
             <VoiceChat
+              ref={voiceChatRef}
               context={context}
               messages={messages}
               onMessagesChange={setMessages}
@@ -225,8 +305,8 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
               onLoadingChange={setLoading}
               className="flex-1 min-h-0"
               showComposer={true}
-              composerMode="normal"
-              hasBegun={false}
+              composerMode="sheet"
+              hasBegun={true}
               onBegin={() => {
                 console.log('🔥 ChatSheet: Begin button clicked');
                 console.log('🔥 ChatSheet: onBegin function exists?', !!onBegin);
