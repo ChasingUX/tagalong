@@ -2,48 +2,6 @@
   {
     "id": "1",
     "characterId": "riff-kwan",
-    "title": "Write comedy sketches",
-    "caption": "Co-create hilarious sketches and comedy bits together",
-    "type": "Collab",
-    "description": "Brainstorm and craft comedy sketches with Riff's expert comedic timing.",
-    "rules": [
-      "We'll create written content together",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll end with a complete comedy sketch you can perform or share"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "2",
-    "characterId": "riff-kwan",
-    "title": "Develop a comedy routine",
-    "caption": "Build a stand-up set with jokes, timing, and delivery",
-    "type": "Collab",
-    "description": "Create and refine a comedy routine with professional comedic structure.",
-    "rules": [
-      "We'll make something new from scratch",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll end with a polished comedy routine ready for performance"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "3",
-    "characterId": "riff-kwan",
-    "title": "Roast session planning",
-    "caption": "Craft witty roasts and comeback lines for any occasion",
-    "type": "Collab",
-    "description": "Master the art of clever roasts and quick-witted comebacks with Riff.",
-    "rules": [
-      "We'll develop a comprehensive plan",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll end with a detailed plan you can implement"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "4",
-    "characterId": "riff-kwan",
     "title": "Comedy writing techniques",
     "caption": "Interactive quiz on joke structure, timing, and comedic principles",
     "type": "Learn",
@@ -56,7 +14,7 @@
     "experience": "quiz"
   },
   {
-    "id": "5",
+    "id": "2",
     "characterId": "riff-kwan",
     "title": "Stand-up performance skills",
     "caption": "Develop stage presence, delivery, and crowd work",
@@ -70,21 +28,7 @@
     "experience": "conversation"
   },
   {
-    "id": "6",
-    "characterId": "riff-kwan",
-    "title": "Improv comedy training",
-    "caption": "Master spontaneous humor and quick thinking",
-    "type": "Learn",
-    "description": "Develop improvisational skills for spontaneous comedy and quick wit.",
-    "rules": [
-      "I'll guide you through improv comedy training",
-      "We'll use flashcards, quizzes, and interactive exercises",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "7",
+    "id": "3",
     "characterId": "riff-kwan",
     "title": "Pun battle royale",
     "caption": "Compete in rapid-fire pun competitions",
@@ -98,7 +42,7 @@
     "experience": "conversation"
   },
   {
-    "id": "8",
+    "id": "4",
     "characterId": "riff-kwan",
     "title": "Comedy improv games",
     "caption": "Play spontaneous comedy games and scenarios",
@@ -112,21 +56,35 @@
     "experience": "conversation"
   },
   {
-    "id": "9",
+    "id": "5",
     "characterId": "riff-kwan",
-    "title": "Meme creation challenge",
-    "caption": "Create viral-worthy memes and internet humor",
-    "type": "Game",
-    "description": "Craft hilarious memes and internet content with comedic expertise.",
+    "title": "Write comedy sketches",
+    "caption": "Co-create hilarious sketches and comedy bits together",
+    "type": "Collab",
+    "description": "Brainstorm and craft comedy sketches with Riff's expert comedic timing.",
     "rules": [
-      "You'll face creative challenges with time or resource limits",
-      "You make choices or responses, I react and keep score",
-      "Success earns points or reveals, with fun reactions either way"
+      "We'll create written content together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a complete comedy sketch you can perform or share"
     ],
     "experience": "conversation"
   },
   {
-    "id": "10",
+    "id": "6",
+    "characterId": "riff-kwan",
+    "title": "Develop a comedy routine",
+    "caption": "Build a stand-up set with jokes, timing, and delivery",
+    "type": "Collab",
+    "description": "Create and refine a comedy routine with professional comedic structure.",
+    "rules": [
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a polished comedy routine ready for performance"
+    ],
+    "experience": "conversation"
+  },
+  {
+    "id": "7",
     "characterId": "riff-kwan",
     "title": "Comedy club open mic",
     "caption": "Perform at a comedy club with Riff as your host",
@@ -140,7 +98,7 @@
     "experience": "conversation"
   },
   {
-    "id": "11",
+    "id": "8",
     "characterId": "riff-kwan",
     "title": "Comedy writing room",
     "caption": "Work as writers on a comedy show together",
@@ -148,20 +106,6 @@
     "description": "Collaborate in a professional comedy writing room creating TV content.",
     "rules": [
       "You're in a realistic scenario with clear context and stakes",
-      "Respond naturally as yourself, make choices, and engage authentically",
-      "I'll adapt to your responses and the story branches based on your choices"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "12",
-    "characterId": "riff-kwan",
-    "title": "Roast battle judge",
-    "caption": "Judge a comedy roast battle with Riff",
-    "type": "Roleplay",
-    "description": "Co-judge a roast battle competition and critique comedic performances.",
-    "rules": [
-      "You're competing or being judged in a formal setting",
       "Respond naturally as yourself, make choices, and engage authentically",
       "I'll adapt to your responses and the story branches based on your choices"
     ],

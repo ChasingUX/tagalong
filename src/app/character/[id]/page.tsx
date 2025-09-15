@@ -89,14 +89,14 @@ export default function CharacterPage({ params }: { params: Params }) {
       </div>
 
       {/* Scene Types */}
-      {(['Learn', 'Collab', 'Game', 'Roleplay'] as const).map((sceneType) => {
+      {(['Learn', 'Game', 'Collab', 'Roleplay'] as const).map((sceneType) => {
         const typeScenes = scenes.filter(s => s.type === sceneType);
         
         // Map scene types to display titles
         const typeDisplayNames = {
-          'Collab': 'Create together',
           'Learn': 'Learn',
           'Game': 'Play games',
+          'Collab': 'Create together',
           'Roleplay': 'Roleplay'
         };
 
@@ -189,7 +189,7 @@ export default function CharacterPage({ params }: { params: Params }) {
       <div className="mt-1">
         <Link
           href={`/character/${character.id}/create-scene`}
-          className="w-full flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-sm font-semibold text-white rounded-xl transition-colors"
+          className="w-full flex items-center justify-center px-6 py-3 bg-black hover:bg-gray-800 text-sm font-semibold text-white rounded-xl transition-colors"
         >
           Create Scene
         </Link>

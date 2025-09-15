@@ -2,48 +2,6 @@
   {
     "id": "1",
     "characterId": "sage-ellison",
-    "title": "Set life goals together",
-    "caption": "Define meaningful personal and professional objectives",
-    "type": "Collab",
-    "description": "Create actionable life goals with Sage using proven goal-setting frameworks.",
-    "rules": [
-      "We'll make something new from scratch",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "2",
-    "characterId": "sage-ellison",
-    "title": "Build a habit system",
-    "caption": "Design sustainable routines and positive habit stacks",
-    "type": "Collab",
-    "description": "Develop personalized habit systems that stick using behavioral science principles.",
-    "rules": [
-      "We'll construct something step by step",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "3",
-    "characterId": "sage-ellison",
-    "title": "Create a life vision board",
-    "caption": "Visualize your ideal future across all life areas",
-    "type": "Collab",
-    "description": "Design inspiring vision boards that align with your values and aspirations.",
-    "rules": [
-      "We'll design something visual together",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll end with a finished design you can use or modify"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "5",
-    "characterId": "sage-ellison",
     "title": "Emotional intelligence training",
     "caption": "Interactive quiz on self-awareness and interpersonal skills",
     "type": "Learn",
@@ -56,7 +14,7 @@
     "experience": "quiz"
   },
   {
-    "id": "4",
+    "id": "2",
     "characterId": "sage-ellison",
     "title": "Master mindfulness techniques",
     "caption": "Learn meditation, breathing, and present-moment awareness",
@@ -70,21 +28,7 @@
     "experience": "conversation"
   },
   {
-    "id": "6",
-    "characterId": "sage-ellison",
-    "title": "Time management mastery",
-    "caption": "Learn productivity systems and energy management",
-    "type": "Learn",
-    "description": "Master time management techniques that align with your natural rhythms.",
-    "rules": [
-      "I'll guide you through time management mastery",
-      "You'll practice with step-by-step guidance and examples",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "7",
+    "id": "3",
     "characterId": "sage-ellison",
     "title": "Values clarification game",
     "caption": "Discover your core values through interactive exercises",
@@ -98,7 +42,7 @@
     "experience": "conversation"
   },
   {
-    "id": "8",
+    "id": "4",
     "characterId": "sage-ellison",
     "title": "Strengths assessment challenge",
     "caption": "Uncover hidden talents and natural abilities",
@@ -112,21 +56,35 @@
     "experience": "conversation"
   },
   {
-    "id": "9",
+    "id": "5",
     "characterId": "sage-ellison",
-    "title": "Decision-making scenarios",
-    "caption": "Practice making tough choices with confidence",
-    "type": "Game",
-    "description": "Navigate complex decision scenarios using structured thinking frameworks.",
+    "title": "Set life goals together",
+    "caption": "Define meaningful personal and professional objectives",
+    "type": "Collab",
+    "description": "Create actionable life goals with Sage using proven goal-setting frameworks.",
     "rules": [
-      "Simple rules with clear objectives and win conditions",
-      "You make choices or responses, I react and keep score",
-      "Success earns points or reveals, with fun reactions either way"
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
     ],
     "experience": "conversation"
   },
   {
-    "id": "10",
+    "id": "6",
+    "characterId": "sage-ellison",
+    "title": "Build a habit system",
+    "caption": "Design sustainable routines and positive habit stacks",
+    "type": "Collab",
+    "description": "Develop personalized habit systems that stick using behavioral science principles.",
+    "rules": [
+      "We'll construct something step by step",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
+    ],
+    "experience": "conversation"
+  },
+  {
+    "id": "7",
     "characterId": "sage-ellison",
     "title": "Life coaching session",
     "caption": "Experience a personalized one-on-one coaching session",
@@ -140,26 +98,12 @@
     "experience": "conversation"
   },
   {
-    "id": "11",
+    "id": "8",
     "characterId": "sage-ellison",
     "title": "Accountability partnership",
     "caption": "Be accountability partners supporting each other's growth",
     "type": "Roleplay",
     "description": "Create mutual accountability and support each other's personal development.",
-    "rules": [
-      "You're in a realistic scenario with clear context and stakes",
-      "Respond naturally as yourself, make choices, and engage authentically",
-      "I'll adapt to your responses and the story branches based on your choices"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "12",
-    "characterId": "sage-ellison",
-    "title": "Mentor a fellow seeker",
-    "caption": "Guide someone else on their personal growth journey",
-    "type": "Roleplay",
-    "description": "Practice coaching skills by mentoring others with Sage's guidance.",
     "rules": [
       "You're in a realistic scenario with clear context and stakes",
       "Respond naturally as yourself, make choices, and engage authentically",

@@ -93,23 +93,27 @@ export async function GET(req: NextRequest) {
     
     // Use Gemini 2.5 Flash for image-to-image generation
     const model = getImageModel();
-    const prompt = `Create a close-up scene image for: "${caption}". 
+    const prompt = `Using the provided character image as reference, create a close-up scene image for: "${caption}". 
 
-Focus on a tight, recognizable close-up that captures the essence of this activity. Choose the best framing for a small thumbnail image:
-- Show the main action or key elements up close (hands working, tools in use, key objects)
-- Include recognizable character details (clothing, hands, or partial face) to maintain identity
+CRITICAL: Maintain the exact same character appearance from the reference image - same face, hair, clothing style, and visual identity.
+
+Create a scene showing this character engaged in the activity. Focus on a tight, recognizable close-up:
+- PRESERVE the character's exact appearance, facial features, hair, and style from the reference image
+- Show the character actively engaged in the described activity
+- Include the character's face or recognizable features when possible
+- Use the same clothing style and visual aesthetic as the reference
+- Show relevant activity elements (tools, objects, environment) that support the scene
 - Use dramatic, clear composition that reads well at small sizes
-- Emphasize the most important visual elements of the scene
 - Create strong visual contrast and clear focal points
 - Avoid including any text, labels, or written words in the image
 
-Examples of good close-up framing:
-- Cooking scenes: Hands in chef coat preparing food, close-up of cooking action
-- Games: Close-up of game elements, hands interacting with objects
-- Learning: Books, flashcards, or study materials with character hands
-- Competitions: Close-up of judging, tasting, or competitive elements
+Examples of good character-focused framing:
+- Cooking scenes: Character in chef attire preparing food, showing face/hands in action
+- Games: Character engaged with game elements, showing expression and involvement
+- Learning: Character studying or teaching, with relevant materials visible
+- Entertainment: Character in professional setting with relevant props/environment
 
-Make it immediately recognizable what activity is happening, even at thumbnail size. Focus on visual elements only, no text.`;
+The character's appearance and identity must remain consistent with the reference image. Make it immediately recognizable as the same person doing the described activity.`;
 
     console.log(`🎨 PROMPT FOR ${characterId}-${sceneId}:`);
     console.log(`📝 Scene: "${caption}"`);

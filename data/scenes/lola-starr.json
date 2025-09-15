@@ -2,48 +2,6 @@
   {
     "id": "1",
     "characterId": "lola-starr",
-    "title": "Create celebrity gossip content",
-    "caption": "Write entertaining celebrity news and commentary",
-    "type": "Collab",
-    "description": "Craft engaging celebrity gossip content with insider knowledge and flair.",
-    "rules": [
-      "We'll make something new from scratch",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "2",
-    "characterId": "lola-starr",
-    "title": "Plan red carpet coverage",
-    "caption": "Design comprehensive coverage for awards shows and premieres",
-    "type": "Collab",
-    "description": "Plan detailed red carpet coverage strategies for major entertainment events.",
-    "rules": [
-      "We'll develop a comprehensive plan",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll end with a detailed plan you can implement"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "3",
-    "characterId": "lola-starr",
-    "title": "Analyze celebrity trends",
-    "caption": "Study fashion, relationships, and entertainment industry patterns",
-    "type": "Collab",
-    "description": "Analyze celebrity trends and predict the next big entertainment stories.",
-    "rules": [
-      "We'll work together to create something meaningful",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "4",
-    "characterId": "lola-starr",
     "title": "Entertainment industry insights",
     "caption": "Interactive quiz on how Hollywood and the entertainment business works",
     "type": "Learn",
@@ -56,7 +14,7 @@
     "experience": "quiz"
   },
   {
-    "id": "5",
+    "id": "2",
     "characterId": "lola-starr",
     "title": "Celebrity fashion analysis",
     "caption": "Study red carpet fashion and celebrity style evolution",
@@ -70,21 +28,7 @@
     "experience": "conversation"
   },
   {
-    "id": "6",
-    "characterId": "lola-starr",
-    "title": "Social media strategy for fame",
-    "caption": "Learn how celebrities build and maintain their public image",
-    "type": "Learn",
-    "description": "Understand celebrity social media strategies and public relations tactics.",
-    "rules": [
-      "I'll guide you through social media strategy for fame",
-      "You'll practice with step-by-step guidance and examples",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "7",
+    "id": "3",
     "characterId": "lola-starr",
     "title": "Celebrity trivia showdown",
     "caption": "Test knowledge of celebrity facts, relationships, and scandals",
@@ -98,7 +42,7 @@
     "experience": "conversation"
   },
   {
-    "id": "8",
+    "id": "4",
     "characterId": "lola-starr",
     "title": "Paparazzi photo guessing",
     "caption": "Identify celebrities from candid photos and situations",
@@ -112,21 +56,35 @@
     "experience": "conversation"
   },
   {
-    "id": "9",
+    "id": "5",
     "characterId": "lola-starr",
-    "title": "Awards show prediction game",
-    "caption": "Predict winners and fashion choices for major awards shows",
-    "type": "Game",
-    "description": "Make predictions about award winners, fashion, and memorable moments.",
+    "title": "Create celebrity gossip content",
+    "caption": "Write entertaining celebrity news and commentary",
+    "type": "Collab",
+    "description": "Craft engaging celebrity gossip content with insider knowledge and flair.",
     "rules": [
-      "Simple rules with clear objectives and win conditions",
-      "You make choices or responses, I react and keep score",
-      "Success earns points or reveals, with fun reactions either way"
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
     ],
     "experience": "conversation"
   },
   {
-    "id": "10",
+    "id": "6",
+    "characterId": "lola-starr",
+    "title": "Plan red carpet coverage",
+    "caption": "Design comprehensive coverage for awards shows and premieres",
+    "type": "Collab",
+    "description": "Plan detailed red carpet coverage strategies for major entertainment events.",
+    "rules": [
+      "We'll develop a comprehensive plan",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a detailed plan you can implement"
+    ],
+    "experience": "conversation"
+  },
+  {
+    "id": "7",
     "characterId": "lola-starr",
     "title": "Entertainment reporter",
     "caption": "Work as Lola's co-host on an entertainment news show",
@@ -140,26 +98,12 @@
     "experience": "conversation"
   },
   {
-    "id": "11",
+    "id": "8",
     "characterId": "lola-starr",
     "title": "Red carpet interviewer",
     "caption": "Interview celebrities at a major Hollywood premiere",
     "type": "Roleplay",
     "description": "Experience the excitement of interviewing A-list celebrities at premieres.",
-    "rules": [
-      "You're in a realistic scenario with clear context and stakes",
-      "Respond naturally as yourself, make choices, and engage authentically",
-      "I'll adapt to your responses and the story branches based on your choices"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "12",
-    "characterId": "lola-starr",
-    "title": "Celebrity publicist team",
-    "caption": "Help manage a celebrity's public image and media presence",
-    "type": "Roleplay",
-    "description": "Work behind the scenes managing celebrity publicity and media relations.",
     "rules": [
       "You're in a realistic scenario with clear context and stakes",
       "Respond naturally as yourself, make choices, and engage authentically",

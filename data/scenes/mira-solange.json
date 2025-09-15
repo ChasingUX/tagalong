@@ -2,48 +2,6 @@
   {
     "id": "1",
     "characterId": "mira-solange",
-    "title": "Create an art piece together",
-    "caption": "Collaborate on paintings, sculptures, or mixed media art",
-    "type": "Collab",
-    "description": "Co-create stunning artworks using various mediums and techniques.",
-    "rules": [
-      "We'll make something new from scratch",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "2",
-    "characterId": "mira-solange",
-    "title": "Design a gallery exhibition",
-    "caption": "Curate and plan an art exhibition or gallery show",
-    "type": "Collab",
-    "description": "Plan immersive gallery exhibitions that tell compelling artistic stories.",
-    "rules": [
-      "We'll design something visual together",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll end with a detailed plan you can implement"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "3",
-    "characterId": "mira-solange",
-    "title": "Develop art concepts",
-    "caption": "Brainstorm creative concepts and artistic themes",
-    "type": "Collab",
-    "description": "Explore profound artistic concepts and translate ideas into visual form.",
-    "rules": [
-      "We'll build and refine an idea together",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "5",
-    "characterId": "mira-solange",
     "title": "Art history exploration",
     "caption": "Interactive quiz on influential artists and movements throughout time",
     "type": "Learn",
@@ -56,7 +14,7 @@
     "experience": "quiz"
   },
   {
-    "id": "4",
+    "id": "2",
     "characterId": "mira-solange",
     "title": "Art techniques masterclass",
     "caption": "Learn painting, drawing, and sculpting fundamentals",
@@ -70,21 +28,7 @@
     "experience": "conversation"
   },
   {
-    "id": "6",
-    "characterId": "mira-solange",
-    "title": "Creative inspiration methods",
-    "caption": "Unlock creativity and overcome artistic blocks",
-    "type": "Learn",
-    "description": "Discover techniques for finding inspiration and maintaining creative flow.",
-    "rules": [
-      "I'll guide you through creative inspiration methods",
-      "You'll practice with step-by-step guidance and examples",
-      "You'll get immediate feedback and track your understanding"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "7",
+    "id": "3",
     "characterId": "mira-solange",
     "title": "Art style guessing game",
     "caption": "Identify art movements and famous artists from artworks",
@@ -98,7 +42,7 @@
     "experience": "conversation"
   },
   {
-    "id": "8",
+    "id": "4",
     "characterId": "mira-solange",
     "title": "Color palette challenge",
     "caption": "Create art using specific color combinations and themes",
@@ -112,21 +56,35 @@
     "experience": "conversation"
   },
   {
-    "id": "9",
+    "id": "5",
     "characterId": "mira-solange",
-    "title": "Abstract interpretation game",
-    "caption": "Interpret and discuss abstract artworks and their meanings",
-    "type": "Game",
-    "description": "Explore abstract art interpretation and develop artistic vocabulary.",
+    "title": "Create an art piece together",
+    "caption": "Collaborate on paintings, sculptures, or mixed media art",
+    "type": "Collab",
+    "description": "Co-create stunning artworks using various mediums and techniques.",
     "rules": [
-      "Simple rules with clear objectives and win conditions",
-      "You make choices or responses, I react and keep score",
-      "Success earns points or reveals, with fun reactions either way"
+      "We'll make something new from scratch",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll create something tangible you can save and use"
     ],
     "experience": "conversation"
   },
   {
-    "id": "10",
+    "id": "6",
+    "characterId": "mira-solange",
+    "title": "Design a gallery exhibition",
+    "caption": "Curate and plan an art exhibition or gallery show",
+    "type": "Collab",
+    "description": "Plan immersive gallery exhibitions that tell compelling artistic stories.",
+    "rules": [
+      "We'll design something visual together",
+      "You share ideas and preferences, I build on them with expertise",
+      "We'll end with a detailed plan you can implement"
+    ],
+    "experience": "conversation"
+  },
+  {
+    "id": "7",
     "characterId": "mira-solange",
     "title": "Artist studio assistant",
     "caption": "Work as Mira's studio assistant on major art projects",
@@ -140,7 +98,7 @@
     "experience": "conversation"
   },
   {
-    "id": "11",
+    "id": "8",
     "characterId": "mira-solange",
     "title": "Gallery opening night",
     "caption": "Host an art gallery opening with collectors and critics",
@@ -148,20 +106,6 @@
     "description": "Navigate the art world at an exclusive gallery opening event.",
     "rules": [
       "You're in a realistic scenario with clear context and stakes",
-      "Respond naturally as yourself, make choices, and engage authentically",
-      "I'll adapt to your responses and the story branches based on your choices"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "12",
-    "characterId": "mira-solange",
-    "title": "Art critique session",
-    "caption": "Participate in professional art critique and discussion",
-    "type": "Roleplay",
-    "description": "Engage in thoughtful artistic critique and constructive feedback sessions.",
-    "rules": [
-      "We're in a one-on-one session focused on your goals",
       "Respond naturally as yourself, make choices, and engage authentically",
       "I'll adapt to your responses and the story branches based on your choices"
     ],
