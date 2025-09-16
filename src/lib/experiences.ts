@@ -33,6 +33,12 @@ export const EXPERIENCES: Record<ExperienceType, ExperienceConfig> = {
     label: 'Game',
     description: 'Progressive choice games that build step by step',
     pipInitialExpanded: false // Starts collapsed for full-screen experience
+  },
+  explore: {
+    type: 'explore',
+    label: 'Explore',
+    description: 'Immersive guided tours with voice narration',
+    pipInitialExpanded: false // Starts collapsed for full-screen experience
   }
 };
 
@@ -54,6 +60,8 @@ export const experienceSupports = (
     case 'flashcard':
       return feature === 'progress_tracking' || feature === 'ai_generation';
     case 'game-progression':
+      return feature === 'progress_tracking' || feature === 'ai_generation' || feature === 'streaming';
+    case 'explore':
       return feature === 'progress_tracking' || feature === 'ai_generation' || feature === 'streaming';
     default:
       return false;

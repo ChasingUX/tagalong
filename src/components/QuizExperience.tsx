@@ -284,7 +284,7 @@ export const QuizExperience: React.FC<QuizExperienceProps> = ({ character, scene
             onClick={beginQuiz}
             className="text-sm text-gray-500 underline hover:text-gray-700 transition-colors cursor-pointer"
           >
-            Begin Quiz
+            Begin {scene.title}
           </button>
         </div>
       </div>

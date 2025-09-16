@@ -15,9 +15,11 @@ type MobileShellProps = {
   showSearchButton?: boolean;
   showInfoButton?: boolean;
   onInfoClick?: () => void;
+  useWhiteHandle?: boolean;
+  hideHandle?: boolean;
 };
 
-export default function MobileShell({ children, className, title = "Tagalong", subtitle, currentCharacterId, showComposeButton = false, showSearchButton = false, showInfoButton = false, onInfoClick }: MobileShellProps) {
+export default function MobileShell({ children, className, title = "Tagalong", subtitle, currentCharacterId, showComposeButton = false, showSearchButton = false, showInfoButton = false, onInfoClick, useWhiteHandle = false, hideHandle = false }: MobileShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -140,15 +142,17 @@ export default function MobileShell({ children, className, title = "Tagalong", s
               {children}
             </div>
 
-           <div>
-              <Image
-                src="/handle.png"
-                alt="Handle"
-                width={393}
-                height={34}
-                className="w-full h-auto"
-              />
-            </div>
+           {!hideHandle && (
+             <div>
+                <Image
+                  src={useWhiteHandle ? "/handle-white.png" : "/handle.png"}
+                  alt="Handle"
+                  width={393}
+                  height={34}
+                  className="w-full h-auto"
+                />
+              </div>
+           )}
           </div>
         </div>
       </div>

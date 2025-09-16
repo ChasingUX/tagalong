@@ -42,7 +42,7 @@ export const CharacterVideo: React.FC<CharacterVideoProps> = ({
         {/* Fallback image if video fails to load */}
         <img
           src={getCharacterImageUrl(character)}
-          alt={character.name}
+          alt={character?.name || 'Character'}
           className="w-full h-full object-cover object-top"
         />
       </video>

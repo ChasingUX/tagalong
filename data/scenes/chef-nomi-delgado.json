@@ -16,10 +16,10 @@
   {
     "id": "2",
     "characterId": "chef-nomi-delgado",
-    "title": "World spices & cooking methods",
+    "title": "Spice & Skill Challenge",
     "caption": "Interactive quiz on world spices & cooking methods",
     "type": "Learn",
-    "description": "Test your knowledge of world spices and essential cooking methods through an interactive quiz.",
+    "description": "Quiz yourself on essential flavors and cooking methods from every corner of the world.",
     "rules": [
       "Answer multiple-choice questions about spices and cooking techniques",
       "Get immediate feedback with explanations from Chef Nomi",
@@ -84,26 +84,26 @@
     "experience": "conversation"
   },
   {
+    "id": "9",
+    "characterId": "chef-nomi-delgado",
+    "title": "Venice Food Tour",
+    "caption": "Immersive guided tour through Venice's culinary treasures",
+    "type": "Roleplay",
+    "description": "Join Chef Nomi on an immersive journey through Venice's flavors, from bustling markets to canal-side osterias.",
+    "rules": [
+      "Explore 5 iconic Venetian food stops brought to life with immersive full-screen visuals",
+      "Go deeper at each stop to zoom in, sample dishes, and uncover hidden stories",
+      "See Venice through Chef Nomi’s playful lens"
+    ],
+    "experience": "explore"
+  },
+  {
     "id": "7",
     "characterId": "chef-nomi-delgado",
     "title": "Compete on their cooking show",
     "caption": "Compete on their cooking show",
     "type": "Roleplay",
     "description": "Compete as a contestant on Chef Nomi's cooking show and impress the judges.",
-    "rules": [
-      "You're in a realistic scenario with clear context and stakes",
-      "Respond naturally as yourself, make choices, and engage authentically",
-      "I'll adapt to your responses and the story branches based on your choices"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "8",
-    "characterId": "chef-nomi-delgado",
-    "title": "Be sous-chef in their kitchen",
-    "caption": "Be sous-chef in their restaurant kitchen",
-    "type": "Roleplay",
-    "description": "Work as Chef Nomi's trusted sous-chef during busy restaurant dinner service.",
     "rules": [
       "You're in a realistic scenario with clear context and stakes",
       "Respond naturally as yourself, make choices, and engage authentically",

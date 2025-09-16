@@ -48,6 +48,8 @@ interface VoiceChatProps {
   // Voice settings
   silenceThreshold?: number;
   autoPlay?: boolean;
+  hideCharacterVideo?: boolean;
+  hideEmptyState?: boolean;
 }
 
 export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
@@ -63,7 +65,9 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   hasBegun = true,
   onBegin,
   silenceThreshold = 2000,
-  autoPlay = true
+  autoPlay = true,
+  hideCharacterVideo = false,
+  hideEmptyState = false
 }, ref) => {
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
@@ -454,7 +458,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
   return (
     <div className={`flex flex-col ${className}`}>
       {/* Character Video - fade in after user begins */}
-      {videoTransition((style, item) => item ? (
+      {!hideCharacterVideo && videoTransition((style, item) => item ? (
         <animated.div style={style} className="mb-4">
           <CharacterVideo 
             character={context.character} 
@@ -475,8 +479,8 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       )}
 
       {/* Chat Messages - Simplified without scroll behavior */}
-      <div className={`flex-1 flex flex-col pt-1 relative ${composerMode === 'sheet' ? 'min-h-0' : ''}`} style={{ minHeight: '200px' }}>
-        {messages.length === 0 && !loading && composerMode !== 'sheet' ? (
+      <div className={`${messages.length === 0 && hideEmptyState ? '' : 'flex-1'} flex flex-col pt-1 relative ${composerMode === 'sheet' ? 'min-h-0' : ''}`} style={{ minHeight: messages.length === 0 && hideEmptyState ? '0px' : '200px' }}>
+        {messages.length === 0 && !loading && composerMode !== 'sheet' && !hideEmptyState ? (
           /* Empty state text */
           <div className="flex flex-col items-center justify-center h-full gap-3">
             <Image
@@ -488,7 +492,6 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
               style={{ opacity: 0.5 }}
             />
             <p className="text-sm text-gray-500 text-center">
-              Tap the microphone or{' '}
               {onBegin ? (
                 <button 
                   onClick={() => {
@@ -497,10 +500,10 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
                   }}
                   className="text-gray-500 underline hover:text-gray-700 transition-colors cursor-pointer"
                 >
-                  begin
+                  Begin {context?.scene?.title || 'Experience'}
                 </button>
               ) : (
-                `start talking to ${context.character.name.split(' ')[0]}`
+                `Tap the microphone or start talking to ${context?.character?.name?.split(' ')[0] || 'character'}`
               )}
             </p>
           </div>

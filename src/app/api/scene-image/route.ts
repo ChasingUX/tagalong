@@ -93,7 +93,29 @@ export async function GET(req: NextRequest) {
     
     // Use Gemini 2.5 Flash for image-to-image generation
     const model = getImageModel();
-    const prompt = `Using the provided character image as reference, create a close-up scene image for: "${caption}". 
+    
+    // Special prompt for Venice Food Tour
+    const isVeniceFoodTour = scene?.title === "Venice Food Tour" || caption.toLowerCase().includes("venice");
+    
+    const prompt = isVeniceFoodTour ? 
+      `Using the provided character image as reference, create a close-up scene image showing this chef character in Venice, Italy for: "${caption}".
+
+CRITICAL: Maintain the exact same character appearance from the reference image - same face, hair, clothing style, and visual identity.
+
+Create a scene showing this chef character in a beautiful Venice setting:
+- PRESERVE the character's exact appearance, facial features, hair, and style from the reference image
+- Show the character in Venice with iconic Venetian elements: canals, gondolas, historic architecture, bridges
+- Include Venetian food culture elements: outdoor café tables, Italian ingredients, canal-side dining
+- Character should be in chef attire or stylish Italian clothing, engaging with Venice food scene
+- Show the character's face clearly with an expression of joy and culinary passion
+- Include authentic Venice atmosphere: warm golden lighting, canal reflections, historic stone buildings
+- Add Italian food elements: fresh ingredients, wine, traditional dishes, market scenes
+- Use cinematic composition that captures both the character and Venice's romantic charm
+- Create warm, inviting colors that evoke Italian cuisine and Venice's golden hour beauty
+- Avoid including any text, labels, or written words in the image
+
+The character should look like they belong in Venice, perhaps at a canal-side restaurant, local market, or cooking with a view of Venice's canals and architecture behind them. Make it feel authentically Venetian while keeping the character's identity consistent.` :
+      `Using the provided character image as reference, create a close-up scene image for: "${caption}". 
 
 CRITICAL: Maintain the exact same character appearance from the reference image - same face, hair, clothing style, and visual identity.
 

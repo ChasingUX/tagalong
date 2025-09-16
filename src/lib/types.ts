@@ -9,7 +9,7 @@ export type Character = {
 };
 
 export type SceneType = 'Game' | 'Collab' | 'Learn' | 'Roleplay';
-export type ExperienceType = 'conversation' | 'quiz' | 'flashcard' | 'game-progression';
+export type ExperienceType = 'conversation' | 'quiz' | 'flashcard' | 'game-progression' | 'explore';
 
 export type Scene = {
   id: string;
@@ -35,5 +35,38 @@ export interface GameState {
   choices: string[];
   questions: GameQuestion[];
   images: string[]; // Base64 or URLs of generated images
+  completed: boolean;
+}
+
+// Explore-specific types
+export interface ExploreStop {
+  id: string;
+  title: string;
+  description: string;
+  imagePrompt: string;
+  soundscapeFile: string;
+  goDeeper?: {
+    level1?: {
+      title: string;
+      description: string;
+      imagePrompt: string;
+    };
+    level2?: {
+      title: string;
+      description: string;
+      imagePrompt: string;
+    };
+  };
+}
+
+export interface ExploreState {
+  currentStop: number;
+  currentDepth: number; // 0 = main stop, 1 = first deeper, 2 = second deeper
+  visitedStops: Array<{
+    stopId: string;
+    depth: number;
+    image: string;
+    title: string;
+  }>;
   completed: boolean;
 }

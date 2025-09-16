@@ -2,15 +2,15 @@
 
 import { useEffect, useState, use, useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import MobileShell from "@/components/MobileShell";
 import SceneModal from "@/components/SceneModal";
 import { QuizExperience } from "@/components/QuizExperience";
 import { GameExperience } from "@/components/GameExperience";
+import { ExploreExperience } from "@/components/ExploreExperience";
 import VoiceChat, { type ChatContext, type Message } from "@/components/VoiceChat";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
-import { getExperienceType, EXPERIENCES } from "@/lib/experiences";
+import { getExperienceType } from "@/lib/experiences";
 import { type ExperienceType } from "@/lib/types";
 
 interface Params {
@@ -29,6 +29,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
   const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void; hasBegun: boolean; loading: boolean } | null>(null);
   const [gameRef, setGameRef] = useState<{ beginGame: () => void; hasBegun: boolean; loading: boolean } | null>(null);
+  const [exploreRef, setExploreRef] = useState<{ beginExplore: () => void; hasBegun: boolean; loading: boolean } | null>(null);
   
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
@@ -198,6 +199,13 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             onRefReady={setGameRef}
             onBegin={() => setHasBegun(true)}
           />
+        ) : experienceType === 'explore' ? (
+          <ExploreExperience 
+            character={character} 
+            scene={currentScene} 
+            onRefReady={setExploreRef}
+            onBegin={() => setHasBegun(true)}
+          />
         ) : chatContext ? (
           <VoiceChat
             context={chatContext}
@@ -220,7 +228,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
       <SceneModal
         isOpen={showModal}
         onClose={closeModal}
-        onBegin={experienceType === 'quiz' ? () => { quizRef?.beginQuiz(); setShowModal(false); } : experienceType === 'game-progression' ? () => { gameRef?.beginGame(); setShowModal(false); } : beginScene}
+        onBegin={experienceType === 'quiz' ? () => { quizRef?.beginQuiz(); setShowModal(false); } : experienceType === 'game-progression' ? () => { gameRef?.beginGame(); setShowModal(false); } : experienceType === 'explore' ? () => { exploreRef?.beginExplore(); setShowModal(false); } : beginScene}
         scene={currentScene}
         character={character}
         hasStarted={hasStarted}
