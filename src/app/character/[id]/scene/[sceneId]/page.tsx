@@ -6,6 +6,7 @@ import Image from "next/image";
 import MobileShell from "@/components/MobileShell";
 import SceneModal from "@/components/SceneModal";
 import { QuizExperience } from "@/components/QuizExperience";
+import { GameExperience } from "@/components/GameExperience";
 import VoiceChat, { type ChatContext, type Message } from "@/components/VoiceChat";
 import { CHARACTERS } from "@/lib/characters";
 import type { Scene } from "@/lib/types";
@@ -27,6 +28,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
   const [hasBegun, setHasBegun] = useState(false);
   const [experienceType, setExperienceType] = useState<ExperienceType>('conversation');
   const [quizRef, setQuizRef] = useState<{ beginQuiz: () => void; hasBegun: boolean; loading: boolean } | null>(null);
+  const [gameRef, setGameRef] = useState<{ beginGame: () => void; hasBegun: boolean; loading: boolean } | null>(null);
   
   // Check if user has started by seeing if there are user messages
   const hasStarted = messages.some(m => m.role === "user");
@@ -189,6 +191,13 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
             onRefReady={setQuizRef}
             onBegin={() => setHasBegun(true)}
           />
+        ) : experienceType === 'game-progression' ? (
+          <GameExperience 
+            character={character} 
+            scene={currentScene} 
+            onRefReady={setGameRef}
+            onBegin={() => setHasBegun(true)}
+          />
         ) : chatContext ? (
           <VoiceChat
             context={chatContext}
@@ -211,7 +220,7 @@ export default function SceneChatPage({ params }: { params: Promise<Params> }) {
       <SceneModal
         isOpen={showModal}
         onClose={closeModal}
-        onBegin={experienceType === 'quiz' ? () => { quizRef?.beginQuiz(); setShowModal(false); } : beginScene}
+        onBegin={experienceType === 'quiz' ? () => { quizRef?.beginQuiz(); setShowModal(false); } : experienceType === 'game-progression' ? () => { gameRef?.beginGame(); setShowModal(false); } : beginScene}
         scene={currentScene}
         character={character}
         hasStarted={hasStarted}

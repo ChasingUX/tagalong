@@ -9,7 +9,7 @@ export type Character = {
 };
 
 export type SceneType = 'Game' | 'Collab' | 'Learn' | 'Roleplay';
-export type ExperienceType = 'conversation' | 'quiz' | 'flashcard';
+export type ExperienceType = 'conversation' | 'quiz' | 'flashcard' | 'game-progression';
 
 export type Scene = {
   id: string;
@@ -21,3 +21,19 @@ export type Scene = {
   description?: string; // More detailed description of the scene
   rules?: string[]; // Rules that govern how the scene works (40-100 chars each)
 };
+
+// Game-specific types
+export interface GameQuestion {
+  round: number;
+  question: string;
+  options: string[];
+  imagePrompt: string;
+}
+
+export interface GameState {
+  currentRound: number;
+  choices: string[];
+  questions: GameQuestion[];
+  images: string[]; // Base64 or URLs of generated images
+  completed: boolean;
+}

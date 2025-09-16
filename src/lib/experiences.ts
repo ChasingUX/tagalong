@@ -27,6 +27,12 @@ export const EXPERIENCES: Record<ExperienceType, ExperienceConfig> = {
     label: 'Flashcards',
     description: 'Study with AI-generated flashcards',
     pipInitialExpanded: false // Starts collapsed
+  },
+  'game-progression': {
+    type: 'game-progression',
+    label: 'Game',
+    description: 'Progressive choice games that build step by step',
+    pipInitialExpanded: false // Starts collapsed for full-screen experience
   }
 };
 
@@ -47,6 +53,8 @@ export const experienceSupports = (
       return feature === 'progress_tracking' || feature === 'ai_generation';
     case 'flashcard':
       return feature === 'progress_tracking' || feature === 'ai_generation';
+    case 'game-progression':
+      return feature === 'progress_tracking' || feature === 'ai_generation' || feature === 'streaming';
     default:
       return false;
   }

@@ -2,6 +2,20 @@
   {
     "id": "1",
     "characterId": "chef-nomi-delgado",
+    "title": "Cooking Showdown",
+    "caption": "Build your signature dish through 5 progressive choices",
+    "type": "Game",
+    "description": "Craft a dish in 5 rounds. Watch it evolve with each choice, ending in a dramatic reveal.",
+    "rules": [
+      "Make 5 choices that stack into your dish",
+      "Watch each round evolve with new images", 
+      "Celebrate and share your final creation"
+    ],
+    "experience": "game-progression"
+  },
+  {
+    "id": "2",
+    "characterId": "chef-nomi-delgado",
     "title": "World spices & cooking methods",
     "caption": "Interactive quiz on world spices & cooking methods",
     "type": "Learn",
@@ -14,7 +28,7 @@
     "experience": "quiz"
   },
   {
-    "id": "2",
+    "id": "3",
     "characterId": "chef-nomi-delgado",
     "title": "Identify cuisines by ingredients",
     "caption": "Quiz: identify cuisines by ingredient list",
@@ -28,7 +42,7 @@
     "experience": "conversation"
   },
   {
-    "id": "3",
+    "id": "4",
     "characterId": "chef-nomi-delgado",
     "title": "Mystery Basket Challenge",
     "caption": "Mystery Basket Challenge (random ingredient combos)",
@@ -36,20 +50,6 @@
     "description": "Create amazing dishes using surprise random ingredient combinations and creativity.",
     "rules": [
       "You'll face creative challenges with time or resource limits",
-      "You make choices or responses, I react and keep score",
-      "Success earns points or reveals, with fun reactions either way"
-    ],
-    "experience": "conversation"
-  },
-  {
-    "id": "4",
-    "characterId": "chef-nomi-delgado",
-    "title": "Emoji dish guessing game",
-    "caption": "Emoji → dish guessing game",
-    "type": "Game",
-    "description": "Decode food emojis to identify dishes and ingredients in this fun game.",
-    "rules": [
-      "You'll make guesses based on clues I provide",
       "You make choices or responses, I react and keep score",
       "Success earns points or reveals, with fun reactions either way"
     ],
