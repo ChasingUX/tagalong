@@ -107,7 +107,7 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             color: 'transparent',
-            animation: 'shimmer 1.8s linear infinite'
+            animation: 'shimmer 3s linear infinite'
           }}
         >
           Connecting
@@ -279,6 +279,19 @@ export const VoiceChat = forwardRef<VoiceChatRef, VoiceChatProps>(({
       }
     }
   }, [messages, currentlyPlaying, autoPlay, playAudio, playedMessages]);
+
+  // Stop audio playback when component unmounts (navigation away)
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        console.log('🔇 VoiceChat: Stopping audio playback on navigation');
+        audioRef.current.pause();
+        audioRef.current = null;
+        setCurrentlyPlaying(null);
+        setStreamingMessage(null);
+      }
+    };
+  }, []);
 
   const sendMessage = async (messageContent: string) => {
     if (!messageContent.trim()) return;
