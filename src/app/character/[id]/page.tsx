@@ -72,20 +72,20 @@ export default function CharacterPage({ params }: { params: Params }) {
       <MobileShell title={character.name} subtitle={character.role} currentCharacterId={character.id} showComposeButton={true}>
       <div>
 
-      <div className="relative mb-7 overflow-hidden rounded-2xl">
+      <div className="relative mb-5 overflow-hidden rounded-2xl">
         <video
           src={getCharacterIdleVideoUrl(character)}
           autoPlay
           loop
           muted
           playsInline
-          className="h-84 w-full object-cover object-top"
+          className="h-88 w-full object-cover object-top"
         >
           {/* Fallback image if video fails to load */}
           <img
             src={getCharacterImageUrl(character)}
             alt={character.name}
-            className="h-84 w-full object-cover object-top"
+            className="h-88 w-full object-cover object-top"
           />
         </video>
       </div>

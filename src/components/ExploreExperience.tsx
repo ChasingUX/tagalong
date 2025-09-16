@@ -242,13 +242,104 @@ export const ExploreExperience: React.FC<ExploreExperienceProps> = ({
     }
   }, [exploreData, onBegin]);
 
+  const playVoiceWithMixing = useCallback((audioUrl: string) => {
+    // Stop any existing voice audio
+    if (voiceRef.current) {
+      voiceRef.current.unload();
+    }
+
+    // Create new voice audio with ducking
+    voiceRef.current = new Howl({
+      src: [audioUrl],
+      volume: 1.0,
+      onplay: () => {
+        // Duck the soundscape
+        if (soundscapeRef.current) {
+          soundscapeRef.current.fade(0.3, 0.1, 500);
+        }
+      },
+      onend: () => {
+        // Restore soundscape volume
+        if (soundscapeRef.current) {
+          soundscapeRef.current.fade(0.1, 0.3, 500);
+        }
+      }
+    });
+
+    voiceRef.current.play();
+  }, []);
+
+  const generateStepGreeting = useCallback(async (title: string, description: string, imagePrompt: string) => {
+    try {
+      console.log('🎵 ExploreExperience: Generating voice greeting for:', title);
+      
+      // Create visual description prompt based on the image generation prompt
+      const visualPrompt = `You are Chef Nomi, describing what you see at ${title} in Venice. Based on this scene: "${imagePrompt}", describe what's happening around you in a vivid, immersive way. Be highly descriptive and provocative, painting a picture with words of the sights, sounds, smells, and atmosphere. Keep it to 2-3 sentences and make it feel like you're right there experiencing it. Don't repeat basic descriptions - focus on the sensory details and what makes this moment special.`;
+      
+      // First get the descriptive text from the chat API
+      const chatRes = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          characterId: character.id,
+          sceneId: scene.id,
+          messages: [
+            { role: 'user', content: visualPrompt, id: `greeting-${Date.now()}` }
+          ]
+        })
+      });
+      
+      if (chatRes.ok) {
+        const chatData = await chatRes.json();
+        console.log('🎵 ExploreExperience: Generated visual description:', chatData.message);
+        
+        // Now generate TTS for the descriptive text
+        const ttsRes = await fetch('/api/tts', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            text: chatData.message,
+            characterId: character.id
+          })
+        });
+        
+        if (ttsRes.ok) {
+          const ttsData = await ttsRes.json();
+          console.log('🎵 ExploreExperience: Voice greeting received from Play.ai');
+          
+          // Play with Howler and mix with soundscape
+          if (ttsData.audioUrl) {
+            playVoiceWithMixing(ttsData.audioUrl);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('🎵 ExploreExperience: Voice greeting error:', error);
+    }
+  }, [character.id, scene.id, playVoiceWithMixing]);
+
+  const generateQuickGreeting = useCallback((title: string, imagePrompt: string): string => {
+    // Create concise, location-specific greetings based on the visual scene
+    const greetings = {
+      'Rialto Market': "Look at those glistening fish on ice! The vendors are calling out their freshest catch.",
+      'Bacaro Wine Bar': "Step into this cozy bacaro - smell those delicious cicchetti and local wine.",
+      'Gelateria by the Canal': "Perfect timing for gelato! See how the sunset light dances on the canal.",
+      'Campo Santa Margherita': "The energy here is electric! Students and locals gathering for late-night bites.",
+      'Grand Canal Terrace Feast': "What a view! The Grand Canal sparkles as we celebrate with this incredible feast."
+    };
+
+    // Return predefined greeting or create a simple one
+    return greetings[title as keyof typeof greetings] || `Welcome to ${title}! Take in this beautiful Venice scene.`;
+  }, []);
+
   const loadStop = useCallback(async (stopIndex: number, depth: number) => {
     if (!exploreData || stopIndex >= exploreData.length) return;
 
     const stop = exploreData[stopIndex];
     
     try {
-      const response = await fetch('/api/explore-image', {
+      // Use the combined API that generates both image and voice description
+      const response = await fetch('/api/explore-step', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -299,10 +390,32 @@ export const ExploreExperience: React.FC<ExploreExperienceProps> = ({
         soundscapeRef.current.play();
       }
 
+      // Generate TTS from the voice description if available
+      if (data.voiceDescription) {
+        const ttsRes = await fetch('/api/tts', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            text: data.voiceDescription,
+            characterId: character.id
+          })
+        });
+        
+        if (ttsRes.ok) {
+          const ttsData = await ttsRes.json();
+          console.log('🎵 ExploreExperience: Voice greeting received from Play.ai');
+          
+          // Play with Howler and mix with soundscape
+          if (ttsData.audioUrl) {
+            playVoiceWithMixing(ttsData.audioUrl);
+          }
+        }
+      }
+
     } catch (error) {
       console.error('Error loading stop:', error);
     }
-  }, [exploreData, character.id, tourId, exploreState.visitedStops]);
+  }, [exploreData, character.id, tourId, exploreState.visitedStops, playVoiceWithMixing]);
 
   const handleNextStop = useCallback(async () => {
     setNextStepLoading(true);
@@ -447,12 +560,22 @@ export const ExploreExperience: React.FC<ExploreExperienceProps> = ({
           ? 'opacity-0 pointer-events-none h-0 mt-0' 
           : 'opacity-100 h-auto mt-4'
       }`}>
-        <h2 className="text-lg font-medium text-gray-900 mb-1">
-          {currentTitle}
-        </h2>
-        <p className="text-gray-600 text-sm leading-relaxed">
-          {currentDescription}
-        </p>
+        {loading || !currentTitle ? (
+          /* Shimmer placeholders for title and description */
+          <>
+            <div className="h-6 bg-gray-200 rounded animate-pulse mb-2" />
+            <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4" />
+          </>
+        ) : (
+          <>
+            <h2 className="text-lg font-medium text-gray-900 mb-1">
+              {currentTitle}
+            </h2>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {currentDescription}
+            </p>
+          </>
+        )}
       </div>
 
       {/* Action buttons below text - fade out and collapse when expanded */}
