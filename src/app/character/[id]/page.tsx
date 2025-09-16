@@ -18,7 +18,7 @@ const getExperiencePill = (experience: ExperienceType) => {
     conversation: { label: 'Chat', color: 'bg-gray-100 text-gray-600' },
     quiz: { label: 'Quiz', color: 'bg-emerald-50 text-emerald-600' },
     flashcard: { label: 'Cards', color: 'bg-violet-50 text-violet-600' },
-    'game-progression': { label: 'Game', color: 'bg-blue-50 text-blue-500' }
+    'game-progression': { label: 'Colab', color: 'bg-blue-50 text-blue-500' }
   };
   
   return config[experience || 'conversation'] || config.conversation;

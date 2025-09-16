@@ -2,9 +2,9 @@
   {
     "id": "1",
     "characterId": "chef-nomi-delgado",
-    "title": "Cooking Showdown",
+    "title": "Build a signature dish",
     "caption": "Build your signature dish through 5 progressive choices",
-    "type": "Game",
+    "type": "Collab",
     "description": "Craft a dish in 5 rounds. Watch it evolve with each choice, ending in a dramatic reveal.",
     "rules": [
       "Make 5 choices that stack into your dish",
@@ -58,14 +58,14 @@
   {
     "id": "5",
     "characterId": "chef-nomi-delgado",
-    "title": "Build a signature dish",
-    "caption": "Build a signature dish together with ingredients you choose",
-    "type": "Collab",
-    "description": "Create your signature dish with Chef Nomi using your favorite ingredients.",
+    "title": "Culinary Time Machine",
+    "caption": "Travel through culinary history and master ancient cooking techniques",
+    "type": "Game",
+    "description": "Journey through different time periods learning historical cooking methods and creating authentic dishes from various eras.",
     "rules": [
-      "We'll construct something step by step",
-      "You share ideas and preferences, I build on them with expertise",
-      "We'll create something tangible you can save and use"
+      "Choose your culinary time period and location",
+      "Learn authentic techniques and ingredients from that era",
+      "Complete cooking challenges using period-appropriate methods"
     ],
     "experience": "conversation"
   },
