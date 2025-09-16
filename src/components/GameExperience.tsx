@@ -95,22 +95,68 @@ export const GameExperience: React.FC<GameExperienceProps> = ({
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [composerInput, setComposerInput] = useState('');
   const [dishName, setDishName] = useState<string | null>(null);
+  const [previewQuestion, setPreviewQuestion] = useState<GameQuestion | null>(null);
 
-  // Chat context for the reusable chat component (same pattern as QuizExperience)
+  // Chat context for the reusable chat component with current game state
   const chatContext: ChatContext | null = React.useMemo(() => {
     if (!character || !scene) return null;
     
-    // Create a more stable context that doesn't change on every gameState update
-    const baseGameContext = `\n\nGame Context: This is "${scene.title}" - a 5-round progressive choice game where you build something step by step.`;
+    let gameContext = `\n\nGame Context: This is "${scene.title}" - a 5-round progressive choice game where you build a dish step by step.`;
+    
+    if (hasBegun) {
+      gameContext += `\n\nCurrent Progress: Round ${gameState.currentRound}/5`;
+      
+      if (gameState.choices.length > 0) {
+        gameContext += `\nChoices so far: ${gameState.choices.join(' → ')}`;
+      }
+      
+      if (currentQuestion) {
+        gameContext += `\n\nCurrent Question: "${currentQuestion.question}"`;
+        gameContext += `\nOptions: ${currentQuestion.options.join(', ')}`;
+        
+        if (selectedOption) {
+          gameContext += `\nCurrently considering: "${selectedOption}"`;
+        }
+      }
+      
+      // Add dynamic dish description if we have choices
+      if (gameState.choices.length > 0) {
+        gameContext += `\n\nCurrent dish development: Building a dish with ${gameState.choices.join(', ')}`;
+      }
+    } else {
+      // Pre-game context - include actual first round options if available
+      gameContext += `\n\nThis game involves making 5 progressive choices to build a unique dish.`;
+      
+      if (previewQuestion) {
+        gameContext += `\n\nFirst round options: ${previewQuestion.options.join(', ')}`;
+        gameContext += `\nQuestion: "${previewQuestion.question}"`;
+      }
+      
+      gameContext += `\n\nThe 5 rounds will be:`;
+      gameContext += `\n1. Choose a protein foundation`;
+      gameContext += `\n2. Select a cooking technique`;
+      gameContext += `\n3. Pick visible sauces/coatings`;
+      gameContext += `\n4. Add substantial sides/accompaniments`;
+      gameContext += `\n5. Choose bold finishing touches`;
+      gameContext += `\n\nEach choice generates a new image showing the dish evolving.`;
+    }
     
     return {
       character,
       scene: {
         ...scene,
-        description: (scene.description || '') + baseGameContext
+        description: (scene.description || '') + gameContext
+      },
+      // Add game-specific context for ChatSheet to recognize
+      gameContext: {
+        hasBegun: hasBegun,
+        currentRound: gameState.currentRound,
+        choices: gameState.choices,
+        currentQuestion: currentQuestion,
+        selectedOption: selectedOption
       }
     };
-  }, [character, scene]); // Remove gameState dependency
+  }, [character, scene, hasBegun, gameState.currentRound, gameState.choices, currentQuestion, selectedOption]);
 
   const beginGame = useCallback(async () => {
     setHasBegun(true);
@@ -365,6 +411,37 @@ export const GameExperience: React.FC<GameExperienceProps> = ({
     setIsTransitioning(false);
     setDishName(null);
   };
+
+  // Fetch preview question for pre-game discussions
+  useEffect(() => {
+    if (!hasBegun && !previewQuestion) {
+      const fetchPreviewQuestion = async () => {
+        try {
+          const response = await fetch('/api/game-questions', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              characterId: character.id,
+              sceneId: scene.id,
+              gameType: 'cooking-showdown',
+              previousChoices: [],
+              currentRound: 1
+            })
+          });
+
+          if (response.ok) {
+            const question: GameQuestion = await response.json();
+            setPreviewQuestion(question);
+            console.log(`🔍 Preview question loaded: ${question.options.join(', ')}`);
+          }
+        } catch (error) {
+          console.error('Error fetching preview question:', error);
+        }
+      };
+
+      fetchPreviewQuestion();
+    }
+  }, [character.id, scene.id, hasBegun, previewQuestion]);
 
   // Set up ref for parent component (same as QuizExperience)
   useEffect(() => {

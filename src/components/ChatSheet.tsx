@@ -49,8 +49,86 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
   // Handle initial message when sheet opens
   useEffect(() => {
     if (isOpen) {
+      // For game context, generate automatic greeting
+      if ((context as any).gameContext && !initialMessage) {
+        const generateGameGreeting = async () => {
+          setLoading(true);
+          const messageId = `game-greeting-${Date.now()}`;
+          
+          try {
+            const gameCtx = (context as any).gameContext;
+            let greetingText: string;
+            
+            console.log('🎮 ChatSheet: Game context debug:', gameCtx);
+            console.log('🎮 ChatSheet: hasBegun:', gameCtx.hasBegun);
+            console.log('🎮 ChatSheet: choices:', gameCtx.choices);
+            
+            if (gameCtx.choices.length === 0 && gameCtx.currentQuestion) {
+              // Pre-game or start of game - show the first question options
+              const options = gameCtx.currentQuestion.options.join(', ');
+              greetingText = `${options}? Excellent options! Each would create a completely different culinary journey. What interests you most about these choices?`;
+            } else if (gameCtx.choices.length === 0) {
+              greetingText = `Ready to start cooking? I'm here to help you make the perfect choices for your dish!`;
+            } else if (gameCtx.selectedOption) {
+              greetingText = `I see you're considering "${gameCtx.selectedOption}" for your ${gameCtx.choices.join(' and ')} dish. Great choice! What would you like to discuss?`;
+            } else if (gameCtx.currentQuestion) {
+              greetingText = `You're building a lovely ${gameCtx.choices.join(' and ')} dish! Need help deciding on "${gameCtx.currentQuestion.question}"?`;
+            } else {
+              greetingText = `Your ${gameCtx.choices.join(' and ')} dish is coming along beautifully! What would you like to discuss?`;
+            }
+            
+            console.log('🎮 ChatSheet: Generating game greeting:', greetingText);
+            
+            // Add the AI greeting message
+            const aiMessage: Message = { 
+              role: "assistant", 
+              content: greetingText, 
+              streaming: true, 
+              id: messageId 
+            };
+            setMessages([aiMessage]);
+            
+            // Generate TTS for the greeting
+            console.log('🎵 ChatSheet: Sending game greeting to TTS');
+            try {
+              const ttsRes = await fetch('/api/tts', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                  text: greetingText,
+                  characterId: context.character.id
+                })
+              });
+              
+              if (ttsRes.ok) {
+                const ttsData = await ttsRes.json();
+                console.log('🎵 ChatSheet: TTS audio received for game greeting');
+                
+                // Update message with audio URL
+                const messageWithAudio: Message = {
+                  role: "assistant",
+                  content: greetingText,
+                  streaming: true,
+                  audioUrl: ttsData.audioUrl,
+                  id: messageId
+                };
+                setMessages([messageWithAudio]);
+              }
+            } catch (ttsError) {
+              console.error('🎵 ChatSheet: TTS error for game greeting:', ttsError);
+            }
+            
+          } catch (error) {
+            console.error('ChatSheet: Error generating game greeting:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
+        
+        generateGameGreeting();
+      }
       // For quiz context, generate automatic greeting
-      if (context.quizQuestion && !initialMessage) {
+      else if (context.quizQuestion && !initialMessage) {
         const generateQuizGreeting = async () => {
           setLoading(true);
           const messageId = `quiz-greeting-${Date.now()}`;
@@ -282,6 +360,14 @@ export const ChatSheet: React.FC<ChatSheetProps> = ({
               {context.quizQuestion && (
                 <p className="text-xs text-gray-500">
                   About: {context.scene.title}
+                </p>
+              )}
+              {(context as any).gameContext && (
+                <p className="text-xs text-gray-500">
+                  {(context as any).gameContext.hasBegun 
+                    ? `Round ${(context as any).gameContext.currentRound}/5: ${context.scene.title}`
+                    : `About: ${context.scene.title}`
+                  }
                 </p>
               )}
             </div>
